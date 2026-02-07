@@ -11,6 +11,7 @@ import { CurrencySelector, type Currency } from "@/components/CurrencySelector"
 import { PurchaseModal } from "@/components/PurchaseModal"
 import { HelpModal } from "@/components/HelpModal"
 import { prices, saleEndDate, pricingFeatures } from "@/lib/data"
+import { TextGenerateEffect } from "@/components/TextGenerateEffect"
 
 export function Pricing() {
   const [currency, setCurrency] = useState<Currency>("EUR")
@@ -33,9 +34,11 @@ export function Pricing() {
           <CurrencySelector selected={currency} onSelect={setCurrency} />
         </div>
 
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-center text-foreground mb-8">
-          Сколько стоит книга?
-        </h2>
+        <TextGenerateEffect
+          as="h2"
+          text="Сколько стоит книга?"
+          className="text-2xl md:text-3xl lg:text-4xl font-light text-center text-foreground mb-8"
+        />
 
         {/* Price Card */}
         <div className="max-w-2xl mx-auto mb-12">

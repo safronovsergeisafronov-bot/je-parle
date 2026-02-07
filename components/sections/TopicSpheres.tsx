@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { topicSpheres } from "@/lib/data"
+import { TextGenerateEffect } from "@/components/TextGenerateEffect"
 
 function isDarkColor(hex: string): boolean {
   const r = parseInt(hex.slice(1, 3), 16)
@@ -14,9 +15,11 @@ export function TopicSpheres() {
     <section className="py-12 md:py-20 bg-secondary/30">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-12">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-foreground mb-4">
-            И вот в этот момент в голове тишина...
-          </h2>
+          <TextGenerateEffect
+            as="h2"
+            text="И вот в этот момент в голове тишина..."
+            className="text-2xl md:text-3xl lg:text-4xl font-light text-foreground mb-4"
+          />
           <p className="text-muted-foreground">
             Для всех уровней. Даже если уже что-то знаешь, книга помогает звучать естественно и «своим» для французов.
           </p>

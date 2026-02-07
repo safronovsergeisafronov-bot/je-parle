@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ExternalLink } from "lucide-react"
+import { TextGenerateEffect } from "@/components/TextGenerateEffect"
 
 export function WhatInside() {
   return (
@@ -18,9 +19,11 @@ export function WhatInside() {
               </span>
             </div>
 
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-foreground mb-4">
-              Интересно, что внутри?
-            </h2>
+            <TextGenerateEffect
+              as="h2"
+              text="Интересно, что внутри?"
+              className="text-2xl md:text-3xl lg:text-4xl font-light text-foreground mb-4"
+            />
             <p className="text-muted-foreground mb-8 max-w-xl">
               Небольшой фрагмент бесплатно — чтобы понять, насколько это удобно. В предпросмотре — только малая часть книги.
             </p>

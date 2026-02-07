@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Je Parle! — Swiss Minimalism</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --red: #ff0000;
+            --gray: #666666;
+            --light-gray: #f5f5f5;
+            --border: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+            font-weight: 300;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        /* Grid System */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: var(--white);
+            border-bottom: 1px solid var(--black);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        nav a {
+            color: var(--black);
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--red);
+        }
+
+        .nav-cta {
+            background: var(--black);
+            color: var(--white) !important;
+            padding: 12px 24px;
+        }
+
+        .nav-cta:hover {
+            background: var(--red);
+        }
+
+        /* Sections */
+        section {
+            padding: 120px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 80px;
+        }
+
+        .section-number {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--gray);
+            letter-spacing: 0.2em;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gray);
+            margin-bottom: 8px;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            border-bottom: none;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-left {
+            padding-right: 40px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--gray);
+            margin-bottom: 60px;
+            max-width: 500px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--black);
+            color: var(--white);
+            padding: 20px 40px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: var(--red);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: var(--black);
+            padding: 20px 40px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 500;
+            border: 1px solid var(--black);
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .hero-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            padding-left: 40px;
+            border-left: 1px solid var(--border);
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-number {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-number .red {
+            color: var(--red);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gray);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: var(--black);
+            margin: 0;
+        }
+
+        /* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+            border: 1px solid var(--black);
+        }
+
+        .feature-card {
+            padding: 60px 40px;
+            border-right: 1px solid var(--black);
+            border-bottom: 1px solid var(--black);
+            position: relative;
+        }
+
+        .feature-card:nth-child(2n) {
+            border-right: none;
+        }
+
+        .feature-card:nth-child(n+3) {
+            border-bottom: none;
+        }
+
+        .feature-number {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--light-gray);
+            position: absolute;
+            top: 30px;
+            right: 30px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 16px;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--gray);
+            line-height: 1.7;
+            max-width: 300px;
+        }
+
+        /* Author */
+        .author-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .author-visual {
+            width: 300px;
+            height: 400px;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--black);
+        }
+
+        .author-initials {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 6rem;
+            font-weight: 700;
+            color: var(--border);
+        }
+
+        .author-content h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+        }
+
+        .author-story {
+            margin-bottom: 30px;
+        }
+
+        .author-story p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .author-story strong {
+            color: var(--black);
+            font-weight: 500;
+        }
+
+        .author-badges {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .author-badge {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .author-badge .value {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .author-badge .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray);
+        }
+
+        /* Topics */
+        .topics-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            border-top: 1px solid var(--black);
+            border-left: 1px solid var(--black);
+        }
+
+        .topic-item {
+            padding: 40px;
+            border-right: 1px solid var(--black);
+            border-bottom: 1px solid var(--black);
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            transition: background 0.2s;
+        }
+
+        .topic-item:hover {
+            background: var(--light-gray);
+        }
+
+        .topic-number {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--gray);
+            min-width: 30px;
+        }
+
+        .topic-content h4 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .topic-content p {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        /* Reviews */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+        }
+
+        .review-card {
+            padding-left: 40px;
+            border-left: 2px solid var(--red);
+        }
+
+        .review-quote {
+            font-size: 1.5rem;
+            font-weight: 300;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .review-author {
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .review-role {
+            font-size: 0.75rem;
+            color: var(--gray);
+            margin-top: 4px;
+        }
+
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 0;
+            border: 1px solid var(--black);
+        }
+
+        .pricing-features {
+            padding: 60px;
+            border-right: 1px solid var(--black);
+        }
+
+        .pricing-features h2 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+
+        .pricing-features ul {
+            list-style: none;
+        }
+
+        .pricing-features li {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .pricing-features li::before {
+            content: '—';
+            color: var(--red);
+        }
+
+        .pricing-box {
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: var(--light-gray);
+        }
+
+        .price-old {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--gray);
+            text-decoration: line-through;
+        }
+
+        .price-new {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 6rem;
+            font-weight: 700;
+            line-height: 1;
+            margin: 20px 0;
+        }
+
+        .price-note {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 40px;
+        }
+
+        .buy-button {
+            display: block;
+            width: 100%;
+            background: var(--black);
+            color: var(--white);
+            padding: 24px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .buy-button:hover {
+            background: var(--red);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            border-top: 1px solid var(--black);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--black);
+        }
+
+        .footer-copy {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 40px;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero-stats {
+                flex-direction: row;
+                border-left: none;
+                border-top: 1px solid var(--border);
+                padding-left: 0;
+                padding-top: 40px;
+            }
+
+            .section-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .author-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .author-visual {
+                width: 100%;
+                height: 300px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                border-right: none !important;
+                border-bottom: 1px solid var(--black) !important;
+            }
+
+            .feature-card:last-child {
+                border-bottom: none !important;
+            }
+
+            .topics-list {
+                grid-template-columns: 1fr;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-features {
+                border-right: none;
+                border-bottom: 1px solid var(--black);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .stat-number {
+                font-size: 3rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+            }
+
+            .author-badges {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">Je Parle!</div>
+                <nav>
+                    <a href="#features">Преимущества</a>
+                    <a href="#author">Автор</a>
+                    <a href="#topics">Темы</a>
+                    <a href="#reviews">Отзывы</a>
+                    <a href="#pricing" class="nav-cta">Купить</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <span class="hero-tag">300+ выражений</span>
+                    <h1>Книга, собранная за 7 лет преподавания</h1>
+                    <p class="hero-subtitle">Живые выражения, которые французы используют каждый день. Не теория из учебника — практика из жизни.</p>
+                    <div class="hero-buttons">
+                        <a href="#pricing" class="btn-primary">Получить книгу</a>
+                        <a href="#" class="btn-secondary">Бесплатный фрагмент</a>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">300<span class="red">+</span></span>
+                        <span class="stat-label">Выражений</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">9</span>
+                        <span class="stat-label">Сфер жизни</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">7</span>
+                        <span class="stat-label">Лет опыта</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section id="features">
+        <div class="container">
+            <div class="section-grid">
+                <div>
+                    <span class="section-number">01</span>
+                    <p class="section-label">Преимущества</p>
+                </div>
+                <div>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <span class="feature-number">01</span>
+                            <h3>Озвучка в видео</h3>
+                            <p>Слайды меняются на экране, голос автора ведёт по книге. Смотрите и слушайте одновременно.</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="feature-number">02</span>
+                            <h3>Курс по чтению</h3>
+                            <p>Бесплатный мини-курс по правилам чтения за 25 минут. Для тех, кто не знает как читать по-французски.</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="feature-number">03</span>
+                            <h3>Опыт экзаменов</h3>
+                            <p>Автор готовит к DELF/DALF. Собрал только полезный материал для реального общения.</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="feature-number">04</span>
+                            <h3>Живые выражения</h3>
+                            <p>То, что вы реально услышите в кафе, на работе, в разговорах. Никакой воды и устаревших фраз.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="author">
+        <div class="container">
+            <div class="section-grid">
+                <div>
+                    <span class="section-number">02</span>
+                    <p class="section-label">Об авторе</p>
+                </div>
+                <div class="author-grid">
+                    <div class="author-visual">
+                        <span class="author-initials">ИГ</span>
+                    </div>
+                    <div class="author-content">
+                        <h2>Илья Гаврилов</h2>
+                        <div class="author-story">
+                            <p>В <strong>10 лет переехал во Францию</strong>. Прошёл путь от чемпиона мира по хоккею и учёбы на священника до преподавания французского.</p>
+                            <p>За <strong>7 лет преподавания</strong> накопил тонны заметок и материалов. Собрал лучшее, добавил примеры и озвучку.</p>
+                            <p>Результат — книга «Je parle!», <strong>концентрат живого французского</strong>, которым пользуются каждый день.</p>
+                        </div>
+                        <div class="author-badges">
+                            <div class="author-badge">
+                                <span class="value">20+</span>
+                                <span class="label">Лет во Франции</span>
+                            </div>
+                            <div class="author-badge">
+                                <span class="value">7</span>
+                                <span class="label">Лет преподавания</span>
+                            </div>
+                            <div class="author-badge">
+                                <span class="value">DELF/DALF</span>
+                                <span class="label">Эксперт</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="topics">
+        <div class="container">
+            <div class="section-grid">
+                <div>
+                    <span class="section-number">03</span>
+                    <p class="section-label">9 сфер жизни</p>
+                </div>
+                <div>
+                    <div class="topics-list">
+                        <div class="topic-item">
+                            <span class="topic-number">01</span>
+                            <div class="topic-content">
+                                <h4>Кафе</h4>
+                                <p>Заказать еду, уточнить состав, попросить счёт</p>
+                            </div>
+                        </div>
+                        <div class="topic-item">
+                            <span class="topic-number">02</span>
+                            <div class="topic-content">
+                                <h4>Знакомства</h4>
+                                <p>Представиться, поддержать разговор</p>
+                            </div>
+                        </div>
+                        <div class="topic-item">
+                            <span class="topic-number">03</span>
+                            <div class="topic-content">
+                                <h4>Работа</h4>
+                                <p>Позвонить, сказать что занят, перенести встречу</p>
+                            </div>
+                        </div>
+                        <div class="topic-item">
+                            <span class="topic-number">04</span>
+                            <div class="topic-content">
+                                <h4>Погода</h4>
+                                <p>Спросить время, обсудить погоду</p>
+                            </div>
+                        </div>
+                        <div class="topic-item">
+                            <span class="topic-number">05</span>
+                            <div class="topic-content">
+                                <h4>Путешествия</h4>
+                                <p>Спросить дорогу, уточнить транспорт</p>
+                            </div>
+                        </div>
+                        <div class="topic-item">
+                            <span class="topic-number">06</span>
+                            <div class="topic-content">
+                                <h4>Вежливость</h4>
+                                <p>Поблагодарить, извиниться, поднять тост</p>
+                            </div>
+                        </div>
+                        <div class="topic-item">
+                            <span class="topic-number">07</span>
+                            <div class="topic-content">
+                                <h4>Быт</h4>
+                                <p>Купить продукты, вызвать такси, уточнить цену</p>
+                            </div>
+                        </div>
+                        <div class="topic-item">
+                            <span class="topic-number">08</span>
+                            <div class="topic-content">
+                                <h4>Здоровье</h4>
+                                <p>Попросить лекарство, описать симптомы</p>
+                            </div>
+                        </div>
+                        <div class="topic-item">
+                            <span class="topic-number">09</span>
+                            <div class="topic-content">
+                                <h4>Развлечения</h4>
+                                <p>Купить билет, заказать напиток в баре</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews">
+        <div class="container">
+            <div class="section-grid">
+                <div>
+                    <span class="section-number">04</span>
+                    <p class="section-label">Отзывы</p>
+                </div>
+                <div>
+                    <div class="reviews-grid">
+                        <div class="review-card">
+                            <p class="review-quote">«Книга огонь! Вышла в магазин, проверила фразу на продавце — работает!»</p>
+                            <p class="review-author">Марина Кузнецова</p>
+                            <p class="review-role">Живёт в Париже</p>
+                        </div>
+                        <div class="review-card">
+                            <p class="review-quote">«Уже оплатила, слушаю — кайф. Уроки становятся настоящим спасением!»</p>
+                            <p class="review-author">Алёна</p>
+                            <p class="review-role">Мама в декрете, живёт во Франции</p>
+                        </div>
+                        <div class="review-card">
+                            <p class="review-quote">«Я сама преподаватель, и я просто в восторге! C'est chic!»</p>
+                            <p class="review-author">Назима</p>
+                            <p class="review-role">Преподаватель французского</p>
+                        </div>
+                        <div class="review-card">
+                            <p class="review-quote">«Ваша книга охуенная. Я думала, что уже прожжённая, но это — топ.»</p>
+                            <p class="review-author">Sophico</p>
+                            <p class="review-role">Уровень B1, учит с 2018</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing">
+        <div class="container">
+            <div class="section-grid">
+                <div>
+                    <span class="section-number">05</span>
+                    <p class="section-label">Получить книгу</p>
+                </div>
+                <div>
+                    <div class="pricing-grid">
+                        <div class="pricing-features">
+                            <h2>Что входит</h2>
+                            <ul>
+                                <li>Книга «Je Parle!» в PDF-формате</li>
+                                <li>Озвучка всех выражений</li>
+                                <li>Доступ к личному кабинету</li>
+                                <li>Все будущие обновления</li>
+                                <li>Скачивание для офлайн</li>
+                                <li>Видеоуроки с произношением</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-box">
+                            <span class="price-old">€28</span>
+                            <span class="price-new">€20</span>
+                            <p class="price-note">Мгновенный доступ после оплаты</p>
+                            <button class="buy-button">Купить сейчас</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Je Parle!</div>
+                <div class="footer-links">
+                    <a href="#">Instagram</a>
+                    <a href="#">Telegram</a>
+                    <a href="#">YouTube</a>
+                </div>
+                <span class="footer-copy">© 2026 Je Parle!</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

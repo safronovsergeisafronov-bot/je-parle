@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Je Parle! — Парижский Шик</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #C9A962;
+            --gold-light: #E8D5A3;
+            --cream: #FDF8F0;
+            --champagne: #F5E6D3;
+            --burgundy: #6B2D5B;
+            --burgundy-light: #8B4D7B;
+            --charcoal: #2C2C2C;
+            --soft-gray: #8B8B8B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Elegant Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(180deg, var(--cream) 0%, transparent 100%);
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--burgundy);
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        nav {
+            display: flex;
+            gap: 3rem;
+        }
+
+        nav a {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            text-decoration: none;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--burgundy);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--champagne) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A962' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 0.5rem 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 500;
+            line-height: 1.2;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--burgundy);
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--soft-gray);
+            margin-bottom: 2.5rem;
+            font-style: italic;
+        }
+
+        .cta-button {
+            display: inline-block;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: var(--burgundy);
+            color: white;
+            padding: 1.2rem 3rem;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover {
+            background: var(--burgundy-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(107, 45, 91, 0.3);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45%;
+            max-width: 550px;
+        }
+
+        .book-mockup {
+            background: white;
+            padding: 2rem;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+            transform: rotate(-5deg);
+            transition: transform 0.5s ease;
+        }
+
+        .book-mockup:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .book-mockup h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--burgundy);
+            margin-bottom: 0.5rem;
+        }
+
+        .book-mockup p {
+            font-size: 0.9rem;
+            color: var(--soft-gray);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+        }
+
+        .section-header .divider {
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 1.5rem auto;
+        }
+
+        .section-header p {
+            color: var(--soft-gray);
+            font-size: 1.1rem;
+        }
+
+        /* Features Grid */
+        .features {
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            border: 1px solid var(--champagne);
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(201, 169, 98, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--soft-gray);
+            line-height: 1.7;
+        }
+
+        /* Author Section */
+        .author {
+            background: var(--champagne);
+            position: relative;
+        }
+
+        .author-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .author-image {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(107, 45, 91, 0.3);
+        }
+
+        .author-image span {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: white;
+        }
+
+        .author-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .author-text .story {
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+        }
+
+        .author-text .story em {
+            color: var(--burgundy);
+            font-style: italic;
+        }
+
+        .author-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--burgundy);
+            border-left: 3px solid var(--gold);
+            padding-left: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Topics Section */
+        .topics {
+            background: white;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .topic-card {
+            padding: 2rem;
+            border: 1px solid var(--champagne);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .topic-card:hover {
+            background: var(--cream);
+            border-color: var(--gold);
+        }
+
+        .topic-emoji {
+            font-size: 2.5rem;
+        }
+
+        .topic-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .topic-card p {
+            font-size: 0.9rem;
+            color: var(--soft-gray);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--cream);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2.5rem;
+            border: 1px solid var(--champagne);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            color: var(--gold-light);
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            line-height: 1;
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            padding-top: 2rem;
+        }
+
+        .testimonial-author {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--burgundy);
+            font-weight: 600;
+        }
+
+        .testimonial-role {
+            font-size: 0.85rem;
+            color: var(--soft-gray);
+        }
+
+        /* Pricing Section */
+        .pricing {
+            background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-light) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .pricing .section-header h2 {
+            color: white;
+        }
+
+        .pricing .section-header p {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .pricing .divider {
+            background: var(--gold);
+        }
+
+        .price-box {
+            background: white;
+            color: var(--charcoal);
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 3rem;
+        }
+
+        .price-old {
+            font-size: 1.5rem;
+            color: var(--soft-gray);
+            text-decoration: line-through;
+        }
+
+        .price-new {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--burgundy);
+            margin: 0.5rem 0 1.5rem;
+        }
+
+        .price-features {
+            text-align: left;
+            margin: 2rem 0;
+        }
+
+        .price-features li {
+            list-style: none;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--champagne);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .price-features li::before {
+            content: '✓';
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .buy-button {
+            display: block;
+            width: 100%;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: var(--burgundy);
+            color: white;
+            padding: 1.5rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .buy-button:hover {
+            background: var(--charcoal);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: white;
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo span {
+            color: var(--gold);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--gold);
+            text-decoration: none;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: white;
+        }
+
+        .footer-copy {
+            color: var(--soft-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-image {
+                display: none;
+            }
+            .hero-content {
+                max-width: 100%;
+                text-align: center;
+            }
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .author-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .topics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .features-grid,
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Je Parle<span>!</span></div>
+        <nav>
+            <a href="#features">Преимущества</a>
+            <a href="#author">Автор</a>
+            <a href="#topics">Темы</a>
+            <a href="#reviews">Отзывы</a>
+            <a href="#pricing">Купить</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Более 300 выражений</div>
+            <h1>Книга, собранная не за день — а за <em>7 лет</em> преподавания французского</h1>
+            <p class="hero-subtitle">Внутри — живые выражения, которые используют французы каждый день</p>
+            <a href="#pricing" class="cta-button">Получить книгу</a>
+        </div>
+        <div class="hero-image">
+            <div class="book-mockup">
+                <h3>Je Parle!</h3>
+                <p>Живой французский на каждый день</p>
+                <div style="height: 200px; background: linear-gradient(135deg, var(--champagne) 0%, var(--cream) 100%); margin-top: 1rem; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 4rem;">🇫🇷</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2>Почему эта книга работает</h2>
+            <div class="divider"></div>
+            <p>Не сухая теория, а живой язык, который вы услышите в кафе, на работе, в разговорах</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎧</div>
+                <h3>Озвучка в видео</h3>
+                <p>Слайды меняются на экране, голос автора ведёт по книге. Смотрите и слушайте — язык усваивается быстрее</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📖</div>
+                <h3>Курс по чтению</h3>
+                <p>Бесплатный мини-курс по правилам чтения (25 минут). Не знаете как читать — начните с него</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎓</div>
+                <h3>Опыт преподавания</h3>
+                <p>Готовит к экзаменам DELF/DALF. Собрал только полезный материал для общения здесь и сейчас</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🇫🇷</div>
+                <h3>Живые выражения</h3>
+                <p>То, что вы реально услышите в кафе, на работе, в разговорах. Только то, что французы реально говорят</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="author" id="author">
+        <div class="author-content">
+            <div class="author-image">
+                <span>ИГ</span>
+            </div>
+            <div class="author-text">
+                <h2>Илья Гаврилов</h2>
+                <p class="story">В <em>10 лет переехал во Францию</em>. Прошёл путь от чемпиона мира по хоккею и учёбы на священника до преподавания французского.</p>
+                <p class="story">С детства хотел написать книгу. За <em>7 лет преподавания</em> накопил много заметок и материалов, которые нельзя было держать в столе.</p>
+                <p class="story">Собрал лучшее, добавил примеры и озвучку. В итоге появилась книга «Je parle!» — <em>концентрат живого французского</em>, которым пользуются каждый день.</p>
+                <blockquote class="author-quote">
+                    "Chers amis, pendant plus de sept ans, j'ai patiemment réuni des expressions et des notes..."
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <section class="topics" id="topics">
+        <div class="section-header">
+            <h2>9 жизненных сфер</h2>
+            <div class="divider"></div>
+            <p>От кафе до работы — всё, что нужно для повседневного общения</p>
+        </div>
+        <div class="topics-grid">
+            <div class="topic-card">
+                <span class="topic-emoji">☕</span>
+                <div>
+                    <h4>Кафе и рестораны</h4>
+                    <p>Заказать еду, уточнить состав, попросить счёт</p>
+                </div>
+            </div>
+            <div class="topic-card">
+                <span class="topic-emoji">🤝</span>
+                <div>
+                    <h4>Знакомства</h4>
+                    <p>Представиться, поддержать разговор, договориться о встрече</p>
+                </div>
+            </div>
+            <div class="topic-card">
+                <span class="topic-emoji">💼</span>
+                <div>
+                    <h4>Работа</h4>
+                    <p>Позвонить, сказать что занят, перенести встречу</p>
+                </div>
+            </div>
+            <div class="topic-card">
+                <span class="topic-emoji">🌤️</span>
+                <div>
+                    <h4>Погода и время</h4>
+                    <p>Спросить время, уточнить расстояние, обсудить погоду</p>
+                </div>
+            </div>
+            <div class="topic-card">
+                <span class="topic-emoji">✈️</span>
+                <div>
+                    <h4>Путешествия</h4>
+                    <p>Спросить дорогу, уточнить транспорт</p>
+                </div>
+            </div>
+            <div class="topic-card">
+                <span class="topic-emoji">🙏</span>
+                <div>
+                    <h4>Вежливость</h4>
+                    <p>Поблагодарить, извиниться, поднять тост</p>
+                </div>
+            </div>
+            <div class="topic-card">
+                <span class="topic-emoji">🛒</span>
+                <div>
+                    <h4>Быт</h4>
+                    <p>Купить продукты, оплатить на кассе, вызвать такси</p>
+                </div>
+            </div>
+            <div class="topic-card">
+                <span class="topic-emoji">🏥</span>
+                <div>
+                    <h4>Здоровье</h4>
+                    <p>Попросить лекарство, описать симптомы</p>
+                </div>
+            </div>
+            <div class="topic-card">
+                <span class="topic-emoji">🎬</span>
+                <div>
+                    <h4>Развлечения</h4>
+                    <p>Купить билет в кино, заказать напиток в баре</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="reviews">
+        <div class="section-header">
+            <h2>Что говорят читатели</h2>
+            <div class="divider"></div>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">Уже оплатила, слушаю — кайф. Хоть я и живу во Франции, но нахожусь в декретном отпуске, и язык постепенно забывается. Уроки становятся настоящим спасением!</p>
+                <p class="testimonial-author">Алёна</p>
+                <p class="testimonial-role">Мама в декрете, живёт во Франции</p>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">Книга огонь! Вышла в магазин, проверила фразу на продавце — работает! Илья, спасибо вам большое!</p>
+                <p class="testimonial-author">Марина Кузнецова</p>
+                <p class="testimonial-role">Живёт в Париже</p>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">Я сама преподаватель, и я просто в восторге! C'est chic!</p>
+                <p class="testimonial-author">Назима</p>
+                <p class="testimonial-role">Преподаватель французского</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="section-header">
+            <h2>Получить книгу</h2>
+            <div class="divider"></div>
+            <p>Мгновенный доступ после оплаты</p>
+        </div>
+        <div class="price-box">
+            <p class="price-old">€28</p>
+            <p class="price-new">€20</p>
+            <ul class="price-features">
+                <li>Книга «Je Parle!» в PDF-формате</li>
+                <li>Озвучка всех выражений</li>
+                <li>Доступ к личному кабинету с видео</li>
+                <li>Все будущие обновления книги</li>
+                <li>Скачивание PDF для офлайн-чтения</li>
+                <li>Видеоуроки с произношением</li>
+            </ul>
+            <button class="buy-button">Купить сейчас</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">Je Parle<span>!</span></div>
+        <div class="social-links">
+            <a href="#">Instagram</a>
+            <a href="#">Telegram</a>
+            <a href="#">YouTube</a>
+        </div>
+        <p class="footer-copy">© 2026 Je Parle! Все права защищены</p>
+    </footer>
+</body>
+</html>

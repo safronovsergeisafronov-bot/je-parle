@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
 import { reviews } from "@/lib/data"
+import { TextGenerateEffect } from "@/components/TextGenerateEffect"
 
 export function Reviews() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -20,9 +21,11 @@ export function Reviews() {
   return (
     <section id="reviews" className="py-12 md:py-20 bg-secondary/30">
       <div className="container mx-auto px-4">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-center text-foreground mb-12">
-          Отзывы на книгу
-        </h2>
+        <TextGenerateEffect
+          as="h2"
+          text="Отзывы на книгу"
+          className="text-2xl md:text-3xl lg:text-4xl font-light text-center text-foreground mb-12"
+        />
 
         {/* Desktop: Grid of cards */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">

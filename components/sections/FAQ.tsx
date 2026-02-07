@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { ContactModal } from "@/components/ContactModal"
 import { Search } from "lucide-react"
 import { faqItems } from "@/lib/data"
+import { TextGenerateEffect } from "@/components/TextGenerateEffect"
 
 export function FAQ() {
   return (
@@ -15,9 +16,11 @@ export function FAQ() {
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-foreground">
-              Ответы на вопросы
-            </h2>
+            <TextGenerateEffect
+              as="h2"
+              text="Ответы на вопросы"
+              className="text-2xl md:text-3xl lg:text-4xl font-light text-foreground"
+            />
             <ContactModal>
               <Button variant="outline">
                 <Search className="w-4 h-4 mr-2" />

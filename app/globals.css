@@ -8,6 +8,7 @@
   --secondary: #eee8d5;
   --secondary-foreground: #111111;
   --card: #f2eddd;
+  --card-hover: #e8e2d2;
   --card-foreground: #111111;
   --muted: #eee8d5;
   --muted-foreground: #666666;
@@ -70,8 +71,8 @@ html {
 }
 
 .hover-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  background: var(--card-hover);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.08);
 }
 
 /* Flip card styles */
@@ -104,6 +105,30 @@ html {
   transform: rotateY(180deg);
 }
 
+/* Text Generate Effect */
+.text-generate {
+  display: inline;
+}
+
+.text-generate .word {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
+  transition-delay: calc(var(--word-index, 0) * 40ms);
+}
+
+.text-generate.in-view .word {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+.text-generate .word + .word {
+  margin-left: 0.25em;
+}
+
 /* Respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -117,5 +142,12 @@ html {
 
   .hover-card:hover {
     transform: none;
+  }
+
+  .text-generate .word {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
   }
 }

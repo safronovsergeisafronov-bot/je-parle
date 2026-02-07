@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Monitor, BookOpen } from "lucide-react"
+import { TextGenerateEffect } from "@/components/TextGenerateEffect"
 
 export function Hero() {
   return (
@@ -10,9 +11,11 @@ export function Hero() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Text Content */}
           <div className="order-2 lg:order-1">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-light leading-tight text-foreground mb-6">
-              Книга, собранная не за день — а за 7 лет преподавания французского.
-            </h1>
+            <TextGenerateEffect
+              as="h1"
+              text="Книга, собранная не за день — а за 7 лет преподавания французского."
+              className="text-3xl md:text-4xl lg:text-5xl font-light leading-tight text-foreground mb-6"
+            />
             <p className="text-lg md:text-xl text-muted-foreground mb-8">
               Внутри — живые выражения, которые используют французы каждый день.
             </p>

@@ -1,13 +1,16 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { authorStoryBlocks } from "@/lib/data"
+import { TextGenerateEffect } from "@/components/TextGenerateEffect"
 
 export function AuthorStory() {
   return (
     <section id="story" className="py-12 md:py-20 bg-secondary/30">
       <div className="container mx-auto px-4">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-center text-foreground mb-12">
-          Как я пришёл к этой книге?
-        </h2>
+        <TextGenerateEffect
+          as="h2"
+          text="Как я пришёл к этой книге?"
+          className="text-2xl md:text-3xl lg:text-4xl font-light text-center text-foreground mb-12"
+        />
 
         <div className="grid md:grid-cols-3 gap-6 md:gap-8">
           {authorStoryBlocks.map((block, index) => (
@@ -17,7 +20,7 @@ export function AuthorStory() {
                   <div className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm font-medium">
                     {index + 1}
                   </div>
-                  <h3 className="font-semibold text-foreground">{block.title}</h3>
+                  <TextGenerateEffect as="h3" text={block.title} className="font-semibold text-foreground" />
                 </div>
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   {block.description}

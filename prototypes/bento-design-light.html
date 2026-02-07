@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Je Parle! — Bento Design Light</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Je Parle! Design System */
+            --background: #fdfbf4;
+            --foreground: #111111;
+            --accent: #801C1E;
+            --accent-light: #9a2528;
+            --accent-foreground: #ffffff;
+            --secondary: #eee8d5;
+            --card: #f2eddd;
+            --card-hover: #ebe5d3;
+            --muted: #eee8d5;
+            --muted-foreground: #666666;
+            --border: #d4c9b0;
+            --radius: 0.75rem;
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--background);
+            color: var(--foreground);
+            line-height: 1.6;
+            font-size: 15px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(253, 251, 244, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+
+        .logo {
+            font-family: 'Onest', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        nav {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--muted-foreground);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 10px 16px;
+            border-radius: var(--radius);
+            transition: all 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--foreground);
+            background: var(--secondary);
+        }
+
+        .nav-cta {
+            background: var(--accent) !important;
+            color: var(--accent-foreground) !important;
+            padding: 10px 20px !important;
+            border-radius: 1000px !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-light) !important;
+        }
+
+        /* Bento Grid */
+        .bento-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card);
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            background: var(--card-hover);
+        }
+
+        .card-accent {
+            background: var(--secondary);
+            border-color: var(--border);
+        }
+
+        .card-accent:hover {
+            background: #e8e2d0;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            padding: 120px 0 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero .bento-grid {
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto auto;
+        }
+
+        .hero-main {
+            grid-row: span 2;
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent);
+            color: var(--accent-foreground);
+            padding: 8px 16px;
+            border-radius: 1000px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 32px;
+            width: fit-content;
+        }
+
+        .hero h1 {
+            font-family: 'Onest', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+            color: var(--foreground);
+        }
+
+        .hero h1 .accent-text {
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--muted-foreground);
+            margin-bottom: 40px;
+            max-width: 500px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent);
+            color: var(--accent-foreground);
+            padding: 16px 32px;
+            border-radius: 1000px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-light);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--secondary);
+            color: var(--foreground);
+            padding: 16px 32px;
+            border-radius: 1000px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--card-hover);
+        }
+
+        /* Stat Cards */
+        .stat-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .stat-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--accent-foreground);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .stat-number {
+            font-family: 'Onest', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--muted-foreground);
+        }
+
+        /* Section */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--secondary);
+            padding: 8px 16px;
+            border-radius: 1000px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--muted-foreground);
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .section-tag .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .section-title {
+            font-family: 'Onest', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--foreground);
+        }
+
+        /* Features Grid */
+        .features .bento-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .feature-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--secondary);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            border: 1px solid var(--border);
+        }
+
+        .feature-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--accent);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .feature-card h3 {
+            font-family: 'Onest', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--foreground);
+        }
+
+        .feature-card p {
+            color: var(--muted-foreground);
+            line-height: 1.7;
+        }
+
+        .feature-number {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            font-family: 'Onest', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--border);
+            line-height: 1;
+            opacity: 0.5;
+        }
+
+        /* Author */
+        .author .bento-grid {
+            grid-template-columns: 1fr 2fr;
+        }
+
+        .author-photo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--secondary);
+            min-height: 400px;
+        }
+
+        .author-initials {
+            font-family: 'Onest', sans-serif;
+            font-size: 6rem;
+            font-weight: 700;
+            color: var(--accent);
+            opacity: 0.3;
+        }
+
+        .author-content h2 {
+            font-family: 'Onest', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--foreground);
+        }
+
+        .author-story p {
+            color: var(--muted-foreground);
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        .author-story strong {
+            color: var(--foreground);
+            font-weight: 500;
+        }
+
+        .author-badges {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .author-badge {
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px 24px;
+            text-align: center;
+        }
+
+        .author-badge .value {
+            font-family: 'Onest', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .author-badge .label {
+            font-size: 0.75rem;
+            color: var(--muted-foreground);
+            margin-top: 4px;
+        }
+
+        /* Topics */
+        .topics .bento-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .topic-card {
+            padding: 24px;
+            text-align: center;
+        }
+
+        .topic-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--secondary);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+        }
+
+        .topic-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--accent);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .card-accent .topic-icon {
+            background: var(--card);
+        }
+
+        /* Text Generate Effect */
+        .text-generate {
+            display: inline;
+        }
+
+        .text-generate .word {
+            display: inline-block;
+            opacity: 0;
+            filter: blur(8px);
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
+            transition-delay: calc(var(--word-index, 0) * 40ms);
+        }
+
+        .text-generate.in-view .word {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateY(0);
+        }
+
+        /* Preserve spaces between words */
+        .text-generate .word + .word {
+            margin-left: 0.25em;
+        }
+
+        .topic-card h4 {
+            font-family: 'Onest', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--foreground);
+        }
+
+        .topic-card p {
+            font-size: 0.85rem;
+            color: var(--muted-foreground);
+        }
+
+        /* Reviews */
+        .reviews .bento-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .review-card {
+            position: relative;
+        }
+
+        .review-quote {
+            position: absolute;
+            top: 16px;
+            right: 24px;
+            font-size: 4rem;
+            color: var(--accent);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .review-card .stars {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 16px;
+        }
+
+        .review-card .stars span {
+            color: #f59e0b;
+        }
+
+        .review-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 24px;
+            color: var(--foreground);
+        }
+
+        .review-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .review-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+            color: var(--accent);
+        }
+
+        .review-author-info .name {
+            font-weight: 600;
+            color: var(--foreground);
+        }
+
+        .review-author-info .role {
+            font-size: 0.85rem;
+            color: var(--muted-foreground);
+        }
+
+        /* Pricing */
+        .pricing .bento-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .pricing-features h3 {
+            font-family: 'Onest', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--foreground);
+        }
+
+        .pricing-list {
+            list-style: none;
+        }
+
+        .pricing-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--muted-foreground);
+        }
+
+        .pricing-list li::before {
+            content: '✓';
+            width: 24px;
+            height: 24px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: var(--accent);
+            flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+
+        .pricing-box {
+            background: var(--secondary);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .price-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--card);
+            padding: 8px 16px;
+            border-radius: 1000px;
+            font-size: 0.85rem;
+            margin-bottom: 24px;
+            border: 1px solid var(--border);
+        }
+
+        .price-old {
+            text-decoration: line-through;
+            color: var(--muted-foreground);
+        }
+
+        .price-new {
+            font-family: 'Onest', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .price-note {
+            color: var(--muted-foreground);
+            margin-bottom: 32px;
+        }
+
+        .buy-button {
+            background: var(--accent);
+            color: var(--accent-foreground);
+            padding: 20px 48px;
+            border-radius: 1000px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .buy-button:hover {
+            background: var(--accent-light);
+        }
+
+        /* Footer */
+        footer {
+            padding: 48px 0;
+            border-top: 1px solid var(--border);
+            background: var(--secondary);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-family: 'Onest', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-links a {
+            color: var(--muted-foreground);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--foreground);
+        }
+
+        .footer-copy {
+            color: var(--muted-foreground);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-main {
+                grid-row: auto;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .author .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .author-photo {
+                min-height: 250px;
+            }
+
+            .features .bento-grid,
+            .reviews .bento-grid,
+            .pricing .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .topics .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav a:not(.nav-cta) {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .topics .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .author-badges {
+                flex-direction: column;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+            }
+        }
+
+        /* Stats row on mobile */
+        @media (max-width: 768px) {
+            .hero .bento-grid {
+                gap: 12px;
+            }
+
+            .stat-card {
+                padding: 24px;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">Je Parle!</div>
+                <nav>
+                    <a href="#features">Преимущества</a>
+                    <a href="#author">Автор</a>
+                    <a href="#topics">Темы</a>
+                    <a href="#reviews">Отзывы</a>
+                    <a href="#pricing" class="nav-cta">Купить</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="bento-grid">
+                <div class="card card-accent hero-main">
+                    <div class="hero-badge">
+                        <span>✨</span>
+                        <span>300+ выражений</span>
+                    </div>
+                    <h1>
+                        <span class="text-generate">Книга, собранная за</span><br>
+                        <span class="accent-text text-generate">7 лет преподавания</span>
+                    </h1>
+                    <p class="hero-subtitle text-generate">
+                        Живые выражения, которые французы используют каждый день. Не теория из учебника — практика из жизни.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#pricing" class="btn-primary">
+                            Получить книгу
+                            <span>→</span>
+                        </a>
+                        <a href="#" class="btn-secondary">
+                            Бесплатный фрагмент
+                        </a>
+                    </div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    </div>
+                    <div class="stat-number">300+</div>
+                    <div class="stat-label">Выражений</div>
+                </div>
+                <div class="card stat-card card-accent">
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                    </div>
+                    <div class="stat-number">9</div>
+                    <div class="stat-label">Сфер жизни</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">
+                    <span class="dot"></span>
+                    <span>Преимущества</span>
+                </div>
+                <h2 class="section-title text-generate">Почему это работает</h2>
+            </div>
+            <div class="bento-grid">
+                <div class="card feature-card">
+                    <span class="feature-number">01</span>
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>
+                    </div>
+                    <h3 class="text-generate">Озвучка в видео</h3>
+                    <p class="text-generate">Слайды меняются на экране, голос автора ведёт по книге. Смотрите и слушайте одновременно.</p>
+                </div>
+                <div class="card feature-card card-accent">
+                    <span class="feature-number">02</span>
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><path d="M8 7h6"/><path d="M8 11h8"/></svg>
+                    </div>
+                    <h3 class="text-generate">Курс по чтению</h3>
+                    <p class="text-generate">Бесплатный мини-курс по правилам чтения за 25 минут. Для тех, кто не знает как читать по-французски.</p>
+                </div>
+                <div class="card feature-card card-accent">
+                    <span class="feature-number">03</span>
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                    </div>
+                    <h3 class="text-generate">Опыт экзаменов</h3>
+                    <p class="text-generate">Автор готовит к DELF/DALF. Собрал только полезный материал для реального общения.</p>
+                </div>
+                <div class="card feature-card">
+                    <span class="feature-number">04</span>
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+                    </div>
+                    <h3 class="text-generate">Живые выражения</h3>
+                    <p class="text-generate">То, что вы реально услышите в кафе, на работе, в разговорах. Никакой воды и устаревших фраз.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="author" class="author">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">
+                    <span class="dot"></span>
+                    <span>Об авторе</span>
+                </div>
+                <h2 class="section-title text-generate">История создателя</h2>
+            </div>
+            <div class="bento-grid">
+                <div class="card author-photo">
+                    <span class="author-initials">ИГ</span>
+                </div>
+                <div class="card author-content">
+                    <h2 class="text-generate">Илья Гаврилов</h2>
+                    <div class="author-story">
+                        <p class="text-generate">В 10 лет переехал во Францию. Прошёл путь от чемпиона мира по хоккею и учёбы на священника до преподавания французского.</p>
+                        <p class="text-generate">За 7 лет преподавания накопил тонны заметок и материалов. Собрал лучшее, добавил примеры и озвучку.</p>
+                        <p class="text-generate">Результат — книга «Je parle!», концентрат живого французского, которым пользуются каждый день.</p>
+                    </div>
+                    <div class="author-badges">
+                        <div class="author-badge">
+                            <div class="value">20+</div>
+                            <div class="label">Лет во Франции</div>
+                        </div>
+                        <div class="author-badge">
+                            <div class="value">7</div>
+                            <div class="label">Лет преподавания</div>
+                        </div>
+                        <div class="author-badge">
+                            <div class="value">DELF</div>
+                            <div class="label">Эксперт</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="topics" class="topics">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">
+                    <span class="dot"></span>
+                    <span>Что внутри</span>
+                </div>
+                <h2 class="section-title text-generate">9 сфер жизни</h2>
+            </div>
+            <div class="bento-grid">
+                <div class="card topic-card">
+                    <div class="topic-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>
+                    </div>
+                    <h4 class="text-generate">Кафе</h4>
+                    <p class="text-generate">Заказать еду, уточнить состав, попросить счёт</p>
+                </div>
+                <div class="card topic-card card-accent">
+                    <div class="topic-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg>
+                    </div>
+                    <h4 class="text-generate">Знакомства</h4>
+                    <p class="text-generate">Представиться, поддержать разговор</p>
+                </div>
+                <div class="card topic-card">
+                    <div class="topic-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    </div>
+                    <h4 class="text-generate">Работа</h4>
+                    <p class="text-generate">Позвонить, сказать что занят</p>
+                </div>
+                <div class="card topic-card card-accent">
+                    <div class="topic-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                    </div>
+                    <h4 class="text-generate">Погода</h4>
+                    <p class="text-generate">Спросить время, обсудить погоду</p>
+                </div>
+                <div class="card topic-card">
+                    <div class="topic-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+                    </div>
+                    <h4 class="text-generate">Путешествия</h4>
+                    <p class="text-generate">Спросить дорогу, уточнить транспорт</p>
+                </div>
+                <div class="card topic-card card-accent">
+                    <div class="topic-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08v0c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"/><path d="m18 15-2-2"/><path d="m15 18-2-2"/></svg>
+                    </div>
+                    <h4 class="text-generate">Вежливость</h4>
+                    <p class="text-generate">Поблагодарить, извиниться, поднять тост</p>
+                </div>
+                <div class="card topic-card">
+                    <div class="topic-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                    </div>
+                    <h4 class="text-generate">Быт</h4>
+                    <p class="text-generate">Купить продукты, вызвать такси</p>
+                </div>
+                <div class="card topic-card card-accent">
+                    <div class="topic-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
+                    </div>
+                    <h4 class="text-generate">Здоровье</h4>
+                    <p class="text-generate">Попросить лекарство, описать симптомы</p>
+                </div>
+                <div class="card topic-card">
+                    <div class="topic-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8H4Z"/><path d="m4 11-.88-2.87a2 2 0 0 1 1.33-2.5l11.48-3.5a2 2 0 0 1 2.5 1.32l.87 2.87L4 11.12"/><path d="m6.6 4.99 3.38 4.2"/><path d="m11.86 3.38 3.38 4.2"/></svg>
+                    </div>
+                    <h4 class="text-generate">Развлечения</h4>
+                    <p class="text-generate">Купить билет, заказать напиток</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="reviews">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">
+                    <span class="dot"></span>
+                    <span>Отзывы</span>
+                </div>
+                <h2 class="section-title text-generate">Что говорят читатели</h2>
+            </div>
+            <div class="bento-grid">
+                <div class="card review-card">
+                    <span class="review-quote">"</span>
+                    <div class="stars">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <p class="review-text text-generate">Книга огонь! Вышла в магазин, проверила фразу на продавце — работает!</p>
+                    <div class="review-author">
+                        <div class="review-avatar">МК</div>
+                        <div class="review-author-info">
+                            <div class="name">Марина Кузнецова</div>
+                            <div class="role">Живёт в Париже</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card review-card card-accent">
+                    <span class="review-quote">"</span>
+                    <div class="stars">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <p class="review-text text-generate">Уже оплатила, слушаю — кайф. Уроки становятся настоящим спасением!</p>
+                    <div class="review-author">
+                        <div class="review-avatar">А</div>
+                        <div class="review-author-info">
+                            <div class="name">Алёна</div>
+                            <div class="role">Мама в декрете, живёт во Франции</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card review-card card-accent">
+                    <span class="review-quote">"</span>
+                    <div class="stars">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <p class="review-text text-generate">Я сама преподаватель, и я просто в восторге! C'est chic!</p>
+                    <div class="review-author">
+                        <div class="review-avatar">Н</div>
+                        <div class="review-author-info">
+                            <div class="name">Назима</div>
+                            <div class="role">Преподаватель французского</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card review-card">
+                    <span class="review-quote">"</span>
+                    <div class="stars">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <p class="review-text text-generate">Ваша книга охуенная. Я думала, что уже прожжённая, но это — топ.</p>
+                    <div class="review-author">
+                        <div class="review-avatar">S</div>
+                        <div class="review-author-info">
+                            <div class="name">Sophico</div>
+                            <div class="role">Уровень B1, учит с 2018</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">
+                    <span class="dot"></span>
+                    <span>Получить книгу</span>
+                </div>
+                <h2 class="section-title text-generate">Выберите свой вариант</h2>
+            </div>
+            <div class="bento-grid">
+                <div class="card pricing-features">
+                    <h3 class="text-generate">Что входит</h3>
+                    <ul class="pricing-list">
+                        <li>Книга «Je Parle!» в PDF-формате</li>
+                        <li>Озвучка всех выражений</li>
+                        <li>Доступ к личному кабинету</li>
+                        <li>Все будущие обновления</li>
+                        <li>Скачивание для офлайн</li>
+                        <li>Видеоуроки с произношением</li>
+                    </ul>
+                </div>
+                <div class="card pricing-box">
+                    <div class="price-tag">
+                        <span class="price-old">€28</span>
+                        <span>→</span>
+                        <span>Скидка 30%</span>
+                    </div>
+                    <div class="price-new">€20</div>
+                    <p class="price-note">Мгновенный доступ после оплаты</p>
+                    <button class="buy-button">Получить книгу →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Je Parle!</div>
+                <div class="footer-links">
+                    <a href="#">Instagram</a>
+                    <a href="#">Telegram</a>
+                    <a href="#">YouTube</a>
+                </div>
+                <span class="footer-copy">© 2026 Je Parle!</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Text Generate Effect - Wrap words and animate on scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            // Select all elements that should have the effect
+            const textElements = document.querySelectorAll('.text-generate');
+
+            textElements.forEach(element => {
+                // Get original text content
+                const text = element.textContent;
+                const words = text.split(/\s+/).filter(word => word.length > 0);
+
+                // Clear element and wrap each word in span
+                element.innerHTML = words.map((word, index) =>
+                    `<span class="word" style="--word-index: ${index}">${word}</span>`
+                ).join(' ');
+            });
+
+            // Intersection Observer for triggering animation
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        // Optional: unobserve after animation
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            // Observe all text-generate elements
+            textElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>

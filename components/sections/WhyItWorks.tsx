@@ -1,14 +1,17 @@
 import { Check } from "lucide-react"
 import { whyItWorksPoints } from "@/lib/data"
+import { TextGenerateEffect } from "@/components/TextGenerateEffect"
 
 export function WhyItWorks() {
   return (
     <section id="why" className="py-12 md:py-20 bg-secondary/30">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-12">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-foreground mb-4">
-            Почему это работает?
-          </h2>
+          <TextGenerateEffect
+            as="h2"
+            text="Почему это работает?"
+            className="text-2xl md:text-3xl lg:text-4xl font-light text-foreground mb-4"
+          />
           <p className="text-muted-foreground">
             Записал для вас озвучку — чтобы вы слышали правильное произношение и интонации.
           </p>
