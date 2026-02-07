@@ -18,7 +18,7 @@ export function TopicSpheres() {
           <TextGenerateEffect
             as="h2"
             text="И вот в этот момент в голове тишина..."
-            className="text-2xl md:text-3xl lg:text-4xl font-light text-foreground mb-4"
+            className="text-2xl md:text-3xl lg:text-4xl font-light leading-none tracking-[-0.02em] text-foreground mb-4"
           />
           <p className="text-muted-foreground">
             Для всех уровней. Даже если уже что-то знаешь, книга помогает звучать естественно и «своим» для французов.

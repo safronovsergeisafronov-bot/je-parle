@@ -13,7 +13,7 @@ export function MiniCourse() {
           <TextGenerateEffect
             as="h2"
             text="Хочешь читать без запинок? ❤️"
-            className="text-2xl md:text-3xl lg:text-4xl font-light text-foreground mb-4"
+            className="text-2xl md:text-3xl lg:text-4xl font-light leading-none tracking-[-0.02em] text-foreground mb-4"
           />
           <p className="text-muted-foreground mb-4">
             Если чтение кажется головоломкой. Не переживай. Я записал для тебя бесплатный мини-курс по правилам чтения и произношения. 25 минут — и ты знаешь правила.

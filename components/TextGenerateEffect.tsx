@@ -7,12 +7,14 @@ interface TextGenerateEffectProps {
   text: string
   className?: string
   as?: "h1" | "h2" | "h3" | "h4" | "span" | "p"
+  delay?: number
 }
 
 export function TextGenerateEffect({
   text,
   className,
-  as: Component = "span"
+  as: Component = "span",
+  delay = 0
 }: TextGenerateEffectProps) {
   const ref = useRef<HTMLElement>(null)
   const [isInView, setIsInView] = useState(false)
@@ -56,12 +58,14 @@ export function TextGenerateEffect({
       className={cn("text-generate", isInView && "in-view", className)}
     >
       {words.map((word, i) => (
-        <span
-          key={i}
-          className="word"
-          style={{ "--word-index": i } as React.CSSProperties}
-        >
-          {word}
+        <span key={i}>
+          <span
+            className="word"
+            style={{ "--word-index": i, "--delay-offset": delay } as React.CSSProperties}
+          >
+            {word}
+          </span>
+          {i < words.length - 1 ? " " : ""}
         </span>
       ))}
     </Tag>

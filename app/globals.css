@@ -3,7 +3,7 @@
 :root {
   --background: #fdfbf4;
   --foreground: #111111;
-  --accent: #801C1E;
+  --accent: #56051B;
   --accent-foreground: #ffffff;
   --secondary: #eee8d5;
   --secondary-foreground: #111111;
@@ -14,7 +14,7 @@
   --muted-foreground: #666666;
   --border: #d4c9b0;
   --input: #d4c9b0;
-  --ring: #801C1E;
+  --ring: #56051B;
   --radius: 0.75rem;
 }
 
@@ -116,7 +116,7 @@ html {
   filter: blur(8px);
   transform: translateY(10px);
   transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
-  transition-delay: calc(var(--word-index, 0) * 40ms);
+  transition-delay: calc(var(--delay-offset, 0) * 1ms + var(--word-index, 0) * 40ms);
 }
 
 .text-generate.in-view .word {
@@ -125,8 +125,14 @@ html {
   transform: translateY(0);
 }
 
-.text-generate .word + .word {
-  margin-left: 0.25em;
+/* Book float animation */
+@keyframes book-float {
+  0%, 100% { transform: rotateY(-15deg) rotateX(5deg) translateY(0); }
+  50% { transform: rotateY(-15deg) rotateX(5deg) translateY(-4px); }
+}
+
+.book-float {
+  animation: book-float 6s ease-in-out infinite;
 }
 
 /* Respect reduced motion preferences */

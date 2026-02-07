@@ -10,7 +10,7 @@ export function WhyItWorks() {
           <TextGenerateEffect
             as="h2"
             text="Почему это работает?"
-            className="text-2xl md:text-3xl lg:text-4xl font-light text-foreground mb-4"
+            className="text-2xl md:text-3xl lg:text-4xl font-light leading-none tracking-[-0.02em] text-foreground mb-4"
           />
           <p className="text-muted-foreground">
             Записал для вас озвучку — чтобы вы слышали правильное произношение и интонации.

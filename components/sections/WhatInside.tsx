@@ -22,7 +22,7 @@ export function WhatInside() {
             <TextGenerateEffect
               as="h2"
               text="Интересно, что внутри?"
-              className="text-2xl md:text-3xl lg:text-4xl font-light text-foreground mb-4"
+              className="text-2xl md:text-3xl lg:text-4xl font-light leading-none tracking-[-0.02em] text-foreground mb-4"
             />
             <p className="text-muted-foreground mb-8 max-w-xl">
               Небольшой фрагмент бесплатно — чтобы понять, насколько это удобно. В предпросмотре — только малая часть книги.

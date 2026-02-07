@@ -37,7 +37,7 @@ export function Pricing() {
         <TextGenerateEffect
           as="h2"
           text="Сколько стоит книга?"
-          className="text-2xl md:text-3xl lg:text-4xl font-light text-center text-foreground mb-8"
+          className="text-2xl md:text-3xl lg:text-4xl font-light leading-none tracking-[-0.02em] text-center text-foreground mb-8"
         />
 
         {/* Price Card */}

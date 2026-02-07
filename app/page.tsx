@@ -1,6 +1,4 @@
-import { Header } from "@/components/sections/Header"
-import { Hero } from "@/components/sections/Hero"
-import { AdvantageCards } from "@/components/sections/AdvantageCards"
+import { HeroSection } from "@/components/sections/HeroSection"
 import { SupportBanner } from "@/components/sections/SupportBanner"
 import { AuthorStory } from "@/components/sections/AuthorStory"
 import { WhatInside } from "@/components/sections/WhatInside"
@@ -16,10 +14,8 @@ import { Footer } from "@/components/sections/Footer"
 export default function Home() {
   return (
     <>
-      <Header />
+      <HeroSection />
       <main>
-        <Hero />
-        <AdvantageCards />
         <SupportBanner />
         <AuthorStory />
         <WhatInside />

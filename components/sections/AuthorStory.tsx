@@ -9,7 +9,7 @@ export function AuthorStory() {
         <TextGenerateEffect
           as="h2"
           text="Как я пришёл к этой книге?"
-          className="text-2xl md:text-3xl lg:text-4xl font-light text-center text-foreground mb-12"
+          className="text-2xl md:text-3xl lg:text-4xl font-light leading-none tracking-[-0.02em] text-center text-foreground mb-12"
         />
 
         <div className="grid md:grid-cols-3 gap-6 md:gap-8">

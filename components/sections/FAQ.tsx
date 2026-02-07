@@ -19,7 +19,7 @@ export function FAQ() {
             <TextGenerateEffect
               as="h2"
               text="Ответы на вопросы"
-              className="text-2xl md:text-3xl lg:text-4xl font-light text-foreground"
+              className="text-2xl md:text-3xl lg:text-4xl font-light leading-none tracking-[-0.02em] text-foreground"
             />
             <ContactModal>
               <Button variant="outline">
