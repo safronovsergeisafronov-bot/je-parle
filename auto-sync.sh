@@ -31,8 +31,8 @@ sync_to_github() {
 
     echo -e "${BLUE}[Auto-Sync]${NC} Обнаружены изменения..."
 
-    # Добавляем все изменения
-    git add .
+    # Добавляем только отслеживаемые директории (НЕ git add . для безопасности)
+    git add app components lib public styles CLAUDE.md package.json package-lock.json
 
     # Создаём коммит
     git commit -m "Auto-sync: $TIMESTAMP"

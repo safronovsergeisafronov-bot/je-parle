@@ -50,7 +50,7 @@ export function FlipCard({ theme, themeRu, topic, topicRu, audioSrc, className }
 
           <div className="flex flex-col gap-3">
             {audioSrc && (
-              <AudioButton src={audioSrc} duration={2000} />
+              <AudioButton src={audioSrc} />
             )}
             <Button
               variant="outline"

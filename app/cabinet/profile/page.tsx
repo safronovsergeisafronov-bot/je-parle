@@ -32,7 +32,7 @@ export default function ProfilePage() {
               <Badge variant="success">Премиум</Badge>
             </div>
             <p className="text-muted-foreground mb-4">
-              ilya@french-super.com
+              {process.env.NEXT_PUBLIC_AUTHOR_EMAIL || "email@hidden"}
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Button variant="outline">Редактировать профиль</Button>

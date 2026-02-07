@@ -29,13 +29,13 @@ export function Reviews() {
           {reviews.map((review) => (
             <Card key={review.id} className="hover-card border-border">
               <CardContent className="p-6">
-                <Quote className="w-8 h-8 text-accent/30 mb-4" />
+                <Quote className="w-8 h-8 text-accent/30 mb-4" aria-hidden="true" />
                 <p className="text-muted-foreground text-sm mb-4 line-clamp-4">
                   {review.text}
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
-                    <span className="text-accent font-medium">
+                    <span className="text-accent font-medium" aria-hidden="true">
                       {review.name.charAt(0)}
                     </span>
                   </div>
@@ -50,16 +50,16 @@ export function Reviews() {
         </div>
 
         {/* Mobile: Carousel */}
-        <div className="md:hidden">
+        <div className="md:hidden" role="region" aria-label="Отзывы" aria-roledescription="carousel">
           <Card className="border-border">
             <CardContent className="p-6">
-              <Quote className="w-8 h-8 text-accent/30 mb-4" />
+              <Quote className="w-8 h-8 text-accent/30 mb-4" aria-hidden="true" />
               <p className="text-muted-foreground text-sm mb-4">
                 {reviews[currentIndex].text}
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
-                  <span className="text-accent font-medium">
+                  <span className="text-accent font-medium" aria-hidden="true">
                     {reviews[currentIndex].name.charAt(0)}
                   </span>
                 </div>
@@ -77,13 +77,13 @@ export function Reviews() {
 
           {/* Navigation */}
           <div className="flex items-center justify-center gap-4 mt-4">
-            <Button variant="outline" size="icon" onClick={prevSlide}>
+            <Button variant="outline" size="icon" onClick={prevSlide} aria-label="Предыдущий отзыв">
               <ChevronLeft className="w-4 h-4" />
             </Button>
-            <span className="text-sm text-muted-foreground">
+            <span className="text-sm text-muted-foreground" aria-live="polite">
               {currentIndex + 1} / {reviews.length}
             </span>
-            <Button variant="outline" size="icon" onClick={nextSlide}>
+            <Button variant="outline" size="icon" onClick={nextSlide} aria-label="Следующий отзыв">
               <ChevronRight className="w-4 h-4" />
             </Button>
           </div>

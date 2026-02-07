@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
 import {
   LayoutDashboard,
@@ -36,6 +36,13 @@ export default function CabinetLayout({
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const pathname = usePathname()
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    await fetch("/api/auth/logout", { method: "POST" })
+    router.push("/")
+    router.refresh()
+  }
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -131,7 +138,7 @@ export default function CabinetLayout({
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium truncate">Илья Гаврилов</p>
                 <p className="text-xs text-muted-foreground truncate">
-                  ilya@french-super.com
+                  {process.env.NEXT_PUBLIC_AUTHOR_EMAIL || "email@hidden"}
                 </p>
               </div>
             </div>
@@ -159,11 +166,15 @@ export default function CabinetLayout({
           </div>
 
           <div className="flex items-center gap-2">
-            <Link href="/">
-              <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-                <LogOut className="h-5 w-5" />
-              </Button>
-            </Link>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-muted-foreground hover:text-foreground"
+              onClick={handleLogout}
+              aria-label="Выйти из кабинета"
+            >
+              <LogOut className="h-5 w-5" />
+            </Button>
           </div>
         </header>
 
