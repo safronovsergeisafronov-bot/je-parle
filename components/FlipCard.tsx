@@ -65,14 +65,14 @@ export function FlipCard({
       >
         {/* Front */}
         <div
-          className="flip-card-front absolute w-full h-full bg-white rounded-2xl p-4 flex flex-col justify-between border border-border/50"
+          className="flip-card-front absolute w-full h-full bg-white rounded-2xl p-4 flex flex-col justify-between"
           style={{ backfaceVisibility: "hidden" }}
         >
           {/* Header: icon + theme */}
           <div className="flex items-center gap-2.5">
             {iconSrc ? (
-              <div className="w-[45px] h-[45px] rounded-xl bg-accent/8 flex items-center justify-center flex-shrink-0">
-                <img src={iconSrc} alt="" className="w-7 h-7 object-contain" aria-hidden="true" />
+              <div className="w-[45px] h-[45px] rounded-xl overflow-hidden flex-shrink-0">
+                <img src={iconSrc} alt="" className="w-full h-full object-cover" aria-hidden="true" />
               </div>
             ) : (
               <div className="w-[45px] h-[45px] rounded-xl bg-accent/8 flex items-center justify-center flex-shrink-0">
@@ -109,9 +109,9 @@ export function FlipCard({
               >
                 <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
                   {isPlaying ? (
-                    <Pause className="w-4 h-4 text-white" />
+                    <Pause className="w-4 h-4 text-white relative top-px" fill="currentColor" />
                   ) : (
-                    <Play className="w-4 h-4 text-white ml-0.5" />
+                    <Play className="w-4 h-4 text-white ml-0.5" fill="currentColor" />
                   )}
                 </div>
                 <span className="text-[11px] lg:text-xs text-muted-foreground leading-tight text-left">
@@ -148,9 +148,15 @@ export function FlipCard({
           }}
         >
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-              <div className="w-4 h-4 rounded-full bg-white/40" />
-            </div>
+            {iconSrc ? (
+              <div className="w-[45px] h-[45px] rounded-xl overflow-hidden flex-shrink-0 opacity-80">
+                <img src={iconSrc} alt="" className="w-full h-full object-cover" aria-hidden="true" />
+              </div>
+            ) : (
+              <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                <div className="w-4 h-4 rounded-full bg-white/40" />
+              </div>
+            )}
             <div className="min-w-0">
               <h3 className="font-semibold text-sm leading-tight text-white truncate">
                 {themeRu}

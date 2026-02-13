@@ -1,8 +1,50 @@
+"use client"
+
+import { useState, useRef, useCallback } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Instagram, Youtube } from "lucide-react"
 import { TelegramIcon } from "@/components/icons/TelegramIcon"
+import { InstagramIcon } from "@/components/icons/InstagramIcon"
+import { YoutubeIcon } from "@/components/icons/YoutubeIcon"
 import { footerNavColumns } from "@/lib/data"
+
+let tooltipCounter = 0
+
+function Tooltip({ children, text }: { children: React.ReactNode; text: React.ReactNode }) {
+  const [visible, setVisible] = useState(false)
+  const [position, setPosition] = useState<"top" | "bottom">("top")
+  const triggerRef = useRef<HTMLDivElement>(null)
+  const idRef = useRef(`footer-tooltip-${++tooltipCounter}`)
+
+  const handleEnter = useCallback(() => {
+    if (triggerRef.current) {
+      const rect = triggerRef.current.getBoundingClientRect()
+      setPosition(rect.top < 120 ? "bottom" : "top")
+    }
+    setVisible(true)
+  }, [])
+
+  return (
+    <div
+      ref={triggerRef}
+      className="relative cursor-pointer"
+      onMouseEnter={handleEnter}
+      onMouseLeave={() => setVisible(false)}
+      aria-describedby={idRef.current}
+    >
+      {children}
+      <div
+        id={idRef.current}
+        role="tooltip"
+        className={`pointer-events-none absolute left-1/2 -translate-x-1/2 w-64 rounded-xl bg-white p-3 text-xs text-foreground transition-opacity z-20 shadow-lg ${
+          position === "top" ? "bottom-full mb-2" : "top-full mt-2"
+        } ${visible ? "opacity-100" : "opacity-0"}`}
+      >
+        {text}
+      </div>
+    </div>
+  )
+}
 
 export function Footer() {
   const leftNavLinks = [
@@ -20,12 +62,14 @@ export function Footer() {
           <div className="lg:w-[35%] lg:flex-shrink-0">
             {/* Logo */}
             <div className="mb-8">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/logo-dark.svg"
-                alt="French.Super"
-                className="h-7 w-auto"
-              />
+              <Link href="/">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/logo-dark.svg"
+                  alt="French.Super"
+                  className="h-7 w-auto"
+                />
+              </Link>
             </div>
 
             {/* Title */}
@@ -55,24 +99,36 @@ export function Footer() {
             {/* Partners */}
             <div className="flex items-center gap-3 mb-6">
               <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-full bg-[#F3EEDE] flex items-center justify-center">
-                  <Image
-                    src="/images/French Tech.svg"
-                    alt="French Tech"
-                    width={24}
-                    height={24}
-                    className="w-6 h-6"
-                  />
-                </div>
-                <div className="w-10 h-10 rounded-full bg-[#F3EEDE] flex items-center justify-center">
-                  <Image
-                    src="/images/Copy Frog.svg"
-                    alt="CopyFrog"
-                    width={24}
-                    height={24}
-                    className="w-6 h-6"
-                  />
-                </div>
+                <Tooltip
+                  text={
+                    <><span className="font-semibold">French Tech</span> — национальная программа Франции по&nbsp;развитию стартапов и&nbsp;технологий.</>
+                  }
+                >
+                  <div className="w-10 h-10 rounded-full bg-[#F3EEDE] flex items-center justify-center">
+                    <Image
+                      src="/images/french-tech.svg"
+                      alt="French Tech"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6"
+                    />
+                  </div>
+                </Tooltip>
+                <Tooltip
+                  text={
+                    <><span className="font-semibold">CopyFrog</span> — платформа на&nbsp;базе искусственного интеллекта для создания уникальных изображений, рекламных текстов, видеокреативов, превращая идеи в&nbsp;готовый результат.</>
+                  }
+                >
+                  <div className="w-10 h-10 rounded-full bg-[#F3EEDE] flex items-center justify-center">
+                    <Image
+                      src="/images/copy-frog.svg"
+                      alt="CopyFrog"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6"
+                    />
+                  </div>
+                </Tooltip>
               </div>
               <span className="text-sm text-foreground font-medium leading-tight">
                 При поддержке
@@ -87,9 +143,10 @@ export function Footer() {
                 href="https://www.instagram.com/french_super"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-2.5 px-5 py-2.5 border border-accent/10 rounded-full hover:bg-accent hover:border-accent transition-all duration-250 shadow-none"
+                aria-label="Instagram — Личный блог"
+                className="group flex items-center gap-2.5 px-5 py-2.5 border border-accent/10 rounded-full hover:bg-accent hover:border-transparent transition-all duration-250 shadow-none"
               >
-                <Instagram className="w-5 h-5 text-accent group-hover:text-white transition-colors duration-250" />
+                <InstagramIcon className="w-5 h-5 text-accent group-hover:text-white transition-colors duration-250" />
                 <span className="text-sm font-medium text-foreground group-hover:text-white transition-colors duration-250">
                   Личный блог
                 </span>
@@ -98,7 +155,8 @@ export function Footer() {
                 href="https://t.me/frenchsuper"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-2.5 px-5 py-2.5 border border-accent/10 rounded-full hover:bg-accent hover:border-accent transition-all duration-250 shadow-none"
+                aria-label="Telegram — Польза"
+                className="group flex items-center gap-2.5 px-5 py-2.5 border border-accent/10 rounded-full hover:bg-accent hover:border-transparent transition-all duration-250 shadow-none"
               >
                 <TelegramIcon className="w-5 h-5 text-accent group-hover:text-white transition-colors duration-250" />
                 <span className="text-sm font-medium text-foreground group-hover:text-white transition-colors duration-250">
@@ -109,9 +167,10 @@ export function Footer() {
                 href="https://www.youtube.com/@frenchsuper"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-2.5 px-5 py-2.5 border border-accent/10 rounded-full hover:bg-accent hover:border-accent transition-all duration-250 shadow-none"
+                aria-label="YouTube — Учись со мной"
+                className="group flex items-center gap-2.5 px-5 py-2.5 border border-accent/10 rounded-full hover:bg-accent hover:border-transparent transition-all duration-250 shadow-none"
               >
-                <Youtube className="w-5 h-5 text-accent group-hover:text-white transition-colors duration-250" />
+                <YoutubeIcon className="w-5 h-5 text-accent group-hover:text-white transition-colors duration-250" />
                 <span className="text-sm font-medium text-foreground group-hover:text-white transition-colors duration-250">
                   Учись со мной
                 </span>
@@ -124,12 +183,21 @@ export function Footer() {
               <ul className="space-y-3">
                 {leftNavLinks.map((link, i) => (
                   <li key={i}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-250 link-animate"
-                    >
-                      {link.label}
-                    </Link>
+                    {link.href.startsWith('#') ? (
+                      <a
+                        href={link.href}
+                        className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-250 link-animate"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-250 link-animate"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -149,7 +217,7 @@ export function Footer() {
                   </div>
                 ))}
                 <p className="text-sm text-foreground/70 pt-2">
-                  © 2025 FrenchSuper / Гаврилов Илья
+                  © {new Date().getFullYear()} FrenchSuper / Гаврилов Илья
                 </p>
                 <p className="text-xs text-muted-foreground">
                   Все материалы сайта защищены авторским правом. Любое

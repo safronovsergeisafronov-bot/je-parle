@@ -79,7 +79,7 @@ export function Pricing() {
               {/* Purchase Button */}
               <div className="space-y-3">
                 {currency === "RUB" ? (
-                  <Button size="lg" className="w-full text-base h-16 shadow-none hover:shadow-none hover:scale-100 hover:opacity-90 transition-all duration-250" asChild>
+                  <Button size="lg" className="w-full text-base h-16 shadow-none hover:shadow-none hover:scale-100 hover:opacity-90 cursor-pointer transition-all duration-250" asChild>
                     <Link
                       href="http://french-super.com/book-je-parle-oplata-ru"
                       target="_blank"
@@ -90,7 +90,7 @@ export function Pricing() {
                   </Button>
                 ) : (
                   <PurchaseModal currency={currency}>
-                    <Button size="lg" className="w-full text-base h-16 shadow-none hover:shadow-none hover:scale-100 hover:opacity-90 transition-all duration-250">
+                    <Button size="lg" className="w-full text-base h-16 shadow-none hover:shadow-none hover:scale-100 hover:opacity-90 cursor-pointer transition-all duration-250">
                       Приобрести книгу ({currency})
                     </Button>
                   </PurchaseModal>
@@ -125,9 +125,10 @@ export function Pricing() {
               </div>
 
               {/* Info Card — right */}
-              <div className="bg-white rounded-2xl p-4 md:p-5 shadow-sm lg:flex-1">
+              <div className="bg-white rounded-2xl p-4 md:p-5 lg:flex-1">
                 <p className="text-sm md:text-base text-foreground lg:text-left">
                   <span className="font-semibold text-accent">Успейте получить книгу</span>{" "}
+                  {/* TODO: "12 февраля" is hardcoded here — saleEndDate from data.ts should be used for consistency */}
                   по&nbsp;лучшим условиям до&nbsp;23:59 (по&nbsp;Парижу) 12&nbsp;февраля.
                 </p>
               </div>
@@ -208,14 +209,14 @@ export function Pricing() {
             <TabsContent value="international" className="mt-0">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {[
-                  { icon: CreditCard, anim: "animate-icon-card", title: "Оплата", desc: "Стоимость указана в\u00A0евро, но оплатить можно в\u00A0любой валюте. Конвертация пройдёт автоматически по\u00A0выгодному курсу банка.", step: 1 },
-                  { icon: Users, anim: "animate-icon-users", title: "Инструкция и\u00A0доступ", desc: "Сразу после успешной оплаты на\u00A0e-mail придёт письмо с\u00A0инструкцией, а\u00A0также откроется страница со\u00A0следующими шагами.", step: 2 },
-                  { icon: FileDown, anim: "animate-icon-download", title: "Материалы", desc: "Вам откроется доступ к\u00A0книге «Je\u00A0Parle!» в\u00A0формате PDF и\u00A0к\u00A0аудиоозвучке. Всё сразу готово к\u00A0изучению.", step: 3 },
+                  { icon: CreditCard, title: "Оплата", desc: "Стоимость указана в\u00A0евро, но оплатить можно в\u00A0любой валюте. Конвертация пройдёт автоматически по\u00A0выгодному курсу банка.", step: 1 },
+                  { icon: Users, title: "Инструкция и\u00A0доступ", desc: "Сразу после успешной оплаты на\u00A0e-mail придёт письмо с\u00A0инструкцией, а\u00A0также откроется страница со\u00A0следующими шагами.", step: 2 },
+                  { icon: FileDown, title: "Материалы", desc: "Вам откроется доступ к\u00A0книге «Je\u00A0Parle!» в\u00A0формате PDF и\u00A0к\u00A0аудиоозвучке. Всё сразу готово к\u00A0изучению.", step: 3 },
                 ].map((card) => (
-                  <div key={card.step} className="group rounded-2xl bg-card p-6 transition-all duration-300 hover:shadow-md hover:shadow-[#56051B]/5">
+                  <div key={card.step} className="group rounded-2xl bg-card p-6 transition-all duration-300">
                     <div className="flex items-center gap-3 mb-4">
                       <div className="w-10 h-10 rounded-xl bg-background flex items-center justify-center">
-                        <card.icon className={`w-5 h-5 text-foreground ${card.anim}`} />
+                        <card.icon className="w-5 h-5 text-foreground" />
                       </div>
                       <span className="text-xs font-semibold text-accent/50 uppercase tracking-wider">Шаг {card.step}</span>
                     </div>
@@ -229,14 +230,14 @@ export function Pricing() {
             <TabsContent value="russia" className="mt-0">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {[
-                  { icon: Wallet, anim: "animate-icon-wallet", title: "Оплата", desc: "Можно оплатить картой любого российского банка или через сервисы: СБП, СберПэй, Яндекс.Пэй и\u00A0др.", step: 1 },
-                  { icon: KeyRound, anim: "animate-icon-key", title: "Доступ в\u00A0личный кабинет", desc: "Сразу после успешной оплаты вы\u00A0получаете письмо на\u00A0e-mail с\u00A0кнопкой входа в\u00A0личный кабинет и\u00A0инструкцией.", step: 2 },
-                  { icon: FolderDown, anim: "animate-icon-download", title: "Материалы внутри", desc: "В\u00A0кабинете сразу доступны книга «Je\u00A0Parle!» (PDF) и\u00A0аудиоозвучка. Всё готово к\u00A0изучению!", step: 3 },
+                  { icon: Wallet, title: "Оплата", desc: "Можно оплатить картой любого российского банка или через сервисы: СБП, СберПэй, Яндекс.Пэй и\u00A0др.", step: 1 },
+                  { icon: KeyRound, title: "Доступ в\u00A0личный кабинет", desc: "Сразу после успешной оплаты вы\u00A0получаете письмо на\u00A0e-mail с\u00A0кнопкой входа в\u00A0личный кабинет и\u00A0инструкцией.", step: 2 },
+                  { icon: FolderDown, title: "Материалы внутри", desc: "В\u00A0кабинете сразу доступны книга «Je\u00A0Parle!» (PDF) и\u00A0аудиоозвучка. Всё готово к\u00A0изучению!", step: 3 },
                 ].map((card) => (
-                  <div key={card.step} className="group rounded-2xl bg-card p-6 transition-all duration-300 hover:shadow-md hover:shadow-[#56051B]/5">
+                  <div key={card.step} className="group rounded-2xl bg-card p-6 transition-all duration-300">
                     <div className="flex items-center gap-3 mb-4">
                       <div className="w-10 h-10 rounded-xl bg-background flex items-center justify-center">
-                        <card.icon className={`w-5 h-5 text-foreground ${card.anim}`} />
+                        <card.icon className="w-5 h-5 text-foreground" />
                       </div>
                       <span className="text-xs font-semibold text-accent/50 uppercase tracking-wider">Шаг {card.step}</span>
                     </div>

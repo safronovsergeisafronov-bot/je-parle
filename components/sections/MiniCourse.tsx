@@ -1,11 +1,11 @@
 "use client"
 
-import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Play, Heart, Book } from "lucide-react"
 import { miniCourseLessons } from "@/lib/data"
 import { StaggerChildren, StaggerItem } from "@/components/AnimatedSection"
+import { VideoPlayerModal } from "@/components/VideoPlayerModal"
 
 function LessonProgress({ step }: { step: number }) {
   return (
@@ -33,7 +33,7 @@ function LessonProgress({ step }: { step: number }) {
 
 function YouTubeBadge() {
   return (
-    <div className="group relative inline-flex items-center gap-2 px-5 py-2.5 bg-background border border-accent/10 rounded-full hover:bg-accent hover:border-transparent transition-all duration-250 cursor-default">
+    <div className="group relative inline-flex items-center gap-2 px-5 py-2.5 bg-background border border-transparent rounded-full hover:bg-accent transition-all duration-250 cursor-default">
       {/* YouTube icon */}
       <svg width="24" height="18" viewBox="0 0 24 18" fill="none" aria-hidden="true" className="transition-colors duration-250">
         <path
@@ -57,7 +57,7 @@ export function MiniCourse() {
           {/* Left — title */}
           <div className="lg:flex-1">
             <h2 className="text-3xl md:text-4xl font-medium leading-[1.15] tracking-[-0.03em] text-foreground">
-              Хочешь читать без&nbsp;запинок?<Heart className="w-7 h-7 text-accent inline-block ml-2 align-middle" fill="currentColor" aria-hidden="true" />
+              Хочешь читать без&nbsp;запинок?<Heart className="w-7 h-7 text-accent inline-block ml-2 align-middle relative -top-0.5" fill="currentColor" aria-hidden="true" />
             </h2>
           </div>
 
@@ -78,7 +78,7 @@ export function MiniCourse() {
         <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6" staggerDelay={0.1}>
           {miniCourseLessons.map((lesson) => (
             <StaggerItem key={lesson.id}>
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-3 h-full">
                 {/* Video preview */}
                 <div className="aspect-[16/10] rounded-2xl overflow-hidden relative">
                   <Image
@@ -94,7 +94,7 @@ export function MiniCourse() {
                 <LessonProgress step={lesson.id} />
 
                 {/* Title & duration */}
-                <div>
+                <div className="flex-1">
                   <h3 className="text-base md:text-lg font-semibold leading-tight text-foreground">
                     {lesson.title}
                   </h3>
@@ -102,17 +102,16 @@ export function MiniCourse() {
                 </div>
 
                 {/* Watch button */}
-                <Button variant="secondary" className="w-full rounded-full shadow-none hover:scale-100 hover:bg-secondary/60 hover:shadow-none" asChild>
-                  <Link
-                    href="https://www.youtube.com/playlist?list=PLBMzAU1DpCQeOR1rISH452WNYgIrX4Sgi"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                <VideoPlayerModal videoId={lesson.youtubeId} title={lesson.title}>
+                  <Button
+                    variant="secondary"
+                    className="w-full rounded-full shadow-none hover:scale-100 hover:bg-secondary/60 hover:shadow-none"
                     aria-label={`Смотреть ${lesson.title}`}
                   >
-                    <Play className="w-4 h-4 mr-2" />
+                    <Play className="w-4 h-4 mr-2" fill="currentColor" />
                     Смотреть урок
-                  </Link>
-                </Button>
+                  </Button>
+                </VideoPlayerModal>
               </div>
             </StaggerItem>
           ))}
