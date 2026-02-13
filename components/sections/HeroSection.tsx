@@ -20,17 +20,14 @@ export function HeroSection() {
           {/* Header row */}
           <div className="flex items-center justify-between">
             {/* Logo / Author */}
-            <Link href="/" className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-white/20 overflow-hidden">
-                <Image
-                  src="/images/author-avatar.jpg"
-                  alt="Гаврилов Илья"
-                  width={40}
-                  height={40}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <span className="text-sm font-medium text-white">French.Super</span>
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/images/Logo.svg"
+                alt="French.Super"
+                width={150}
+                height={26}
+                className="h-6 w-auto"
+              />
             </Link>
 
             {/* Desktop Nav */}
