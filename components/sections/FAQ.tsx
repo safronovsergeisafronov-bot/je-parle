@@ -22,7 +22,7 @@ export function FAQ() {
               className="text-3xl md:text-4xl font-medium leading-[1.15] tracking-[-0.03em] text-foreground"
             />
             <ContactModal>
-              <Button className="bg-[#F2ECDE] text-foreground hover:bg-[#e5dece] hover:scale-100 border-0 shadow-none">
+              <Button className="bg-[#F2ECDE] text-foreground hover:bg-[#e5dece] hover:scale-100 border-0 shadow-none hover:shadow-none">
                 <Search className="w-4 h-4 mr-2 text-foreground" />
                 Задать вопрос
               </Button>

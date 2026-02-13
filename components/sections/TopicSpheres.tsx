@@ -51,7 +51,7 @@ export function TopicSpheres() {
         <StaggerChildren className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4" staggerDelay={0.06}>
           {topicSpheres.map((sphere) => {
             const dark = isDarkColor(sphere.color)
-            const textColor = dark ? "#ffffff" : "var(--foreground)"
+            const textColor = sphere.textColor ?? (dark ? "#ffffff" : "var(--foreground)")
             const badgeBg = dark
               ? "rgba(255,255,255,0.15)"
               : "rgba(0,0,0,0.08)"
@@ -101,8 +101,8 @@ export function TopicSpheres() {
               className="rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden h-full"
               style={{ backgroundColor: "#57041B" }}
             >
-              {/* Icon tiles — draggable */}
-              <div className="flex flex-wrap gap-2 mb-4">
+              {/* Icon tiles — draggable (decorative) */}
+              <div className="flex flex-wrap gap-2 mb-4" aria-hidden="true">
                 {ctaIcons.map(({ Icon, bg }, i) => (
                   <motion.div
                     key={i}

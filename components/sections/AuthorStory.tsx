@@ -6,7 +6,7 @@ import { StaggerChildren, StaggerItem } from "@/components/AnimatedSection"
 
 export function AuthorStory() {
   return (
-    <section id="story" className="py-10 md:py-15 bg-background">
+    <section id="story" className="py-3 md:py-4 bg-background">
       <div className="w-full px-3 lg:px-4">
         <StaggerChildren
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5"
@@ -36,7 +36,7 @@ export function AuthorStory() {
 
               <div className="relative rounded-xl overflow-hidden">
                 <Image
-                  src="/images/Начало пути.png"
+                  src="/images/nachalo-puti.png"
                   alt="Начало пути — Гаврилов Илья"
                   width={600}
                   height={450}
@@ -47,7 +47,9 @@ export function AuthorStory() {
 
               {/* Link */}
               <a
-                href="#"
+                href="https://www.instagram.com/french_super"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-sm text-muted-foreground underline underline-offset-4 decoration-border hover:text-foreground hover:decoration-foreground/40 transition-colors mt-auto text-center w-full block"
                 aria-label="Читать историю автора в Instagram актуальном"
               >
@@ -60,7 +62,7 @@ export function AuthorStory() {
           <StaggerItem>
             <div className="rounded-2xl p-5 md:p-6 flex flex-col gap-3.5 h-full relative overflow-hidden">
               <Image
-                src="/images/Мечта.jpg"
+                src="/images/mechta.jpg"
                 alt="Мечта — материалы Гаврилова Ильи"
                 fill
                 className="object-cover"
@@ -94,7 +96,7 @@ export function AuthorStory() {
               <div className="relative mt-auto -mx-5 md:-mx-6 -mb-5 md:-mb-6 overflow-hidden rounded-b-2xl">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/Сегодня.svg"
+                  src="/images/segodnya.svg"
                   alt="Аудиоплеер"
                   className="w-full h-auto"
                 />

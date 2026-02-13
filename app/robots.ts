@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/"],
+        disallow: ["/api/", "/cabinet/", "/login"],
       },
     ],
     sitemap: "https://french-super.com/book/sitemap.xml",

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Quote, X } from "lucide-react"
@@ -11,14 +11,49 @@ import { StaggerChildren, StaggerItem } from "@/components/AnimatedSection"
 export function Reviews() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [openReview, setOpenReview] = useState<number | null>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % reviews.length)
-  }
+  }, [])
 
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length)
-  }
+  }, [])
+
+  useEffect(() => {
+    if (openReview !== null) {
+      document.body.style.overflow = "hidden"
+      // Focus close button when modal opens
+      closeButtonRef.current?.focus()
+    } else {
+      document.body.style.overflow = ""
+    }
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [openReview])
+
+  // Close modal on Escape
+  useEffect(() => {
+    if (openReview === null) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenReview(null)
+    }
+    document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
+  }, [openReview])
+
+  // Carousel keyboard navigation
+  const handleCarouselKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === "ArrowLeft") {
+      e.preventDefault()
+      prevSlide()
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault()
+      nextSlide()
+    }
+  }, [prevSlide, nextSlide])
 
   return (
     <section id="reviews" className="py-10 md:py-15 bg-secondary/30">
@@ -60,7 +95,7 @@ export function Reviews() {
         </StaggerChildren>
 
         {/* Mobile: Carousel */}
-        <div className="md:hidden" role="region" aria-label="Отзывы" aria-roledescription="carousel">
+        <div className="md:hidden" role="region" aria-label="Отзывы" aria-roledescription="carousel" tabIndex={0} onKeyDown={handleCarouselKeyDown}>
           <Card
             className="border-border cursor-pointer"
             onClick={() => setOpenReview(reviews[currentIndex].id)}
@@ -107,9 +142,13 @@ export function Reviews() {
       {openReview !== null && (() => {
         const review = reviews.find(r => r.id === openReview)
         if (!review) return null
+        const labelId = `review-dialog-name-${review.id}`
         return (
           <div
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={labelId}
             onClick={() => setOpenReview(null)}
           >
             {/* Backdrop */}
@@ -121,6 +160,7 @@ export function Reviews() {
               onClick={(e) => e.stopPropagation()}
             >
               <button
+                ref={closeButtonRef}
                 onClick={() => setOpenReview(null)}
                 className="absolute top-4 right-4 w-8 h-8 rounded-full bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors"
                 aria-label="Закрыть отзыв"
@@ -139,7 +179,7 @@ export function Reviews() {
                   </span>
                 </div>
                 <div>
-                  <p className="font-medium text-foreground">{review.name}</p>
+                  <p id={labelId} className="font-medium text-foreground">{review.name}</p>
                   <p className="text-sm text-muted-foreground">{review.subtitle}</p>
                 </div>
               </div>

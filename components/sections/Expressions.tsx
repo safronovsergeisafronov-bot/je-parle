@@ -5,7 +5,7 @@ import { expressionCards } from "@/lib/data"
 
 export function Expressions() {
   return (
-    <section className="py-10 md:py-15 lg:py-0">
+    <section id="expressions" className="py-3 md:py-4 lg:py-0">
       <div className="w-full px-3 lg:px-4">
         <div className="lg:bg-card lg:rounded-b-3xl lg:px-10 lg:pt-6 lg:pb-16">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">

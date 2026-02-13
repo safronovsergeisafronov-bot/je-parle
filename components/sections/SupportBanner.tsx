@@ -13,10 +13,13 @@ const iconMap: Record<string, React.ReactNode> = {
   "graduation-cap": <GraduationCap className="w-5 h-5 text-white/80" />,
 }
 
+let tooltipCounter = 0
+
 function Tooltip({ children, text }: { children: React.ReactNode; text: React.ReactNode }) {
   const [visible, setVisible] = useState(false)
   const [position, setPosition] = useState<"top" | "bottom">("top")
   const triggerRef = useRef<HTMLDivElement>(null)
+  const idRef = useRef(`tooltip-${++tooltipCounter}`)
 
   const handleEnter = useCallback(() => {
     if (triggerRef.current) {
@@ -33,9 +36,12 @@ function Tooltip({ children, text }: { children: React.ReactNode; text: React.Re
       className="relative cursor-pointer"
       onMouseEnter={handleEnter}
       onMouseLeave={() => setVisible(false)}
+      aria-describedby={idRef.current}
     >
       {children}
       <div
+        id={idRef.current}
+        role="tooltip"
         className={`pointer-events-none absolute left-1/2 -translate-x-1/2 w-64 rounded-xl bg-white p-3 text-xs text-foreground transition-opacity z-20 shadow-lg ${
           position === "top" ? "bottom-full mb-2" : "top-full mt-2"
         } ${visible ? "opacity-100" : "opacity-0"}`}
@@ -48,7 +54,7 @@ function Tooltip({ children, text }: { children: React.ReactNode; text: React.Re
 
 export function SupportBanner() {
   return (
-    <section className="py-10 md:py-15">
+    <section className="py-3 md:py-4">
       <div className="w-full px-3 lg:px-4">
         <div className="bg-gradient-to-r from-[#2a1f1a] via-[#1c1614] to-[#2a1f1a] rounded-3xl p-5 sm:p-6 md:p-8">
 
@@ -72,7 +78,7 @@ export function SupportBanner() {
                   aria-label="French Tech"
                 >
                   <Image
-                    src="/images/French Tech.svg"
+                    src="/images/french-tech.svg"
                     alt="French Tech"
                     width={56}
                     height={56}
@@ -90,7 +96,7 @@ export function SupportBanner() {
                   aria-label="CopyFrog"
                 >
                   <Image
-                    src="/images/Copy Frog.svg"
+                    src="/images/copy-frog.svg"
                     alt="CopyFrog"
                     width={56}
                     height={56}

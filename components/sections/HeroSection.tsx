@@ -137,7 +137,7 @@ export function HeroSection() {
           {/* "Связаться" button — top right on desktop */}
           <div className="hidden md:block absolute top-6 right-6 md:top-8 md:right-8 lg:top-10 lg:right-10 xl:top-12 xl:right-12 z-10">
             <ContactModal>
-              <button className="cursor-pointer text-sm bg-white text-foreground hover:bg-white/85 hover:shadow-md transition-all duration-250 px-4 py-2 rounded-full border border-white">
+              <button className="cursor-pointer text-sm bg-white text-foreground hover:bg-white/85 transition-all duration-250 px-4 py-2 rounded-full">
                 Связаться
               </button>
             </ContactModal>
@@ -148,7 +148,7 @@ export function HeroSection() {
       {/* Bottom row — Advantage Cards (bento grid, same gaps) */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
         {advantageCards.map((card) => (
-          <div key={card.id} className="bg-card rounded-2xl p-6 transition-all duration-250 hover:bg-card-hover hover:shadow-sm cursor-default">
+          <div key={card.id} className="bg-card rounded-2xl p-6 transition-all duration-250 hover:bg-card-hover cursor-default">
             <div className="w-7 h-7 rounded-full bg-foreground flex items-center justify-center mb-4">
               <Plus className="w-3.5 h-3.5 text-white" />
             </div>

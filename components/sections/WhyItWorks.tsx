@@ -25,7 +25,9 @@ function ProgressDots({ count }: { count: number }) {
   )
 }
 
-// Desktop checkpoint positions (% of the card)
+// Desktop checkpoint positions as % of the card dimensions.
+// These form a zigzag path the croissant follows on scroll:
+//   1 (top-left) → 2 (mid-left) → 3 (bottom-left) → 4 (bottom-right) → 5 (mid-right)
 const checkpoints = [
   { x: 9, y: 35 },
   { x: 27, y: 52 },
@@ -175,7 +177,7 @@ export function WhyItWorks() {
               }}
             >
               <Image
-                src="/images/круасан.png"
+                src="/images/croissant.png"
                 alt="Круассан"
                 width={64}
                 height={64}
@@ -210,7 +212,7 @@ export function WhyItWorks() {
           </div>
           <div className="flex justify-center mt-8 select-none">
             <Image
-              src="/images/круасан.png"
+              src="/images/croissant.png"
               alt="Круассан"
               width={48}
               height={48}
