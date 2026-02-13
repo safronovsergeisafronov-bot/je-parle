@@ -14,9 +14,9 @@ export function HeroSection() {
   return (
     <section className="p-3 lg:p-4 flex flex-col gap-3 lg:gap-4">
       {/* Top row — two panels */}
-      <div className="h-[650px] flex flex-col lg:flex-row gap-3 lg:gap-4">
+      <div className="flex flex-col lg:flex-row lg:h-[clamp(550px,70vh,750px)] gap-3 lg:gap-4">
         {/* Left Panel — Burgundy */}
-        <div className="lg:w-1/2 bg-accent rounded-2xl flex flex-col p-6 md:p-8 lg:p-10 xl:p-12 relative overflow-hidden">
+        <div className="lg:w-1/2 bg-accent rounded-2xl flex flex-col p-6 md:p-8 md:pt-6 lg:p-10 xl:p-12 relative overflow-hidden">
           {/* Header row */}
           <div className="flex items-center justify-between">
             {/* Logo / Author */}
@@ -30,7 +30,7 @@ export function HeroSection() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <span className="text-sm font-medium text-white">Гаврилов Илья</span>
+              <span className="text-sm font-medium text-white">French.Super</span>
             </Link>
 
             {/* Desktop Nav */}
@@ -85,7 +85,7 @@ export function HeroSection() {
           )}
 
           {/* Heading + Description — centered between header and buttons */}
-          <div className="flex-1 flex flex-col items-center justify-center text-center">
+          <div className="flex-1 flex flex-col items-center justify-center text-center pt-6 md:pt-8 lg:pt-0">
             <h1 className="mb-3 lg:mb-4">
               <TextGenerateEffect
                 as="span"
@@ -107,12 +107,12 @@ export function HeroSection() {
             </h1>
 
             <p className="text-sm md:text-base text-white/70 max-w-md">
-              Внутри — живые выражения, которые используют французы каждый день. 300+ фраз с озвучкой.
+              Внутри — живые выражения, которые используют французы каждый день. 300+ фраз с&nbsp;озвучкой.
             </p>
           </div>
 
           {/* CTA Buttons — pinned to bottom */}
-          <div className="flex flex-col gap-3 w-full">
+          <div className="flex flex-col gap-3 w-full pt-4 md:pt-6 lg:pt-0">
             <Link
               href="#buy"
               className="bg-white text-foreground rounded-full px-8 py-4 text-base font-medium hover:bg-white/90 transition-colors text-center"
@@ -129,7 +129,7 @@ export function HeroSection() {
         </div>
 
         {/* Right Panel — Hero Image */}
-        <div className="lg:w-1/2 bg-secondary rounded-2xl relative overflow-hidden">
+        <div className="min-h-[300px] md:min-h-[400px] lg:min-h-0 lg:w-1/2 bg-secondary rounded-2xl relative overflow-hidden">
           <Image
             src="/images/Hero-section.jpg"
             alt="Je Parle! — книга для изучения французского языка"
@@ -141,7 +141,7 @@ export function HeroSection() {
           {/* "Связаться" button — top right on desktop */}
           <div className="hidden md:block absolute top-6 right-6 md:top-8 md:right-8 lg:top-10 lg:right-10 xl:top-12 xl:right-12 z-10">
             <ContactModal>
-              <button className="text-sm text-white/80 hover:text-white transition-colors px-4 py-2 rounded-full border border-white/20 hover:border-white/50 backdrop-blur-sm bg-black/10">
+              <button className="cursor-pointer text-sm bg-white text-foreground hover:bg-white/85 transition-colors px-4 py-2 rounded-full border border-white">
                 Связаться
               </button>
             </ContactModal>
@@ -152,11 +152,11 @@ export function HeroSection() {
       {/* Bottom row — Advantage Cards (bento grid, same gaps) */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
         {advantageCards.map((card) => (
-          <div key={card.id} className="bg-card rounded-2xl p-6">
+          <div key={card.id} className="bg-card rounded-2xl p-6 transition-colors duration-200 hover:bg-card/70 cursor-default">
             <div className="w-7 h-7 rounded-full bg-foreground flex items-center justify-center mb-4">
               <Plus className="w-3.5 h-3.5 text-white" />
             </div>
-            <h3 className="font-semibold text-foreground mb-2">
+            <h3 className="text-base md:text-lg font-semibold leading-tight text-foreground mb-2">
               {card.title}
             </h3>
             <p className="text-sm text-muted-foreground">

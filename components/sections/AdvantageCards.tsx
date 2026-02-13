@@ -13,7 +13,7 @@ export function AdvantageCards() {
                 <div className="w-7 h-7 rounded-full bg-foreground flex items-center justify-center mb-4">
                   <Plus className="w-3.5 h-3.5 text-white" />
                 </div>
-                <h3 className="font-semibold text-foreground mb-2">
+                <h3 className="text-base md:text-lg font-semibold leading-tight text-foreground mb-2">
                   {card.title}
                 </h3>
                 <p className="text-sm text-muted-foreground">

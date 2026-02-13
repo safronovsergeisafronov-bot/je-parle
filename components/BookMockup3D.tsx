@@ -30,7 +30,7 @@ export function BookMockup3D() {
               <h3 className="text-4xl lg:text-5xl font-bold text-white mb-3">
                 Je parle!
               </h3>
-              <p className="text-white/60 text-sm leading-relaxed max-w-[200px]">
+              <p className="text-white/60 text-sm max-w-[200px]">
                 Руководство, чтобы говорить, как настоящий француз
               </p>
             </div>

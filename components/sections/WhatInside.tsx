@@ -1,53 +1,65 @@
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ExternalLink } from "lucide-react"
 import { TextGenerateEffect } from "@/components/TextGenerateEffect"
 
 export function WhatInside() {
   return (
     <section id="inside" className="py-12 md:py-20">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-accent/20 to-secondary p-8 md:p-12">
-            {/* Badges */}
-            <div className="flex flex-wrap gap-2 mb-6">
-              <span className="inline-block px-3 py-1 bg-accent text-white text-sm rounded-full">
+      <div className="w-full px-3 lg:px-4">
+        {/* Main card — dark cinematic gradient */}
+        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#0d0002] via-[#56051B] to-[#8b1a3a]">
+          <div className="grid lg:grid-cols-[1.2fr_1fr] min-h-[480px] lg:min-h-[580px]">
+
+            {/* Left: Atmospheric image area */}
+            <div className="relative min-h-[320px] lg:min-h-full">
+
+              {/* Top-left badge */}
+              <span className="absolute top-5 left-5 md:top-8 md:left-8 z-20 px-4 py-1.5 bg-white/15 backdrop-blur-sm text-white text-sm font-medium rounded-full">
                 Бесплатный фрагмент
               </span>
-              <span className="inline-block px-3 py-1 bg-foreground text-background text-sm rounded-full">
+
+              {/* Bottom-left badge */}
+              <span className="absolute bottom-5 left-5 md:bottom-8 md:left-8 z-20 px-4 py-1.5 bg-white/15 backdrop-blur-sm text-white text-sm font-medium rounded-full">
                 PDF 16 страниц
               </span>
             </div>
 
-            <TextGenerateEffect
-              as="h2"
-              text="Интересно, что внутри?"
-              className="text-2xl md:text-3xl lg:text-4xl font-light leading-none tracking-[-0.02em] text-foreground mb-4"
-            />
-            <p className="text-muted-foreground mb-8 max-w-xl">
-              Небольшой фрагмент бесплатно — чтобы понять, насколько это удобно. В предпросмотре — только малая часть книги.
-            </p>
+            {/* Right: Content */}
+            <div className="relative flex flex-col justify-start p-8 md:p-12 lg:p-14">
+              {/* Top badge */}
+              <span className="inline-block self-start px-4 py-1.5 bg-white/15 backdrop-blur-sm text-white/90 text-sm font-medium rounded-full mb-6">
+                Весь продукт в 6,7 раз больше
+              </span>
 
-            <Button size="lg" asChild>
+              <TextGenerateEffect
+                as="h2"
+                text="Интересно, что внутри?"
+                className="text-3xl md:text-4xl font-medium leading-[1.15] tracking-[-0.03em] text-white mb-6"
+              />
+
+              <p className="text-white/75 text-base md:text-lg mb-8 max-w-md">
+                Небольшой фрагмент бесплатно&nbsp;— чтобы понять, насколько это удобно.
+                В&nbsp;предпросмотре&nbsp;— только малая часть книги.
+              </p>
+
+              {/* CTA Button — warm gold */}
               <Link
                 href="https://drive.google.com/file/d/1CwZf42BbZ7gZsE5rhJ5lA7S_kAm7chRW/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 self-start bg-[#E8D5A3] hover:bg-[#dcc88e] text-foreground font-semibold text-lg md:text-xl px-10 py-5 md:px-12 md:py-6 rounded-full transition-all duration-200 hover:scale-100"
               >
-                <ExternalLink className="w-5 h-5 mr-2" />
+                {/* Link icon */}
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                </svg>
                 Читать фрагмент
               </Link>
-            </Button>
 
-            <p className="text-sm text-muted-foreground mt-4">
-              Ждать загрузку не нужно — фрагмент откроется сразу через Google Диск по ссылке.
-            </p>
-
-            {/* Decorative badge */}
-            <div className="absolute top-4 right-4 bg-white/90 rounded-lg px-3 py-2 shadow-lg">
-              <p className="text-xs text-muted-foreground">Весь продукт в</p>
-              <p className="text-lg font-bold text-accent">6,7 раз больше</p>
+              <p className="text-xs md:text-sm text-white/40 mt-6 max-w-xs text-center">
+                Ждать загрузку не&nbsp;нужно&nbsp;— фрагмент откроется сразу через Google Диск по&nbsp;ссылке.
+              </p>
             </div>
+
           </div>
         </div>
       </div>

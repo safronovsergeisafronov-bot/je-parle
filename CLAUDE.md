@@ -187,6 +187,20 @@ transition: all 0.2s ease-in-out;
 
 ---
 
+## Стандарт заголовков карточек
+
+Все `<h3>` / `<h4>` внутри карточек-плашек обязаны использовать:
+
+```
+text-base md:text-lg font-semibold leading-tight
+```
+
+= 16px (mobile) → 18px (md+), полужирный, плотный интерлиньяж.
+
+**Не трогаем:** FlipCard (интерактивный, `text-lg md:text-xl`), Reviews (имена, `text-sm`), WhyItWorks (нет заголовков в карточках).
+
+---
+
 ## Hover эффекты
 
 ```css

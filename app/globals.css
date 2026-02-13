@@ -44,6 +44,12 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  line-height: 1.4;
+}
+
+/* Prevent orphaned short words at end of lines */
+p, li, span, h1, h2, h3, h4 {
+  text-wrap: pretty;
 }
 
 /* Smooth scrolling */
@@ -123,6 +129,89 @@ html {
   opacity: 1;
   filter: blur(0);
   transform: translateY(0);
+}
+
+/* Accordion animations */
+@keyframes accordion-down {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0;
+  }
+}
+
+@utility animate-accordion-down {
+  animation: accordion-down 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility animate-accordion-up {
+  animation: accordion-up 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Delivery icon micro-animations */
+@keyframes icon-card-tap {
+  0%, 100% { transform: rotateY(0deg); }
+  50% { transform: rotateY(15deg); }
+}
+
+@keyframes icon-users-wave {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-2px); }
+  75% { transform: translateY(1px); }
+}
+
+@keyframes icon-download-bounce {
+  0%, 100% { transform: translateY(0); }
+  40% { transform: translateY(3px); }
+  60% { transform: translateY(-1px); }
+}
+
+@keyframes icon-wallet-tilt {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+@keyframes icon-key-jiggle {
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(8deg); }
+  40% { transform: rotate(-6deg); }
+  60% { transform: rotate(4deg); }
+  80% { transform: rotate(-2deg); }
+}
+
+@utility animate-icon-card {
+  animation: icon-card-tap 3s ease-in-out infinite;
+}
+
+@utility animate-icon-users {
+  animation: icon-users-wave 2.5s ease-in-out infinite;
+}
+
+@utility animate-icon-download {
+  animation: icon-download-bounce 2s ease-in-out infinite;
+}
+
+@utility animate-icon-wallet {
+  animation: icon-wallet-tilt 3s ease-in-out infinite;
+}
+
+@utility animate-icon-key {
+  animation: icon-key-jiggle 2.5s ease-in-out infinite;
 }
 
 /* Book float animation */

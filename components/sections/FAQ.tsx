@@ -12,18 +12,18 @@ import { TextGenerateEffect } from "@/components/TextGenerateEffect"
 
 export function FAQ() {
   return (
-    <section id="faq" className="py-12 md:py-20 bg-secondary/30">
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto">
+    <section id="faq" className="py-12 md:py-20 bg-background">
+      <div className="w-full px-3 lg:px-4">
+        <div>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
             <TextGenerateEffect
               as="h2"
               text="Ответы на вопросы"
-              className="text-2xl md:text-3xl lg:text-4xl font-light leading-none tracking-[-0.02em] text-foreground"
+              className="text-3xl md:text-4xl font-medium leading-[1.15] tracking-[-0.03em] text-foreground"
             />
             <ContactModal>
-              <Button variant="outline">
-                <Search className="w-4 h-4 mr-2" />
+              <Button className="bg-[#F2ECDE] text-foreground hover:bg-[#e5dece] hover:scale-100 border-0 shadow-none">
+                <Search className="w-4 h-4 mr-2 text-foreground" />
                 Задать вопрос
               </Button>
             </ContactModal>
@@ -34,14 +34,14 @@ export function FAQ() {
               <AccordionItem
                 key={item.id}
                 value={`item-${item.id}`}
-                className="bg-background rounded-xl px-4 border border-border"
+                className="bg-white rounded-xl px-4 border border-border"
               >
                 <AccordionTrigger className="text-left hover:no-underline">
                   <span className="font-medium text-foreground pr-4">
                     {item.question}
                   </span>
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground leading-relaxed">
+                <AccordionContent className="text-muted-foreground">
                   {item.answer}
                 </AccordionContent>
               </AccordionItem>

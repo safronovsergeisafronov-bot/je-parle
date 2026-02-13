@@ -3,12 +3,13 @@
 import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
+import { ChevronLeft, ChevronRight, Quote, X } from "lucide-react"
 import { reviews } from "@/lib/data"
 import { TextGenerateEffect } from "@/components/TextGenerateEffect"
 
 export function Reviews() {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [openReview, setOpenReview] = useState<number | null>(null)
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % reviews.length)
@@ -20,17 +21,21 @@ export function Reviews() {
 
   return (
     <section id="reviews" className="py-12 md:py-20 bg-secondary/30">
-      <div className="container mx-auto px-4">
+      <div className="w-full px-3 lg:px-4">
         <TextGenerateEffect
           as="h2"
           text="Отзывы на книгу"
-          className="text-2xl md:text-3xl lg:text-4xl font-light leading-none tracking-[-0.02em] text-center text-foreground mb-12"
+          className="text-3xl md:text-4xl font-medium leading-[1.15] tracking-[-0.03em] text-center text-foreground mb-12"
         />
 
         {/* Desktop: Grid of cards */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {reviews.map((review) => (
-            <Card key={review.id} className="hover-card border-border">
+            <Card
+              key={review.id}
+              className="border-border shadow-none hover:shadow-none hover:bg-card/70 transition-colors duration-200 cursor-pointer"
+              onClick={() => setOpenReview(review.id)}
+            >
               <CardContent className="p-6">
                 <Quote className="w-8 h-8 text-accent/30 mb-4" aria-hidden="true" />
                 <p className="text-muted-foreground text-sm mb-4 line-clamp-4">
@@ -54,7 +59,10 @@ export function Reviews() {
 
         {/* Mobile: Carousel */}
         <div className="md:hidden" role="region" aria-label="Отзывы" aria-roledescription="carousel">
-          <Card className="border-border">
+          <Card
+            className="border-border cursor-pointer"
+            onClick={() => setOpenReview(reviews[currentIndex].id)}
+          >
             <CardContent className="p-6">
               <Quote className="w-8 h-8 text-accent/30 mb-4" aria-hidden="true" />
               <p className="text-muted-foreground text-sm mb-4">
@@ -92,6 +100,51 @@ export function Reviews() {
           </div>
         </div>
       </div>
+
+      {/* Review popup overlay */}
+      {openReview !== null && (() => {
+        const review = reviews.find(r => r.id === openReview)
+        if (!review) return null
+        return (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            onClick={() => setOpenReview(null)}
+          >
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-foreground/40 backdrop-blur-[4px]" />
+
+            {/* Modal */}
+            <div
+              className="relative bg-background rounded-2xl p-6 md:p-8 max-w-lg w-full max-h-[80vh] overflow-y-auto z-10"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setOpenReview(null)}
+                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors"
+                aria-label="Закрыть отзыв"
+              >
+                <X className="w-4 h-4 text-foreground" />
+              </button>
+
+              <Quote className="w-10 h-10 text-accent/30 mb-4" aria-hidden="true" />
+              <p className="text-muted-foreground text-sm md:text-base mb-6 leading-relaxed">
+                {review.text}
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
+                  <span className="text-accent font-medium text-lg" aria-hidden="true">
+                    {review.name.charAt(0)}
+                  </span>
+                </div>
+                <div>
+                  <p className="font-medium text-foreground">{review.name}</p>
+                  <p className="text-sm text-muted-foreground">{review.subtitle}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      })()}
     </section>
   )
 }
