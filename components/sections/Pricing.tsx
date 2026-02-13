@@ -1,12 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Check, BookOpen, CreditCard, Users, FileDown, Wallet, KeyRound, FolderDown } from "lucide-react"
+import { Check, CreditCard, Users, FileDown, Wallet, KeyRound, FolderDown, Sparkles, ShieldCheck } from "lucide-react"
 import { CountdownTimer } from "@/components/CountdownTimer"
 import { CurrencySelector, type Currency } from "@/components/CurrencySelector"
 import { PurchaseModal } from "@/components/PurchaseModal"
@@ -18,9 +17,10 @@ export function Pricing() {
   const [currency, setCurrency] = useState<Currency>("USD")
 
   const currentPrice = prices[currency]
+  const discount = Math.round(((currentPrice.old - currentPrice.new) / currentPrice.old) * 100)
 
   return (
-    <section id="buy" className="py-12 md:py-20">
+    <section id="buy" className="py-10 md:py-15">
       <div className="w-full px-3 lg:px-4">
         <TextGenerateEffect
           as="h2"
@@ -31,30 +31,23 @@ export function Pricing() {
         {/* Bento Grid: Image + Pricing */}
         <div className="mb-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-            {/* Left: Image Card */}
-            <div className="relative overflow-hidden rounded-2xl bg-secondary min-h-[300px] md:min-h-[unset]">
-              {/* Placeholder — replace with real image */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-8">
-                <BookOpen className="w-16 h-16 text-accent/30" />
-                <p className="text-sm text-muted-foreground text-center">
-                  Изображение книги
-                </p>
-              </div>
-              {/* Uncomment when image is ready:
-              <Image
-                src="/images/book-pricing.jpg"
-                alt="Книга Je Parle!"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              */}
+            {/* Left: Premium Book Placeholder */}
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#56051B] via-[#7a1a35] to-[#56051B] min-h-[300px] md:min-h-[unset] flex items-center justify-center">
+              {/* Image will be added here later */}
             </div>
 
             {/* Right: Pricing Card */}
-            <div className="rounded-2xl border-2 border-accent bg-background p-6 md:p-8 flex flex-col">
+            <div className="relative rounded-2xl border-2 border-accent bg-background p-6 md:p-8 flex flex-col">
+              {/* Sale badge */}
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
+                <div className="flex items-center gap-1.5 bg-accent text-white text-xs font-semibold px-4 py-1.5 rounded-full shadow-lg">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Скидка {discount}%</span>
+                </div>
+              </div>
+
               {/* Currency Tabs */}
-              <div className="flex justify-center mb-6">
+              <div className="flex justify-center mb-6 mt-2">
                 <CurrencySelector selected={currency} onSelect={setCurrency} />
               </div>
 
@@ -75,16 +68,18 @@ export function Pricing() {
               <ul className="space-y-3 mb-8 flex-1">
                 {pricingFeatures.map((feature, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                    <div className="w-5 h-5 rounded-full bg-[#56051B]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check className="w-3 h-3 text-accent" strokeWidth={2.5} />
+                    </div>
                     <span className="text-sm text-muted-foreground">{feature}</span>
                   </li>
                 ))}
               </ul>
 
               {/* Purchase Button */}
-              <div>
+              <div className="space-y-3">
                 {currency === "RUB" ? (
-                  <Button size="lg" className="w-full hover:scale-100" asChild>
+                  <Button size="lg" className="w-full text-base h-16 shadow-none hover:shadow-none hover:scale-100 hover:opacity-90 transition-all duration-250" asChild>
                     <Link
                       href="http://french-super.com/book-je-parle-oplata-ru"
                       target="_blank"
@@ -95,11 +90,17 @@ export function Pricing() {
                   </Button>
                 ) : (
                   <PurchaseModal currency={currency}>
-                    <Button size="lg" className="w-full hover:scale-100">
+                    <Button size="lg" className="w-full text-base h-16 shadow-none hover:shadow-none hover:scale-100 hover:opacity-90 transition-all duration-250">
                       Приобрести книгу ({currency})
                     </Button>
                   </PurchaseModal>
                 )}
+
+                {/* Trust signal */}
+                <p className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  Безопасная оплата
+                </p>
               </div>
             </div>
           </div>
@@ -108,9 +109,9 @@ export function Pricing() {
         {/* Спеццена Card */}
         <div className="mb-4 md:mb-6">
           <div className="rounded-2xl bg-secondary p-5 sm:p-6 md:p-8 lg:p-10">
-            <div className="flex flex-col items-center gap-5 md:gap-6 text-center">
-              {/* Title */}
-              <div>
+            <div className="flex flex-col lg:flex-row items-center gap-5 md:gap-6 lg:gap-8">
+              {/* Title — left */}
+              <div className="text-center lg:text-left lg:flex-1">
                 <span className="text-2xl sm:text-3xl md:text-4xl font-medium text-foreground leading-tight">
                   Спеццена
                   <br />
@@ -118,14 +119,14 @@ export function Pricing() {
                 </span>
               </div>
 
-              {/* Timer */}
-              <div className="flex justify-center">
+              {/* Timer — center */}
+              <div className="flex justify-center lg:flex-1">
                 <CountdownTimer targetDate={saleEndDate} variant="minimal" />
               </div>
 
-              {/* Info Card */}
-              <div className="bg-white rounded-2xl p-4 md:p-5 lg:p-6 w-full max-w-md">
-                <p className="text-sm md:text-base text-foreground">
+              {/* Info Card — right */}
+              <div className="bg-white rounded-2xl p-4 md:p-5 shadow-sm lg:flex-1">
+                <p className="text-sm md:text-base text-foreground lg:text-left">
                   <span className="font-semibold text-accent">Успейте получить книгу</span>{" "}
                   по&nbsp;лучшим условиям до&nbsp;23:59 (по&nbsp;Парижу) 12&nbsp;февраля.
                 </p>
@@ -141,7 +142,9 @@ export function Pricing() {
               {/* Text */}
               <div className="text-center md:text-left flex-1">
                 <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-foreground">
-                  Оставьте заявку, если у&nbsp;вас возникли проблемы с&nbsp;оплатой
+                  Оставьте заявку,
+                  <br />
+                  если у&nbsp;вас возникли проблемы с&nbsp;оплатой
                 </span>
               </div>
 
@@ -149,7 +152,7 @@ export function Pricing() {
               <HelpModal>
                 <Button
                   size="lg"
-                  className="shrink-0 px-10 md:px-14 py-5 md:py-7 text-base md:text-lg rounded-full whitespace-nowrap"
+                  className="shrink-0 px-10 md:px-14 py-5 md:py-7 text-base md:text-lg rounded-full whitespace-nowrap hover:scale-100 hover:opacity-90 shadow-none hover:shadow-none transition-all duration-250"
                   aria-label="Оставить заявку при проблемах с оплатой"
                 >
                   Оставить заявку
@@ -204,65 +207,43 @@ export function Pricing() {
 
             <TabsContent value="international" className="mt-0">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="rounded-2xl bg-card p-6">
-                  <div className="w-10 h-10 rounded-xl bg-background flex items-center justify-center mb-4">
-                    <CreditCard className="w-5 h-5 text-foreground animate-icon-card" />
+                {[
+                  { icon: CreditCard, anim: "animate-icon-card", title: "Оплата", desc: "Стоимость указана в\u00A0евро, но оплатить можно в\u00A0любой валюте. Конвертация пройдёт автоматически по\u00A0выгодному курсу банка.", step: 1 },
+                  { icon: Users, anim: "animate-icon-users", title: "Инструкция и\u00A0доступ", desc: "Сразу после успешной оплаты на\u00A0e-mail придёт письмо с\u00A0инструкцией, а\u00A0также откроется страница со\u00A0следующими шагами.", step: 2 },
+                  { icon: FileDown, anim: "animate-icon-download", title: "Материалы", desc: "Вам откроется доступ к\u00A0книге «Je\u00A0Parle!» в\u00A0формате PDF и\u00A0к\u00A0аудиоозвучке. Всё сразу готово к\u00A0изучению.", step: 3 },
+                ].map((card) => (
+                  <div key={card.step} className="group rounded-2xl bg-card p-6 transition-all duration-300 hover:shadow-md hover:shadow-[#56051B]/5">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-xl bg-background flex items-center justify-center">
+                        <card.icon className={`w-5 h-5 text-foreground ${card.anim}`} />
+                      </div>
+                      <span className="text-xs font-semibold text-accent/50 uppercase tracking-wider">Шаг {card.step}</span>
+                    </div>
+                    <h4 className="text-base md:text-lg font-semibold leading-tight text-foreground mb-2">{card.title}</h4>
+                    <p className="text-sm text-muted-foreground">{card.desc}</p>
                   </div>
-                  <h4 className="text-base md:text-lg font-semibold leading-tight text-foreground mb-2">Оплата</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Стоимость указана в&nbsp;евро, но оплатить можно в&nbsp;любой валюте. Конвертация пройдёт автоматически по&nbsp;выгодному курсу банка.
-                  </p>
-                </div>
-                <div className="rounded-2xl bg-card p-6">
-                  <div className="w-10 h-10 rounded-xl bg-background flex items-center justify-center mb-4">
-                    <Users className="w-5 h-5 text-foreground animate-icon-users" />
-                  </div>
-                  <h4 className="text-base md:text-lg font-semibold leading-tight text-foreground mb-2">Инструкция и&nbsp;доступ</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Сразу после успешной оплаты на&nbsp;e-mail придёт письмо с&nbsp;инструкцией, а&nbsp;также откроется страница со&nbsp;следующими шагами.
-                  </p>
-                </div>
-                <div className="rounded-2xl bg-card p-6">
-                  <div className="w-10 h-10 rounded-xl bg-background flex items-center justify-center mb-4">
-                    <FileDown className="w-5 h-5 text-foreground animate-icon-download" />
-                  </div>
-                  <h4 className="text-base md:text-lg font-semibold leading-tight text-foreground mb-2">Материалы</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Вам откроется доступ к&nbsp;книге «Je&nbsp;Parle!» в&nbsp;формате PDF и&nbsp;к&nbsp;аудиоозвучке. Всё сразу готово к&nbsp;изучению.
-                  </p>
-                </div>
+                ))}
               </div>
             </TabsContent>
 
             <TabsContent value="russia" className="mt-0">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="rounded-2xl bg-card p-6">
-                  <div className="w-10 h-10 rounded-xl bg-background flex items-center justify-center mb-4">
-                    <Wallet className="w-5 h-5 text-foreground animate-icon-wallet" />
+                {[
+                  { icon: Wallet, anim: "animate-icon-wallet", title: "Оплата", desc: "Можно оплатить картой любого российского банка или через сервисы: СБП, СберПэй, Яндекс.Пэй и\u00A0др.", step: 1 },
+                  { icon: KeyRound, anim: "animate-icon-key", title: "Доступ в\u00A0личный кабинет", desc: "Сразу после успешной оплаты вы\u00A0получаете письмо на\u00A0e-mail с\u00A0кнопкой входа в\u00A0личный кабинет и\u00A0инструкцией.", step: 2 },
+                  { icon: FolderDown, anim: "animate-icon-download", title: "Материалы внутри", desc: "В\u00A0кабинете сразу доступны книга «Je\u00A0Parle!» (PDF) и\u00A0аудиоозвучка. Всё готово к\u00A0изучению!", step: 3 },
+                ].map((card) => (
+                  <div key={card.step} className="group rounded-2xl bg-card p-6 transition-all duration-300 hover:shadow-md hover:shadow-[#56051B]/5">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-xl bg-background flex items-center justify-center">
+                        <card.icon className={`w-5 h-5 text-foreground ${card.anim}`} />
+                      </div>
+                      <span className="text-xs font-semibold text-accent/50 uppercase tracking-wider">Шаг {card.step}</span>
+                    </div>
+                    <h4 className="text-base md:text-lg font-semibold leading-tight text-foreground mb-2">{card.title}</h4>
+                    <p className="text-sm text-muted-foreground">{card.desc}</p>
                   </div>
-                  <h4 className="text-base md:text-lg font-semibold leading-tight text-foreground mb-2">Оплата</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Можно оплатить картой любого российского банка или через сервисы: СБП, СберПэй, Яндекс.Пэй и&nbsp;др.
-                  </p>
-                </div>
-                <div className="rounded-2xl bg-card p-6">
-                  <div className="w-10 h-10 rounded-xl bg-background flex items-center justify-center mb-4">
-                    <KeyRound className="w-5 h-5 text-foreground animate-icon-key" />
-                  </div>
-                  <h4 className="text-base md:text-lg font-semibold leading-tight text-foreground mb-2">Доступ в&nbsp;личный кабинет</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Сразу после успешной оплаты вы&nbsp;получаете письмо на&nbsp;e-mail с&nbsp;кнопкой входа в&nbsp;личный кабинет и&nbsp;инструкцией.
-                  </p>
-                </div>
-                <div className="rounded-2xl bg-card p-6">
-                  <div className="w-10 h-10 rounded-xl bg-background flex items-center justify-center mb-4">
-                    <FolderDown className="w-5 h-5 text-foreground animate-icon-download" />
-                  </div>
-                  <h4 className="text-base md:text-lg font-semibold leading-tight text-foreground mb-2">Материалы внутри</h4>
-                  <p className="text-sm text-muted-foreground">
-                    В&nbsp;кабинете сразу доступны книга «Je&nbsp;Parle!» (PDF) и&nbsp;аудиоозвучка. Всё готово к&nbsp;изучению!
-                  </p>
-                </div>
+                ))}
               </div>
             </TabsContent>
           </Tabs>

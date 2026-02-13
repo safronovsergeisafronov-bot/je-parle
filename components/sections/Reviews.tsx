@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Quote, X } from "lucide-react"
 import { reviews } from "@/lib/data"
 import { TextGenerateEffect } from "@/components/TextGenerateEffect"
+import { StaggerChildren, StaggerItem } from "@/components/AnimatedSection"
 
 export function Reviews() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -20,7 +21,7 @@ export function Reviews() {
   }
 
   return (
-    <section id="reviews" className="py-12 md:py-20 bg-secondary/30">
+    <section id="reviews" className="py-10 md:py-15 bg-secondary/30">
       <div className="w-full px-3 lg:px-4">
         <TextGenerateEffect
           as="h2"
@@ -29,33 +30,34 @@ export function Reviews() {
         />
 
         {/* Desktop: Grid of cards */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <StaggerChildren className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.1}>
           {reviews.map((review) => (
-            <Card
-              key={review.id}
-              className="border-border shadow-none hover:shadow-none hover:bg-card/70 transition-colors duration-200 cursor-pointer"
-              onClick={() => setOpenReview(review.id)}
-            >
-              <CardContent className="p-6">
-                <Quote className="w-8 h-8 text-accent/30 mb-4" aria-hidden="true" />
-                <p className="text-muted-foreground text-sm mb-4 line-clamp-4">
-                  {review.text}
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
-                    <span className="text-accent font-medium" aria-hidden="true">
-                      {review.name.charAt(0)}
-                    </span>
+            <StaggerItem key={review.id}>
+              <Card
+                className="border-border shadow-none hover:shadow-none hover:bg-card/70 transition-colors duration-200 cursor-pointer h-full"
+                onClick={() => setOpenReview(review.id)}
+              >
+                <CardContent className="p-6">
+                  <Quote className="w-8 h-8 text-accent/30 mb-4" aria-hidden="true" />
+                  <p className="text-muted-foreground text-sm mb-4 line-clamp-4">
+                    {review.text}
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+                      <span className="text-accent font-medium" aria-hidden="true">
+                        {review.name.charAt(0)}
+                      </span>
+                    </div>
+                    <div>
+                      <p className="font-medium text-foreground text-sm">{review.name}</p>
+                      <p className="text-xs text-muted-foreground">{review.subtitle}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-medium text-foreground text-sm">{review.name}</p>
-                    <p className="text-xs text-muted-foreground">{review.subtitle}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerChildren>
 
         {/* Mobile: Carousel */}
         <div className="md:hidden" role="region" aria-label="Отзывы" aria-roledescription="carousel">

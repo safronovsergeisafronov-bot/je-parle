@@ -4,6 +4,7 @@ import { useState, useRef, useCallback } from "react"
 import Image from "next/image"
 import { MessageCircle, AlarmClock, Filter, GraduationCap, Info } from "lucide-react"
 import { darkCards } from "@/lib/data"
+import { StaggerChildren, StaggerItem } from "@/components/AnimatedSection"
 
 const iconMap: Record<string, React.ReactNode> = {
   "message-circle": <MessageCircle className="w-5 h-5 text-white/80" />,
@@ -47,9 +48,9 @@ function Tooltip({ children, text }: { children: React.ReactNode; text: React.Re
 
 export function SupportBanner() {
   return (
-    <section className="py-3 lg:py-4">
+    <section className="py-10 md:py-15">
       <div className="w-full px-3 lg:px-4">
-        <div className="bg-[#1c1614] rounded-3xl p-5 sm:p-6 md:p-8">
+        <div className="bg-gradient-to-r from-[#2a1f1a] via-[#1c1614] to-[#2a1f1a] rounded-3xl p-5 sm:p-6 md:p-8">
 
           {/* Top banner row */}
           <div className="flex flex-col lg:flex-row items-start lg:items-center gap-5 lg:gap-0 mb-6 md:mb-8">
@@ -120,24 +121,23 @@ export function SupportBanner() {
           </div>
 
           {/* Bottom: 4 dark cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+          <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4" staggerDelay={0.08}>
             {darkCards.map((card) => (
-              <div
-                key={card.id}
-                className="bg-[#2a2220] rounded-2xl p-5 md:p-6"
-              >
-                <div className="w-10 h-10 rounded-xl bg-[#3a3230] flex items-center justify-center mb-4">
-                  {iconMap[card.icon]}
+              <StaggerItem key={card.id}>
+                <div className="bg-[#2a2220] rounded-2xl p-5 md:p-6 h-full">
+                  <div className="w-10 h-10 rounded-xl bg-[#3a3230] flex items-center justify-center mb-4">
+                    {iconMap[card.icon]}
+                  </div>
+                  <h4 className="font-semibold text-white text-base md:text-lg leading-tight mb-2 whitespace-pre-line">
+                    {card.title}
+                  </h4>
+                  <p className="text-sm text-white/55 whitespace-pre-line">
+                    {card.description}
+                  </p>
                 </div>
-                <h4 className="font-semibold text-white text-base md:text-lg leading-tight mb-2 whitespace-pre-line">
-                  {card.title}
-                </h4>
-                <p className="text-sm text-white/55 whitespace-pre-line">
-                  {card.description}
-                </p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerChildren>
         </div>
       </div>
     </section>

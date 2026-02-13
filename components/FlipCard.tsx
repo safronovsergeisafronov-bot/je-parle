@@ -11,6 +11,7 @@ interface FlipCardProps {
   topic: string
   topicRu: string
   audioSrc?: string
+  iconSrc?: string
   className?: string
 }
 
@@ -20,6 +21,7 @@ export function FlipCard({
   topic,
   topicRu,
   audioSrc,
+  iconSrc,
   className,
 }: FlipCardProps) {
   const [isFlipped, setIsFlipped] = useState(false)
@@ -63,43 +65,49 @@ export function FlipCard({
       >
         {/* Front */}
         <div
-          className="flip-card-front absolute w-full h-full bg-white rounded-2xl p-5 flex flex-col justify-between border border-border/50"
+          className="flip-card-front absolute w-full h-full bg-white rounded-2xl p-4 flex flex-col justify-between border border-border/50"
           style={{ backfaceVisibility: "hidden" }}
         >
-          {/* Header: icon placeholder + theme */}
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-              <div className="w-5 h-5 rounded-full bg-accent/30" />
-            </div>
+          {/* Header: icon + theme */}
+          <div className="flex items-center gap-2.5">
+            {iconSrc ? (
+              <div className="w-[45px] h-[45px] rounded-xl bg-accent/8 flex items-center justify-center flex-shrink-0">
+                <img src={iconSrc} alt="" className="w-7 h-7 object-contain" aria-hidden="true" />
+              </div>
+            ) : (
+              <div className="w-[45px] h-[45px] rounded-xl bg-accent/8 flex items-center justify-center flex-shrink-0">
+                <div className="w-4 h-4 rounded-full bg-accent/30" />
+              </div>
+            )}
             <div className="min-w-0">
-              <h3 className="font-bold text-base lg:text-lg leading-tight text-foreground">
+              <h3 className="font-semibold text-sm leading-tight text-foreground truncate">
                 {theme}
               </h3>
-              <p className="text-muted-foreground text-sm">({themeRu})</p>
+              <p className="text-muted-foreground text-xs truncate">({themeRu})</p>
             </div>
           </div>
 
           {/* Topic bar */}
-          <div className="bg-foreground rounded-xl px-5 py-3.5">
+          <div className="bg-foreground rounded-xl px-4 py-2.5">
             <span className="text-[11px] text-white/50 block mb-0.5">
               Тема:
             </span>
-            <p className="text-sm text-white font-medium">
+            <p className="text-xs text-white font-medium leading-snug truncate">
               {topic} / {topicRu}
             </p>
           </div>
 
           {/* Action buttons — centered */}
-          <div className="flex items-center justify-center gap-4 lg:gap-6">
+          <div className="flex items-center justify-center gap-3 lg:gap-5">
             {audioSrc && (
               <button
                 onClick={handlePlay}
-                className="flex items-center gap-3 group"
+                className="flex items-center gap-2 group"
                 aria-label={
                   isPlaying ? "Остановить аудио" : "Прослушать аудио"
                 }
               >
-                <div className="w-11 h-11 rounded-full bg-accent flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
                   {isPlaying ? (
                     <Pause className="w-4 h-4 text-white" />
                   ) : (
@@ -116,10 +124,10 @@ export function FlipCard({
 
             <button
               onClick={() => setIsFlipped(true)}
-              className="flex items-center gap-3 group"
+              className="flex items-center gap-2 group"
               aria-label="Узнать как переводится"
             >
-              <div className="w-11 h-11 rounded-full bg-secondary flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
                 <RotateCcw className="w-4 h-4 text-accent" />
               </div>
               <span className="text-[11px] lg:text-xs text-muted-foreground leading-tight text-left">
@@ -133,39 +141,39 @@ export function FlipCard({
 
         {/* Back */}
         <div
-          className="flip-card-back absolute w-full h-full bg-accent rounded-2xl p-5 flex flex-col justify-between"
+          className="flip-card-back absolute w-full h-full bg-accent rounded-2xl p-4 flex flex-col justify-between"
           style={{
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
           }}
         >
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-              <div className="w-5 h-5 rounded-full bg-white/40" />
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+              <div className="w-4 h-4 rounded-full bg-white/40" />
             </div>
-            <div>
-              <h3 className="font-bold text-base lg:text-lg leading-tight text-white">
+            <div className="min-w-0">
+              <h3 className="font-semibold text-sm leading-tight text-white truncate">
                 {themeRu}
               </h3>
-              <p className="text-white/60 text-sm">Перевод</p>
+              <p className="text-white/60 text-xs">Перевод</p>
             </div>
           </div>
 
-          <div className="bg-white/10 rounded-xl px-5 py-3.5">
+          <div className="bg-white/10 rounded-xl px-4 py-2.5">
             <span className="text-[11px] text-white/50 block mb-0.5">
               Тема:
             </span>
-            <p className="text-sm text-white font-medium">
+            <p className="text-xs text-white font-medium truncate">
               {topicRu}
             </p>
           </div>
 
           <button
             onClick={() => setIsFlipped(false)}
-            className="flex items-center gap-3 group"
+            className="flex items-center gap-2 group"
             aria-label="Вернуться к оригиналу"
           >
-            <div className="w-11 h-11 rounded-full bg-white flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+            <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
               <RotateCcw className="w-4 h-4 text-accent" />
             </div>
             <span className="text-xs text-white/80 leading-tight text-left">

@@ -50,7 +50,7 @@ export const darkCards = [
   {
     id: 4,
     icon: "graduation-cap",
-    title: "Опыт 20 лет и\u00A0сотни учеников",
+    title: "Опыт 20 лет\nи сотни учеников",
     description: f("20 лет жизни во Франции и опыт учеников собраны в одном пособии")
   }
 ]
@@ -63,7 +63,8 @@ export const expressionCards = [
     themeRu: "Отношения",
     topic: "La 1ère rencontre",
     topicRu: "Первая встреча",
-    audioSrc: "/audio/expression1.mp3"
+    audioSrc: "/audio/expression1.mp3",
+    iconSrc: "/images/Les relations_1.svg"
   },
   {
     id: 2,
@@ -71,7 +72,8 @@ export const expressionCards = [
     themeRu: "Отношения",
     topic: "Le verbe « rencontrer »",
     topicRu: "Подводные камни",
-    audioSrc: "/audio/expression2.mp3"
+    audioSrc: "/audio/expression2.mp3",
+    iconSrc: "/images/Les relations_2.svg"
   },
   {
     id: 3,
@@ -79,7 +81,8 @@ export const expressionCards = [
     themeRu: "Выражения с местоимениями «en» и «y»",
     topic: "Les expressions avec « en »",
     topicRu: "Выражения с «en»",
-    audioSrc: "/audio/expression3.mp3"
+    audioSrc: "/audio/expression3.mp3",
+    iconSrc: "/images/Les expressions avec « en » et « y »_3.svg"
   },
   {
     id: 4,
@@ -87,7 +90,8 @@ export const expressionCards = [
     themeRu: "Выражения с местоимениями «en» и «y»",
     topic: "Les expressions avec « y »",
     topicRu: "Выражения с «y»",
-    audioSrc: "/audio/expression4.mp3"
+    audioSrc: "/audio/expression4.mp3",
+    iconSrc: "/images/Les expressions avec « en » et « y »_4.svg"
   }
 ]
 

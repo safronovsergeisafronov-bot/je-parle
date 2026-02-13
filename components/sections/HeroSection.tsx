@@ -25,7 +25,7 @@ export function HeroSection() {
               <img
                 src="/images/Logo.svg"
                 alt="French.Super"
-                className="h-6 w-auto"
+                className="h-7 w-auto"
               />
             </Link>
 
@@ -33,15 +33,15 @@ export function HeroSection() {
             <nav className="hidden md:flex items-center gap-2">
               <Link
                 href="#inside"
-                className="text-sm text-white hover:bg-white hover:text-foreground transition-colors px-4 py-2 rounded-full border hover:border-white"
-                style={{ borderColor: "rgba(255,255,255,0.1)" }}
+                className="text-sm text-white hover:bg-white hover:text-foreground transition-all duration-250 px-4 py-2 rounded-full border hover:border-white"
+                style={{ borderColor: "rgba(255,255,255,0.25)" }}
               >
                 Что внутри
               </Link>
               <Link
                 href="#why"
-                className="text-sm text-white hover:bg-white hover:text-foreground transition-colors px-4 py-2 rounded-full border hover:border-white"
-                style={{ borderColor: "rgba(255,255,255,0.1)" }}
+                className="text-sm text-white hover:bg-white hover:text-foreground transition-all duration-250 px-4 py-2 rounded-full border hover:border-white"
+                style={{ borderColor: "rgba(255,255,255,0.25)" }}
               >
                 Почему это работает
               </Link>
@@ -111,13 +111,13 @@ export function HeroSection() {
           <div className="flex flex-col gap-3 w-full pt-4 md:pt-6 lg:pt-0">
             <Link
               href="#buy"
-              className="bg-white text-foreground rounded-full px-8 py-4 text-base font-medium hover:bg-white/90 transition-colors text-center"
+              className="bg-white text-foreground rounded-full px-8 py-4 text-base font-medium hover:bg-white/90 hover:shadow-lg transition-all duration-250 text-center"
             >
               Получить книгу &laquo;Je Parle!&raquo;
             </Link>
             <Link
               href="#inside"
-              className="bg-white/15 text-white rounded-full px-8 py-4 text-base font-medium hover:bg-white/20 transition-colors text-center"
+              className="bg-white/15 text-white rounded-full px-8 py-4 text-base font-medium hover:bg-white/25 transition-all duration-250 text-center"
             >
               Посмотреть бесплатный фрагмент
             </Link>
@@ -137,7 +137,7 @@ export function HeroSection() {
           {/* "Связаться" button — top right on desktop */}
           <div className="hidden md:block absolute top-6 right-6 md:top-8 md:right-8 lg:top-10 lg:right-10 xl:top-12 xl:right-12 z-10">
             <ContactModal>
-              <button className="cursor-pointer text-sm bg-white text-foreground hover:bg-white/85 transition-colors px-4 py-2 rounded-full border border-white">
+              <button className="cursor-pointer text-sm bg-white text-foreground hover:bg-white/85 hover:shadow-md transition-all duration-250 px-4 py-2 rounded-full border border-white">
                 Связаться
               </button>
             </ContactModal>
@@ -148,7 +148,7 @@ export function HeroSection() {
       {/* Bottom row — Advantage Cards (bento grid, same gaps) */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
         {advantageCards.map((card) => (
-          <div key={card.id} className="bg-card rounded-2xl p-6 transition-colors duration-200 hover:bg-card/70 cursor-default">
+          <div key={card.id} className="bg-card rounded-2xl p-6 transition-all duration-250 hover:bg-card-hover hover:shadow-sm cursor-default">
             <div className="w-7 h-7 rounded-full bg-foreground flex items-center justify-center mb-4">
               <Plus className="w-3.5 h-3.5 text-white" />
             </div>

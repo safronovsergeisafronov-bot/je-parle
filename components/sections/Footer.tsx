@@ -12,18 +12,20 @@ export function Footer() {
   const rightNavLinks = footerNavColumns[2].links
 
   return (
-    <footer id="contact" className="py-12 md:py-16">
+    <footer id="contact" className="py-10 md:py-15">
       <div className="w-full px-3 lg:px-4">
         <div className="bg-white rounded-3xl p-8 md:p-12">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
           {/* Left column */}
           <div className="lg:w-[35%] lg:flex-shrink-0">
             {/* Logo */}
-            <div className="flex items-center gap-2 mb-8">
-              <span className="text-2xl">⚜️</span>
-              <span className="text-xl font-semibold text-foreground">
-                French.Super
-              </span>
+            <div className="mb-8">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/logo-dark.svg"
+                alt="French.Super"
+                className="h-7 w-auto"
+              />
             </div>
 
             {/* Title */}
@@ -42,7 +44,7 @@ export function Footer() {
             {/* CTA Button */}
             <Link
               href="#buy"
-              className="inline-flex items-center justify-center px-16 py-5 bg-accent text-white rounded-full text-lg font-medium hover:scale-105 transition-transform"
+              className="inline-flex items-center justify-center px-16 py-5 bg-accent text-white rounded-full text-lg font-medium hover:scale-105 hover:shadow-lg transition-all duration-250"
             >
               Оплатить
             </Link>
@@ -53,20 +55,24 @@ export function Footer() {
             {/* Partners */}
             <div className="flex items-center gap-3 mb-6">
               <div className="flex items-center gap-2">
-                <Image
-                  src="/images/French Tech.svg"
-                  alt="French Tech"
-                  width={28}
-                  height={28}
-                  className="w-7 h-7"
-                />
-                <Image
-                  src="/images/Copy Frog.svg"
-                  alt="CopyFrog"
-                  width={28}
-                  height={28}
-                  className="w-7 h-7"
-                />
+                <div className="w-10 h-10 rounded-full bg-[#F3EEDE] flex items-center justify-center">
+                  <Image
+                    src="/images/French Tech.svg"
+                    alt="French Tech"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6"
+                  />
+                </div>
+                <div className="w-10 h-10 rounded-full bg-[#F3EEDE] flex items-center justify-center">
+                  <Image
+                    src="/images/Copy Frog.svg"
+                    alt="CopyFrog"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6"
+                  />
+                </div>
               </div>
               <span className="text-sm text-foreground font-medium leading-tight">
                 При поддержке
@@ -81,10 +87,10 @@ export function Footer() {
                 href="https://www.instagram.com/french_super"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 px-5 py-2.5 border border-border rounded-full hover:bg-secondary/50 transition-colors shadow-none"
+                className="group flex items-center gap-2.5 px-5 py-2.5 border border-accent/10 rounded-full hover:bg-accent hover:border-accent transition-all duration-250 shadow-none"
               >
-                <Instagram className="w-5 h-5 text-accent" />
-                <span className="text-sm font-medium text-foreground">
+                <Instagram className="w-5 h-5 text-accent group-hover:text-white transition-colors duration-250" />
+                <span className="text-sm font-medium text-foreground group-hover:text-white transition-colors duration-250">
                   Личный блог
                 </span>
               </Link>
@@ -92,10 +98,10 @@ export function Footer() {
                 href="https://t.me/frenchsuper"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 px-5 py-2.5 border border-border rounded-full hover:bg-secondary/50 transition-colors shadow-none"
+                className="group flex items-center gap-2.5 px-5 py-2.5 border border-accent/10 rounded-full hover:bg-accent hover:border-accent transition-all duration-250 shadow-none"
               >
-                <TelegramIcon className="w-5 h-5 text-accent" />
-                <span className="text-sm font-medium text-foreground">
+                <TelegramIcon className="w-5 h-5 text-accent group-hover:text-white transition-colors duration-250" />
+                <span className="text-sm font-medium text-foreground group-hover:text-white transition-colors duration-250">
                   Польза
                 </span>
               </Link>
@@ -103,10 +109,10 @@ export function Footer() {
                 href="https://www.youtube.com/@frenchsuper"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 px-5 py-2.5 border border-border rounded-full hover:bg-secondary/50 transition-colors shadow-none"
+                className="group flex items-center gap-2.5 px-5 py-2.5 border border-accent/10 rounded-full hover:bg-accent hover:border-accent transition-all duration-250 shadow-none"
               >
-                <Youtube className="w-5 h-5 text-accent" />
-                <span className="text-sm font-medium text-foreground">
+                <Youtube className="w-5 h-5 text-accent group-hover:text-white transition-colors duration-250" />
+                <span className="text-sm font-medium text-foreground group-hover:text-white transition-colors duration-250">
                   Учись со мной
                 </span>
               </Link>
@@ -120,7 +126,7 @@ export function Footer() {
                   <li key={i}>
                     <Link
                       href={link.href}
-                      className="text-sm text-foreground/70 hover:text-foreground transition-colors"
+                      className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-250 link-animate"
                     >
                       {link.label}
                     </Link>
@@ -131,15 +137,16 @@ export function Footer() {
               {/* Right nav + copyright */}
               <div className="space-y-3">
                 {rightNavLinks.map((link, i) => (
-                  <Link
-                    key={i}
-                    href={link.href}
-                    className="block text-sm text-foreground/70 hover:text-foreground transition-colors"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {link.label}
-                  </Link>
+                  <div key={i}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-250 link-animate"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {link.label}
+                    </Link>
+                  </div>
                 ))}
                 <p className="text-sm text-foreground/70 pt-2">
                   © 2025 FrenchSuper / Гаврилов Илья

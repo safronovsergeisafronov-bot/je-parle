@@ -3,7 +3,7 @@ import { TextGenerateEffect } from "@/components/TextGenerateEffect"
 
 export function WhatInside() {
   return (
-    <section id="inside" className="py-12 md:py-20">
+    <section id="inside" className="py-10 md:py-15">
       <div className="w-full px-3 lg:px-4">
         {/* Main card — dark cinematic gradient */}
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#0d0002] via-[#56051B] to-[#8b1a3a]">
@@ -24,7 +24,7 @@ export function WhatInside() {
             </div>
 
             {/* Right: Content */}
-            <div className="relative flex flex-col justify-start p-8 md:p-12 lg:p-14">
+            <div className="relative flex flex-col justify-start px-8 pb-8 pt-5 md:px-12 md:pb-12 md:pt-8 lg:px-14 lg:pb-14 lg:pt-8">
               {/* Top badge */}
               <span className="inline-block self-start px-4 py-1.5 bg-white/15 backdrop-blur-sm text-white/90 text-sm font-medium rounded-full mb-6">
                 Весь продукт в 6,7 раз больше
@@ -46,7 +46,7 @@ export function WhatInside() {
                 href="https://drive.google.com/file/d/1CwZf42BbZ7gZsE5rhJ5lA7S_kAm7chRW/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 self-start bg-[#E8D5A3] hover:bg-[#dcc88e] text-foreground font-semibold text-lg md:text-xl px-10 py-5 md:px-12 md:py-6 rounded-full transition-all duration-200 hover:scale-100"
+                className="inline-flex items-center justify-center gap-3 bg-[#E8D5A3] hover:bg-[#dcc88e] hover:shadow-lg text-foreground font-semibold text-lg md:text-xl px-14 py-5 md:px-16 md:py-6 rounded-full transition-all duration-250 w-full max-w-sm"
               >
                 {/* Link icon */}
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -55,7 +55,7 @@ export function WhatInside() {
                 Читать фрагмент
               </Link>
 
-              <p className="text-xs md:text-sm text-white/40 mt-6 max-w-xs text-center">
+              <p className="text-xs md:text-sm text-white/40 mt-6 max-w-sm text-center">
                 Ждать загрузку не&nbsp;нужно&nbsp;— фрагмент откроется сразу через Google Диск по&nbsp;ссылке.
               </p>
             </div>

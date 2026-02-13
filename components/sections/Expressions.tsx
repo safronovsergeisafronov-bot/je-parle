@@ -5,9 +5,9 @@ import { expressionCards } from "@/lib/data"
 
 export function Expressions() {
   return (
-    <section className="py-12 md:py-20 lg:py-0">
+    <section className="py-10 md:py-15 lg:py-0">
       <div className="w-full px-3 lg:px-4">
-        <div className="lg:bg-card lg:rounded-b-3xl lg:px-10 lg:py-12">
+        <div className="lg:bg-card lg:rounded-b-3xl lg:px-10 lg:pt-6 lg:pb-16">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
             {/* Left: Title & subtitle */}
             <div className="lg:w-[30%] lg:flex-shrink-0">
@@ -35,6 +35,7 @@ export function Expressions() {
                   topic={card.topic}
                   topicRu={card.topicRu}
                   audioSrc={card.audioSrc}
+                  iconSrc={card.iconSrc}
                 />
               ))}
             </div>

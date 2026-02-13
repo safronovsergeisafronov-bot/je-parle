@@ -10,24 +10,45 @@ import { Reviews } from "@/components/sections/Reviews"
 import { Pricing } from "@/components/sections/Pricing"
 import { FAQ } from "@/components/sections/FAQ"
 import { Footer } from "@/components/sections/Footer"
+import { AnimatedSection } from "@/components/AnimatedSection"
 
 export default function Home() {
   return (
     <>
       <HeroSection />
       <main>
-        <SupportBanner />
-        <AuthorStory />
-        <WhatInside />
+        <AnimatedSection>
+          <SupportBanner />
+        </AnimatedSection>
+        <AnimatedSection>
+          <AuthorStory />
+        </AnimatedSection>
+        <AnimatedSection>
+          <WhatInside />
+        </AnimatedSection>
         <WhyItWorks />
-        <Expressions />
-        <TopicSpheres />
-        <MiniCourse />
-        <Reviews />
-        <Pricing />
-        <FAQ />
+        <AnimatedSection>
+          <Expressions />
+        </AnimatedSection>
+        <AnimatedSection>
+          <TopicSpheres />
+        </AnimatedSection>
+        <AnimatedSection>
+          <MiniCourse />
+        </AnimatedSection>
+        <AnimatedSection>
+          <Reviews />
+        </AnimatedSection>
+        <AnimatedSection>
+          <Pricing />
+        </AnimatedSection>
+        <AnimatedSection>
+          <FAQ />
+        </AnimatedSection>
       </main>
-      <Footer />
+      <AnimatedSection>
+        <Footer />
+      </AnimatedSection>
     </>
   )
 }

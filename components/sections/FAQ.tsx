@@ -12,7 +12,7 @@ import { TextGenerateEffect } from "@/components/TextGenerateEffect"
 
 export function FAQ() {
   return (
-    <section id="faq" className="py-12 md:py-20 bg-background">
+    <section id="faq" className="py-10 md:py-15 bg-secondary/20">
       <div className="w-full px-3 lg:px-4">
         <div>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
@@ -34,7 +34,7 @@ export function FAQ() {
               <AccordionItem
                 key={item.id}
                 value={`item-${item.id}`}
-                className="bg-white rounded-xl px-4 border border-border"
+                className="bg-white rounded-2xl px-4 border border-border hover:border-accent/15 transition-colors duration-250"
               >
                 <AccordionTrigger className="text-left hover:no-underline">
                   <span className="font-medium text-foreground pr-4">

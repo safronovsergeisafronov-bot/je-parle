@@ -87,7 +87,7 @@ export function WhyItWorks() {
         <div className="sticky top-0 h-screen flex flex-col pt-3 lg:pt-4 px-3 lg:px-4">
           <div className="relative w-full bg-card rounded-t-3xl overflow-hidden flex-1">
             {/* Title & subtitle — top right */}
-            <div className="absolute right-[4%] top-[5%] max-w-[320px] xl:max-w-[400px] z-10">
+            <div className="absolute right-[4%] top-[10%] max-w-[320px] xl:max-w-[400px] z-10">
               <h2 className="text-3xl xl:text-4xl font-medium leading-[1.15] tracking-[-0.03em] text-foreground mb-4">
                 Почему это
                 <br />
@@ -187,7 +187,7 @@ export function WhyItWorks() {
       </div>
 
       {/* Mobile & tablet: simplified vertical layout */}
-      <div className="lg:hidden py-12 md:py-16 bg-secondary/30">
+      <div className="lg:hidden py-10 md:py-15 bg-secondary/30">
         <div className="w-full px-3 lg:px-4">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-medium leading-[1.15] tracking-[-0.03em] text-foreground mb-3">
@@ -200,7 +200,7 @@ export function WhyItWorks() {
           </div>
           <div className="space-y-4">
             {whyItWorksPoints.map((text, i) => (
-              <div key={i} className="bg-card rounded-xl p-4 text-left">
+              <div key={i} className="bg-card rounded-2xl p-4 text-left">
                 <ProgressDots count={i + 1} />
                 <p className="text-sm text-muted-foreground">
                   {text}
