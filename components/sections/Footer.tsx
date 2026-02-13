@@ -108,9 +108,9 @@ export function Footer() {
                     <Image
                       src="/images/french-tech-beige.svg"
                       alt="French Tech"
-                      width={24}
-                      height={24}
-                      className="w-6 h-6"
+                      width={32}
+                      height={32}
+                      className="w-8 h-8"
                     />
                   </div>
                 </Tooltip>
@@ -123,9 +123,9 @@ export function Footer() {
                     <Image
                       src="/images/copy-frog-beige.svg"
                       alt="CopyFrog"
-                      width={24}
-                      height={24}
-                      className="w-6 h-6"
+                      width={32}
+                      height={32}
+                      className="w-8 h-8"
                     />
                   </div>
                 </Tooltip>
