@@ -21,11 +21,10 @@ export function HeroSection() {
           <div className="flex items-center justify-between">
             {/* Logo / Author */}
             <Link href="/" className="flex items-center">
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="/images/Logo.svg"
                 alt="French.Super"
-                width={150}
-                height={26}
                 className="h-6 w-auto"
               />
             </Link>
