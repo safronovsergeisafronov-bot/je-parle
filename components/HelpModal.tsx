@@ -22,6 +22,7 @@ interface HelpModalProps {
 
 export function HelpModal({ children }: HelpModalProps) {
   const [contactMethod, setContactMethod] = useState("telegram")
+  const [problemType, setProblemType] = useState("")
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
   const [errorMessage, setErrorMessage] = useState("")
 
@@ -31,11 +32,24 @@ export function HelpModal({ children }: HelpModalProps) {
     setErrorMessage("")
 
     const formData = new FormData(e.currentTarget)
+
+    // Формируем сообщение: если "other" - берём текст из textarea, иначе - выбранный вариант
+    let message = ""
+    if (problemType === "other") {
+      message = formData.get("problem") as string
+    } else if (problemType === "card") {
+      message = "Не проходит оплата картой"
+    } else if (problemType === "paid") {
+      message = "Деньги списались, но книга не пришла"
+    } else if (problemType === "access") {
+      message = "Не пришли данные для входа в личный кабинет"
+    }
+
     const data = {
       name: formData.get("help-name") as string,
       contactMethod,
       contact: formData.get("help-contact") as string,
-      message: formData.get("problem") as string,
+      message,
       type: "help" as const,
     }
 
@@ -59,7 +73,7 @@ export function HelpModal({ children }: HelpModalProps) {
   }
 
   return (
-    <Sheet onOpenChange={() => { setStatus("idle"); setErrorMessage("") }}>
+    <Sheet onOpenChange={() => { setStatus("idle"); setErrorMessage(""); setProblemType("") }}>
       <SheetTrigger asChild>
         {children}
       </SheetTrigger>
@@ -123,31 +137,67 @@ export function HelpModal({ children }: HelpModalProps) {
               />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="problem">Какая у вас возникла проблема?</Label>
-              <Textarea
-                id="problem"
-                name="problem"
-                placeholder="Напишите здесь, что именно произошло"
-                rows={4}
+            <div className="space-y-3">
+              <Label>Возможные варианты проблем (на выбор 1 из 4)</Label>
+              <RadioGroup
+                onValueChange={setProblemType}
+                className="space-y-3"
                 required
-                minLength={5}
-                maxLength={2000}
-              />
+              >
+                <div className="flex items-start space-x-2">
+                  <RadioGroupItem value="card" id="problem-card" className="mt-1" />
+                  <Label htmlFor="problem-card" className="cursor-pointer font-normal leading-tight">
+                    Не проходит оплата картой
+                  </Label>
+                </div>
+                <div className="flex items-start space-x-2">
+                  <RadioGroupItem value="paid" id="problem-paid" className="mt-1" />
+                  <Label htmlFor="problem-paid" className="cursor-pointer font-normal leading-tight">
+                    Деньги списались, но книга не пришла
+                  </Label>
+                </div>
+                <div className="flex items-start space-x-2">
+                  <RadioGroupItem value="access" id="problem-access" className="mt-1" />
+                  <Label htmlFor="problem-access" className="cursor-pointer font-normal leading-tight">
+                    Не пришли данные для входа в личный кабинет
+                  </Label>
+                </div>
+                <div className="flex items-start space-x-2">
+                  <RadioGroupItem value="other" id="problem-other" className="mt-1" />
+                  <Label htmlFor="problem-other" className="cursor-pointer font-normal leading-tight">
+                    Другая проблема (опишу ниже)
+                  </Label>
+                </div>
+              </RadioGroup>
             </div>
+
+            {problemType === "other" && (
+              <div className="space-y-2">
+                <Label htmlFor="problem">Какая у вас возникла проблема?</Label>
+                <Textarea
+                  id="problem"
+                  name="problem"
+                  placeholder="Напишите здесь, что именно произошло"
+                  rows={4}
+                  required
+                  minLength={5}
+                  maxLength={2000}
+                />
+              </div>
+            )}
 
             {status === "error" && (
               <p className="text-sm text-red-600 text-center">{errorMessage}</p>
             )}
 
-            <Button type="submit" className="w-full" size="lg" disabled={status === "loading"}>
+            <Button type="submit" className="w-full hover:scale-100" size="lg" disabled={status === "loading"}>
               {status === "loading" ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                   Отправка...
                 </>
               ) : (
-                "Отправить вопрос"
+                "Отправить запрос"
               )}
             </Button>
 

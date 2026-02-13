@@ -113,7 +113,7 @@ describe("HelpModal", () => {
 
     await user.click(screen.getByTestId("sheet-trigger"))
     expect(screen.getByLabelText("Ваше имя")).toBeInTheDocument()
-    expect(screen.getByLabelText("Какая у вас возникла проблема?")).toBeInTheDocument()
+    expect(screen.getByText(/Возможные варианты проблем/)).toBeInTheDocument()
   })
 
   it("shows radio buttons for contact method", async () => {
@@ -145,8 +145,12 @@ describe("HelpModal", () => {
     await user.click(screen.getByTestId("sheet-trigger"))
     await user.type(screen.getByLabelText("Ваше имя"), "Test User")
     await user.type(screen.getByLabelText(/Имя пользователя или телефон/), "@testuser")
+
+    // Выбираем "Другая проблема", чтобы появилось текстовое поле
+    await user.click(screen.getByLabelText(/Другая проблема/))
     await user.type(screen.getByLabelText("Какая у вас возникла проблема?"), "Payment issue test")
-    await user.click(screen.getByText("Отправить вопрос"))
+
+    await user.click(screen.getByText("Отправить запрос"))
 
     await waitFor(() => {
       expect(screen.getByText("Сообщение отправлено!")).toBeInTheDocument()
@@ -169,8 +173,12 @@ describe("HelpModal", () => {
     await user.click(screen.getByTestId("sheet-trigger"))
     await user.type(screen.getByLabelText("Ваше имя"), "Test User")
     await user.type(screen.getByLabelText(/Имя пользователя или телефон/), "@testuser")
+
+    // Выбираем "Другая проблема", чтобы появилось текстовое поле
+    await user.click(screen.getByLabelText(/Другая проблема/))
     await user.type(screen.getByLabelText("Какая у вас возникла проблема?"), "Payment issue test")
-    await user.click(screen.getByText("Отправить вопрос"))
+
+    await user.click(screen.getByText("Отправить запрос"))
 
     await waitFor(() => {
       expect(screen.getByText("Network error")).toBeInTheDocument()
@@ -193,11 +201,79 @@ describe("HelpModal", () => {
     await user.click(screen.getByTestId("sheet-trigger"))
     await user.type(screen.getByLabelText("Ваше имя"), "Test User")
     await user.type(screen.getByLabelText(/Имя пользователя или телефон/), "@testuser")
+
+    // Выбираем "Другая проблема", чтобы появилось текстовое поле
+    await user.click(screen.getByLabelText(/Другая проблема/))
     await user.type(screen.getByLabelText("Какая у вас возникла проблема?"), "Payment issue test")
-    await user.click(screen.getByText("Отправить вопрос"))
+
+    await user.click(screen.getByText("Отправить запрос"))
 
     const fetchCall = (global.fetch as any).mock.calls[0]
     const body = JSON.parse(fetchCall[1].body)
     expect(body.type).toBe("help")
+  })
+
+  it("shows problem type radio buttons", async () => {
+    const user = userEvent.setup()
+    render(
+      <HelpModal>
+        <button>Open</button>
+      </HelpModal>
+    )
+
+    await user.click(screen.getByTestId("sheet-trigger"))
+    expect(screen.getByLabelText(/Не проходит оплата картой/)).toBeInTheDocument()
+    expect(screen.getByLabelText(/Деньги списались, но книга не пришла/)).toBeInTheDocument()
+    expect(screen.getByLabelText(/Не пришли данные для входа в личный кабинет/)).toBeInTheDocument()
+    expect(screen.getByLabelText(/Другая проблема/)).toBeInTheDocument()
+  })
+
+  it("shows textarea only when 'Другая проблема' is selected", async () => {
+    const user = userEvent.setup()
+    render(
+      <HelpModal>
+        <button>Open</button>
+      </HelpModal>
+    )
+
+    await user.click(screen.getByTestId("sheet-trigger"))
+
+    // Изначально textarea не видна
+    expect(screen.queryByLabelText("Какая у вас возникла проблема?")).not.toBeInTheDocument()
+
+    // Выбираем "Другая проблема"
+    await user.click(screen.getByLabelText(/Другая проблема/))
+
+    // Теперь textarea видна
+    expect(screen.getByLabelText("Какая у вас возникла проблема?")).toBeInTheDocument()
+  })
+
+  it("submits predefined problem type without textarea", async () => {
+    const user = userEvent.setup()
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ success: true }),
+    })
+
+    render(
+      <HelpModal>
+        <button>Open</button>
+      </HelpModal>
+    )
+
+    await user.click(screen.getByTestId("sheet-trigger"))
+    await user.type(screen.getByLabelText("Ваше имя"), "Test User")
+    await user.type(screen.getByLabelText(/Имя пользователя или телефон/), "@testuser")
+
+    // Выбираем готовый вариант проблемы
+    await user.click(screen.getByLabelText(/Не проходит оплата картой/))
+
+    await user.click(screen.getByText("Отправить запрос"))
+
+    await waitFor(() => {
+      const fetchCall = (global.fetch as any).mock.calls[0]
+      const body = JSON.parse(fetchCall[1].body)
+      expect(body.message).toBe("Не проходит оплата картой")
+    })
   })
 })
