@@ -194,11 +194,10 @@ export function Pricing() {
             </svg>
           </div>
 
-          <TextGenerateEffect
-            as="h2"
-            text="Как оплатить книгу и получить доступ?"
-            className="text-3xl md:text-4xl font-medium leading-[1.15] tracking-[-0.03em] text-center text-foreground mb-8"
-          />
+          <h2 className="text-3xl md:text-4xl font-medium leading-[1.15] tracking-[-0.03em] text-center text-foreground mb-8">
+            Как оплатить книгу
+            <br />и получить доступ?
+          </h2>
 
           <Tabs defaultValue="international" className="w-full">
             <TabsList className="w-full grid grid-cols-2 max-w-lg mx-auto mb-6">

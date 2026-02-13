@@ -1,4 +1,5 @@
 import { fixOrphans } from "./utils"
+import React from "react"
 
 // Helper shorthand
 const f = fixOrphans
@@ -199,7 +200,20 @@ export const faqItems = [
   {
     id: 6,
     question: "Оплатил(-а) курс, но после оплаты ничего не произошло",
-    answer: f("К сожалению, такое иногда случается, но очень редко. Не переживайте, ваш платеж прошел успешно, и я его вижу. Если возникли проблемы, пожалуйста, напишите нам в телеграме в Службу Заботы @frenchsuper_team для дальнейшего решения проблемы.")
+    answer: (
+      <>
+        К сожалению, такое иногда случается, но очень редко. Не переживайте, ваш платеж прошел успешно, и я его вижу. Если возникли проблемы, пожалуйста, напишите нам в телеграме в Службу Заботы{" "}
+        <a
+          href="https://t.me/frenchsuper_team"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-accent hover:underline font-medium"
+        >
+          @frenchsuper_team
+        </a>{" "}
+        для дальнейшего решения проблемы.
+      </>
+    )
   },
   {
     id: 7,

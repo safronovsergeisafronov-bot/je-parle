@@ -48,7 +48,8 @@ describe("Static data integrity", () => {
     expect(faqItems).toHaveLength(9)
     faqItems.forEach((item) => {
       expect(item.question.length).toBeGreaterThan(5)
-      expect(item.answer.length).toBeGreaterThan(20)
+      // answer может быть строкой или JSX элементом (React.ReactNode)
+      expect(item.answer).toBeTruthy()
     })
   })
 

@@ -88,7 +88,7 @@ export function Footer() {
             {/* CTA Button */}
             <Link
               href="#buy"
-              className="inline-flex items-center justify-center px-16 py-5 bg-accent text-white rounded-full text-lg font-medium hover:scale-105 hover:shadow-lg transition-all duration-250"
+              className="inline-flex items-center justify-center px-16 py-5 bg-accent text-white rounded-full text-lg font-medium hover:bg-accent/90 hover:shadow-lg transition-all duration-250"
             >
               Оплатить
             </Link>
@@ -104,9 +104,9 @@ export function Footer() {
                     <><span className="font-semibold">French Tech</span> — национальная программа Франции по&nbsp;развитию стартапов и&nbsp;технологий.</>
                   }
                 >
-                  <div className="w-10 h-10 rounded-full bg-[#F3EEDE] flex items-center justify-center">
+                  <div className="flex items-center justify-center">
                     <Image
-                      src="/images/french-tech.svg"
+                      src="/images/french-tech-beige.svg"
                       alt="French Tech"
                       width={24}
                       height={24}
@@ -119,9 +119,9 @@ export function Footer() {
                     <><span className="font-semibold">CopyFrog</span> — платформа на&nbsp;базе искусственного интеллекта для создания уникальных изображений, рекламных текстов, видеокреативов, превращая идеи в&nbsp;готовый результат.</>
                   }
                 >
-                  <div className="w-10 h-10 rounded-full bg-[#F3EEDE] flex items-center justify-center">
+                  <div className="flex items-center justify-center">
                     <Image
-                      src="/images/copy-frog.svg"
+                      src="/images/copy-frog-beige.svg"
                       alt="CopyFrog"
                       width={24}
                       height={24}
