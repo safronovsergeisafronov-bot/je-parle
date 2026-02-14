@@ -119,8 +119,8 @@ export function FlipCard({
             </p>
           </div>
 
-          {/* Action buttons — centered */}
-          <div className="flex items-center justify-center gap-3 lg:gap-5">
+          {/* Action buttons — aligned to edges */}
+          <div className="flex items-center justify-between gap-2">
             {audioSrc && (
               <button
                 onClick={handlePlay}
@@ -149,14 +149,14 @@ export function FlipCard({
               className="flex items-center gap-2 group"
               aria-label="Узнать как переводится"
             >
-              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
-                <RotateCcw className="w-4 h-4 text-accent" />
-              </div>
-              <span className="text-[11px] lg:text-xs text-muted-foreground leading-tight text-left">
+              <span className="text-[11px] lg:text-xs text-muted-foreground leading-tight text-right">
                 Узнать как
                 <br />
                 переводится
               </span>
+              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                <RotateCcw className="w-4 h-4 text-accent" />
+              </div>
             </button>
           </div>
         </div>
@@ -200,17 +200,6 @@ export function FlipCard({
               <p className="text-xs text-white/70 mb-1">Объяснение:</p>
               <p className="text-sm text-white leading-snug">{explanation}</p>
             </div>
-          </div>
-
-          {/* Кнопка возврата (справа внизу) */}
-          <div className="flex justify-end">
-            <button
-              onClick={() => setIsFlipped(false)}
-              className="w-12 h-12 rounded-full bg-white flex items-center justify-center flex-shrink-0 hover:scale-105 transition-transform"
-              aria-label="Вернуться к оригиналу"
-            >
-              <RotateCcw className="w-5 h-5 text-accent" />
-            </button>
           </div>
         </div>
       </motion.div>

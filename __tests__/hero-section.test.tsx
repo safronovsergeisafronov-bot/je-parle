@@ -67,7 +67,7 @@ describe("HeroSection", () => {
   it("renders CTA buttons", () => {
     render(<HeroSection />)
     expect(screen.getAllByText(/Получить книгу/).length).toBeGreaterThanOrEqual(1)
-    expect(screen.getAllByText("Посмотреть бесплатный фрагмент").length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText("Посмотреть фрагмент").length).toBeGreaterThanOrEqual(1)
   })
 
   it("renders all 4 advantage cards", () => {

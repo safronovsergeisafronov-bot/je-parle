@@ -7,7 +7,7 @@ import { CinematicModal } from "@/components/CinematicModal"
 
 const Document = dynamic(
   () => import("react-pdf").then((mod) => {
-    mod.pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${mod.pdfjs.version}/build/pdf.worker.min.mjs`
+    mod.pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs"
     return { default: mod.Document }
   }),
   { ssr: false }
@@ -81,43 +81,56 @@ export function PdfViewerModal({
             <button
               onClick={() => setPageNumber((p) => Math.max(1, p - 1))}
               disabled={pageNumber <= 1}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/20 disabled:opacity-30 disabled:hover:bg-white/10"
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-white transition-all hover:bg-accent/90 hover:scale-105 disabled:opacity-30 disabled:hover:scale-100"
               aria-label="Предыдущая страница"
             >
-              <ChevronLeft className="h-5 w-5" />
+              <ChevronLeft className="h-6 w-6" />
             </button>
 
-            <span className="min-w-[120px] text-center text-sm text-white/70">
+            <span className="min-w-[140px] text-center text-sm font-medium text-white">
               Страница {pageNumber} из {numPages || "..."}
             </span>
 
             <button
               onClick={() => setPageNumber((p) => Math.min(numPages, p + 1))}
               disabled={pageNumber >= numPages}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/20 disabled:opacity-30 disabled:hover:bg-white/10"
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-white transition-all hover:bg-accent/90 hover:scale-105 disabled:opacity-30 disabled:hover:scale-100"
               aria-label="Следующая страница"
             >
-              <ChevronRight className="h-5 w-5" />
+              <ChevronRight className="h-6 w-6" />
             </button>
 
             <a
               href={pdfUrl}
               download
-              className="ml-2 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+              className="ml-2 flex h-12 w-12 items-center justify-center rounded-full bg-accent text-white transition-all hover:bg-accent/90 hover:scale-105"
               aria-label="Скачать PDF"
             >
-              <Download className="h-5 w-5" />
+              <Download className="h-6 w-6" />
             </a>
           </div>
 
           {/* PDF */}
-          <div className="overflow-hidden rounded-2xl bg-white">
+          <div className="overflow-hidden rounded-2xl bg-white shadow-lg">
             <Document
               file={pdfUrl}
               onLoadSuccess={onDocumentLoadSuccess}
               loading={
                 <div className="flex h-[400px] items-center justify-center" style={{ width: pageWidth }}>
-                  <div className="h-8 w-8 animate-spin rounded-full border-2 border-white/20 border-t-accent" />
+                  <div className="h-8 w-8 animate-spin rounded-full border-2 border-border border-t-accent" />
+                </div>
+              }
+              error={
+                <div className="flex h-[400px] flex-col items-center justify-center gap-4" style={{ width: pageWidth }}>
+                  <p className="text-muted-foreground text-sm">Не удалось загрузить PDF</p>
+                  <a
+                    href={pdfUrl}
+                    download
+                    className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-white hover:bg-accent/90 transition-colors"
+                  >
+                    <Download className="h-4 w-4" />
+                    Скачать файл
+                  </a>
                 </div>
               }
             >

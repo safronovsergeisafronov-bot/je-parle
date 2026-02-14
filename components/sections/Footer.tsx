@@ -80,7 +80,7 @@ export function Footer() {
             </h3>
 
             {/* Subtitle */}
-            <p className="text-sm text-muted-foreground mb-8 max-w-[300px]">
+            <p className="text-base md:text-lg text-muted-foreground mb-8 max-w-[300px]">
               Сразу после оплаты на&nbsp;ваш e-mail приходят логин
               и&nbsp;пароль для входа в&nbsp;личный кабинет.
             </p>

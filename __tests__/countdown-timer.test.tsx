@@ -13,24 +13,25 @@ describe("CountdownTimer", () => {
   })
 
   it("renders without errors (default variant)", () => {
-    const future = new Date(Date.now() + 86400000) // +1 day
+    const future = new Date(Date.now() + 5 * 86400000) // +5 days
     render(<CountdownTimer targetDate={future} />)
-    expect(screen.getAllByText("дней").length).toBeGreaterThanOrEqual(1)
+    // Should render some time label (pluralized)
+    expect(screen.getAllByText(/дней|дня|день/).length).toBeGreaterThanOrEqual(1)
   })
 
   it("renders without errors (minimal variant)", () => {
-    const future = new Date(Date.now() + 86400000)
+    const future = new Date(Date.now() + 5 * 86400000)
     render(<CountdownTimer targetDate={future} variant="minimal" />)
-    expect(screen.getAllByText("дней").length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/дней|дня|день/).length).toBeGreaterThanOrEqual(1)
   })
 
   it("renders all 4 time labels", () => {
-    const future = new Date(Date.now() + 86400000)
+    const future = new Date(Date.now() + 5 * 86400000) // +5 days → 5 дней
     render(<CountdownTimer targetDate={future} />)
-    expect(screen.getAllByText("дней").length).toBeGreaterThanOrEqual(1)
-    expect(screen.getAllByText("часов").length).toBeGreaterThanOrEqual(1)
-    expect(screen.getAllByText("минут").length).toBeGreaterThanOrEqual(1)
-    expect(screen.getAllByText("секунд").length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/дней|дня|день/).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/часов|часа|час/).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/минут|минуты|минута/).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/секунд|секунды|секунда/).length).toBeGreaterThanOrEqual(1)
   })
 
   it("displays zeros when target date is in the past", () => {
@@ -49,8 +50,8 @@ describe("CountdownTimer", () => {
 
     vi.advanceTimersByTime(1000)
 
-    // Timer should have updated
-    expect(screen.getAllByText("минут").length).toBeGreaterThanOrEqual(1)
+    // Timer should have updated — check for any minute label form
+    expect(screen.getAllByText(/минут|минуты|минута/).length).toBeGreaterThanOrEqual(1)
   })
 
   it("renders separators in default variant", () => {
@@ -65,5 +66,12 @@ describe("CountdownTimer", () => {
     const future = new Date(Date.now() + 86400000)
     const { container } = render(<CountdownTimer targetDate={future} className="custom-timer" />)
     expect(container.querySelector(".custom-timer")).toBeInTheDocument()
+  })
+
+  it("correctly pluralizes Russian time labels", () => {
+    // Test with 21 days → should show "день" (not "дней")
+    const future = new Date(Date.now() + 21 * 86400000)
+    render(<CountdownTimer targetDate={future} />)
+    expect(screen.getAllByText("день").length).toBeGreaterThanOrEqual(1)
   })
 })

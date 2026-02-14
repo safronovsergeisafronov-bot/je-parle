@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Check, CreditCard, Users, FileDown, Wallet, KeyRound, FolderDown, Sparkles, ShieldCheck } from "lucide-react"
+import { Check, CreditCard, Users, FileDown, Wallet, KeyRound, FolderDown, ShieldCheck } from "lucide-react"
 import { CountdownTimer } from "@/components/CountdownTimer"
 import { CurrencySelector, type Currency } from "@/components/CurrencySelector"
 import { PurchaseModal } from "@/components/PurchaseModal"
@@ -18,7 +18,6 @@ export function Pricing() {
   const videoRef = useRef<HTMLVideoElement>(null)
 
   const currentPrice = prices[currency]
-  const discount = Math.round(((currentPrice.old - currentPrice.new) / currentPrice.old) * 100)
 
   // Lazy load video: play only when visible
   useEffect(() => {
@@ -75,26 +74,15 @@ export function Pricing() {
 
             {/* Right: Pricing Card */}
             <div className="relative rounded-2xl border-2 border-accent bg-background p-6 md:p-8 flex flex-col">
-              {/* Sale badge */}
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-                <div className="flex items-center gap-1.5 bg-accent text-white text-xs font-semibold px-4 py-1.5 rounded-full shadow-lg">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>Скидка {discount}%</span>
-                </div>
-              </div>
-
               {/* Currency Tabs */}
-              <div className="flex justify-center mb-6 mt-2">
+              <div className="flex justify-center mb-6">
                 <CurrencySelector selected={currency} onSelect={setCurrency} />
               </div>
 
               {/* Price */}
               <div className="text-center mb-6">
-                <p className="text-muted-foreground line-through text-lg">
-                  {currentPrice.symbol}{currentPrice.old}
-                </p>
                 <p className="text-5xl md:text-6xl font-bold text-accent">
-                  {currentPrice.symbol}{currentPrice.new}
+                  {currentPrice.symbol}{currentPrice.price}
                 </p>
                 <p className="text-sm text-muted-foreground mt-2">
                   Одна цена, всё просто.
@@ -143,8 +131,10 @@ export function Pricing() {
           </div>
         </div>
 
-        {/* Спеццена Card */}
-        <div className="mb-4 md:mb-6">
+        {/* Спеццена Card — СКРЫТ (hidden), НЕ УДАЛЯТЬ! Блок используется для промоакций.
+            Чтобы включить: убрать className="hidden" с внешнего div.
+            Также обновить saleEndDate в lib/data.tsx и текст даты ниже. */}
+        <div className="hidden mb-4 md:mb-6">
           <div className="rounded-2xl bg-secondary p-5 sm:p-6 md:p-8 lg:p-10">
             <div className="flex flex-col lg:flex-row items-center gap-5 md:gap-6 lg:gap-8">
               {/* Title — left */}

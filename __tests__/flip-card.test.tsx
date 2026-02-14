@@ -95,18 +95,7 @@ describe("FlipCard", () => {
 
     const flipButtons = screen.getAllByLabelText("Узнать как переводится")
     await user.click(flipButtons[0])
-    expect(screen.getAllByText("Перевод").length).toBeGreaterThanOrEqual(1)
-  })
-
-  it("flips back to front when back button is clicked", async () => {
-    const user = userEvent.setup()
-    render(<FlipCard {...defaultProps} />)
-
-    const flipButtons = screen.getAllByLabelText("Узнать как переводится")
-    await user.click(flipButtons[0])
-    const backButtons = screen.getAllByLabelText("Вернуться к оригиналу")
-    await user.click(backButtons[0])
-    expect(screen.getAllByText("Les relations").length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText("Перевод:").length).toBeGreaterThanOrEqual(1)
   })
 
   it("renders icon image when iconSrc is provided", () => {

@@ -59,7 +59,7 @@ export function HeroSection() {
 
           {/* Mobile Menu Dropdown */}
           {isMenuOpen && (
-            <div className="md:hidden mt-4 pb-4 border-b border-white/10">
+            <div className="md:hidden mt-4 pb-4 border-b border-white/[0.1]">
               <nav className="flex flex-col gap-1">
                 {mobileNavLinks.map((link) => (
                   <Link
@@ -119,7 +119,7 @@ export function HeroSection() {
               href="#inside"
               className="bg-white/15 text-white rounded-full px-8 py-4 text-base font-medium hover:bg-white/25 transition-all duration-250 text-center"
             >
-              Посмотреть бесплатный фрагмент
+              Посмотреть фрагмент
             </Link>
           </div>
         </div>
@@ -134,8 +134,8 @@ export function HeroSection() {
             className="object-cover"
             sizes="(max-width: 1024px) 100vw, 50vw"
           />
-          {/* "Связаться" button — top right on desktop */}
-          <div className="hidden md:block absolute top-6 right-6 md:top-8 md:right-8 lg:top-10 lg:right-10 xl:top-12 xl:right-12 z-10">
+          {/* "Связаться" button — top right on all devices */}
+          <div className="absolute top-6 right-6 md:top-8 md:right-8 lg:top-10 lg:right-10 xl:top-12 xl:right-12 z-10">
             <ContactModal>
               <button className="cursor-pointer text-sm bg-white text-foreground hover:bg-white/85 transition-all duration-250 px-4 py-2 rounded-full">
                 Связаться

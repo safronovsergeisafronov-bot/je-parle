@@ -10,7 +10,7 @@ import { VideoPlayerModal } from "@/components/VideoPlayerModal"
 function LessonProgress({ step }: { step: number }) {
   return (
     <div
-      className="flex items-center gap-1 px-2.5 py-1.5 bg-background rounded-full w-fit"
+      className="flex items-center gap-1 pl-1 pr-2 py-1.5 bg-background rounded-full w-fit"
       role="progressbar"
       aria-valuenow={step}
       aria-valuemin={1}
@@ -69,7 +69,7 @@ export function MiniCourse() {
 
           {/* Right — description */}
           <div className="lg:flex-1">
-            <p className="text-muted-foreground text-sm md:text-base">
+            <p className="text-base md:text-lg text-muted-foreground">
               Если чтение кажется головоломкой. Не&nbsp;переживай. Я&nbsp;записал для тебя бесплатный мини-курс по&nbsp;правилам чтения и&nbsp;произношения. 25&nbsp;минут — и&nbsp;ты&nbsp;знаешь правила.
             </p>
           </div>

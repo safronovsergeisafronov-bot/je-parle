@@ -64,7 +64,7 @@ describe("Static data integrity", () => {
   it("has 4 currency prices", () => {
     expect(Object.keys(prices)).toEqual(["USD", "EUR", "UAH", "RUB"])
     Object.values(prices).forEach((price) => {
-      expect(price.new).toBeLessThan(price.old)
+      expect(price.price).toBeGreaterThan(0)
       expect(price.symbol).toBeTruthy()
     })
   })

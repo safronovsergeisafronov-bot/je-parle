@@ -95,7 +95,7 @@ export function WhyItWorks() {
                 <br />
                 работает?
               </h2>
-              <p className="text-base xl:text-lg text-muted-foreground">
+              <p className="text-base md:text-lg text-muted-foreground">
                 Записал для вас озвучку&nbsp;&mdash; чтобы вы&nbsp;слышали правильное произношение и&nbsp;интонации.
               </p>
             </div>
@@ -195,7 +195,7 @@ export function WhyItWorks() {
             <h2 className="text-3xl md:text-4xl font-medium leading-[1.15] tracking-[-0.03em] text-foreground mb-3">
               Почему это работает?
             </h2>
-            <p className="text-muted-foreground">
+            <p className="text-base md:text-lg text-muted-foreground">
               Записал для вас озвучку&nbsp;&mdash; чтобы вы&nbsp;слышали
               правильное произношение и&nbsp;интонации.
             </p>

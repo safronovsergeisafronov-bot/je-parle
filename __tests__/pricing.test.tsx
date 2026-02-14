@@ -1,7 +1,17 @@
-import { describe, it, expect, vi, afterEach } from "vitest"
+import { describe, it, expect, vi, afterEach, beforeAll } from "vitest"
 import { render, screen, cleanup } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import React from "react"
+
+// Mock IntersectionObserver for video lazy-loading
+beforeAll(() => {
+  global.IntersectionObserver = class IntersectionObserver {
+    constructor() {}
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  } as any
+})
 
 function filterDomProps(props: Record<string, any>) {
   const {
@@ -77,8 +87,7 @@ describe("Pricing", () => {
 
   it("renders the pricing card with default USD price", () => {
     render(<Pricing />)
-    expect(screen.getAllByText(`$${prices.USD.new}`).length).toBeGreaterThanOrEqual(1)
-    expect(screen.getAllByText(`$${prices.USD.old}`).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(`$${prices.USD.price}`).length).toBeGreaterThanOrEqual(1)
   })
 
   it("renders all pricing features", () => {
@@ -105,7 +114,7 @@ describe("Pricing", () => {
     render(<Pricing />)
 
     await user.click(screen.getByText("EUR"))
-    expect(screen.getAllByText(`\u20AC${prices.EUR.new}`).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(`€${prices.EUR.price}`).length).toBeGreaterThanOrEqual(1)
   })
 
   it("shows RUB link instead of PurchaseModal when RUB selected", async () => {
@@ -114,12 +123,6 @@ describe("Pricing", () => {
 
     await user.click(screen.getByText("RUB"))
     expect(screen.getAllByText(/Приобрести книгу \(RUB\)/).length).toBeGreaterThanOrEqual(1)
-  })
-
-  it("renders discount badge", () => {
-    render(<Pricing />)
-    const discount = Math.round(((prices.USD.old - prices.USD.new) / prices.USD.old) * 100)
-    expect(screen.getAllByText(`Скидка ${discount}%`).length).toBeGreaterThanOrEqual(1)
   })
 
   it("renders spetscena section", () => {

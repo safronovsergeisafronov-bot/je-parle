@@ -171,12 +171,12 @@ export const reviews = [
   }
 ]
 
-// Цены в разных валютах
+// Цены в разных валютах (базовая цена $30, остальные по курсу Google в нашу пользу)
 export const prices = {
-  USD: { old: 30, new: 22, symbol: "$" },
-  EUR: { old: 28, new: 20, symbol: "€" },
-  UAH: { old: 1200, new: 900, symbol: "₴" },
-  RUB: { old: 2800, new: 2100, symbol: "₽" }
+  USD: { price: 30, symbol: "$" },
+  EUR: { price: 28, symbol: "€" },     // ~1 EUR = 1.07 USD (округлено в нашу пользу)
+  UAH: { price: 1250, symbol: "₴" },   // ~1 USD = 41.5 UAH (округлено в нашу пользу)
+  RUB: { price: 2990, symbol: "₽" }    // ~1 USD = 99.5 RUB (округлено в нашу пользу)
 }
 
 // Дата окончания акции
