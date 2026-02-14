@@ -31,7 +31,7 @@ export function JsonLd() {
         "image": `${bookUrl}/images/og-image.jpg`,
         "offers": {
           "@type": "Offer",
-          "price": prices.EUR.new.toFixed(2),
+          "price": prices.EUR.price.toFixed(2),
           "priceCurrency": "EUR",
           "availability": "https://schema.org/InStock",
           "url": bookUrl,
