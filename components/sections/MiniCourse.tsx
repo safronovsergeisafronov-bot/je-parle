@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Play, Heart, Book } from "lucide-react"
+import { Play, Heart } from "lucide-react"
 import { miniCourseLessons } from "@/lib/data"
 import { StaggerChildren, StaggerItem } from "@/components/AnimatedSection"
 import { VideoPlayerModal } from "@/components/VideoPlayerModal"
@@ -10,7 +10,7 @@ import { VideoPlayerModal } from "@/components/VideoPlayerModal"
 function LessonProgress({ step }: { step: number }) {
   return (
     <div
-      className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-background rounded-full"
+      className="flex items-center gap-1 px-2.5 py-1.5 bg-background rounded-full w-fit"
       role="progressbar"
       aria-valuenow={step}
       aria-valuemin={1}
@@ -18,12 +18,13 @@ function LessonProgress({ step }: { step: number }) {
       aria-label={`Урок ${step} из 6`}
     >
       {Array.from({ length: 6 }, (_, i) => (
-        <Book
+        <Image
           key={i}
-          className={`w-3.5 h-3.5 ${
-            i < step ? "text-accent" : "text-secondary"
-          }`}
-          fill="currentColor"
+          src={i < step ? "/images/book-blank1.svg" : "/images/book-blank2.svg"}
+          alt=""
+          width={11}
+          height={12}
+          className="w-3.5 h-3.5"
           aria-hidden="true"
         />
       ))}

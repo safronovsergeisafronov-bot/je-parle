@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -15,9 +15,34 @@ import { TextGenerateEffect } from "@/components/TextGenerateEffect"
 
 export function Pricing() {
   const [currency, setCurrency] = useState<Currency>("USD")
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   const currentPrice = prices[currency]
   const discount = Math.round(((currentPrice.old - currentPrice.new) / currentPrice.old) * 100)
+
+  // Lazy load video: play only when visible
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.play().catch(() => {
+              // Autoplay might be blocked, that's OK
+            })
+          } else {
+            video.pause()
+          }
+        })
+      },
+      { threshold: 0.25 } // Play when 25% visible
+    )
+
+    observer.observe(video)
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <section id="buy" className="py-10 md:py-15">
@@ -31,9 +56,21 @@ export function Pricing() {
         {/* Bento Grid: Image + Pricing */}
         <div className="mb-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-            {/* Left: Premium Book Placeholder */}
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#56051B] via-[#7a1a35] to-[#56051B] min-h-[300px] md:min-h-[unset] flex items-center justify-center">
-              {/* Image will be added here later */}
+            {/* Left: Premium Book Video */}
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#56051B] via-[#7a1a35] to-[#56051B] min-h-[300px] md:min-h-[unset]">
+              <video
+                ref={videoRef}
+                className="w-full h-full object-cover"
+                muted
+                loop
+                playsInline
+                preload="none"
+                poster="/video/pricing-hero-poster.jpg"
+                aria-label="Видео презентация книги Je Parle"
+              >
+                <source src="/video/pricing-hero-optimized.mp4" type="video/mp4" />
+                Ваш браузер не поддерживает видео.
+              </video>
             </div>
 
             {/* Right: Pricing Card */}

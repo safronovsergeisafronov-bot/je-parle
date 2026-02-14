@@ -111,12 +111,12 @@ export const topicSpheres = [
 
 // Мини-курс (6 уроков)
 export const miniCourseLessons = [
-  { id: 1, title: "Урок 1. Алфавит и фонетика", duration: "1 минута 11 секунд", youtubeId: "placeholder1" },
-  { id: 2, title: "Урок 2. Гласные звуки", duration: "3 минуты 58 секунд", youtubeId: "placeholder2" },
-  { id: 3, title: "Урок 3. Согласные буквы", duration: "4 минуты 16 секунд", youtubeId: "placeholder3" },
-  { id: 4, title: "Урок 4. Сочетания букв: oi, eau, au и другие", duration: "3 минуты 50 секунд", youtubeId: "placeholder4" },
-  { id: 5, title: "Урок 5. Носовые звуки во французском языке", duration: "2 минуты 46 секунд", youtubeId: "placeholder5" },
-  { id: 6, title: "Финальный урок. Читаем совместно текст", duration: "9 минут 2 секунды", youtubeId: "placeholder6" }
+  { id: 1, title: "Урок 1. Алфавит и фонетика", duration: "1 минута 11 секунд", youtubeId: "qY5IkP2VF0g" },
+  { id: 2, title: "Урок 2. Гласные звуки", duration: "3 минуты 58 секунд", youtubeId: "w9mZixijRig" },
+  { id: 3, title: "Урок 3. Согласные буквы", duration: "4 минуты 16 секунд", youtubeId: "eZCLko4QDJQ" },
+  { id: 4, title: "Урок 4. Сочетания букв: oi, eau, au и другие", duration: "3 минуты 50 секунд", youtubeId: "qxq44xmus6E" },
+  { id: 5, title: "Урок 5. Носовые звуки во французском языке", duration: "2 минуты 46 секунд", youtubeId: "oysNa24lrhM" },
+  { id: 6, title: "Финальный урок. Читаем совместно текст", duration: "9 минут 2 секунды", youtubeId: "kW6bhIqJjkk" }
 ]
 
 // Отзывы (6 штук)
