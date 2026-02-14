@@ -69,11 +69,24 @@ export async function sendToTelegram(body: ContactBody): Promise<boolean> {
   }
 
   const typeLabel = body.type === "question" ? "Вопрос" : "Нужна помощь"
+
+  // Формируем кликабельную ссылку на контакт
+  let contactLink = ""
+  if (body.contactMethod === "whatsapp") {
+    // WhatsApp формат: https://wa.me/79991234567 (без +, пробелов, дефисов)
+    const cleanPhone = body.contact.replace(/[^\d]/g, "")
+    contactLink = `[${escapeMarkdown(body.contact)}](https://wa.me/${cleanPhone})`
+  } else {
+    // Telegram формат: https://t.me/username (без @)
+    const username = body.contact.replace(/^@/, "")
+    contactLink = `[${escapeMarkdown(body.contact)}](https://t.me/${escapeMarkdown(username)})`
+  }
+
   const text = [
     `\u{1F4E9} *${escapeMarkdown(typeLabel)}*`,
     "",
     `\u{1F464} *Имя:* ${escapeMarkdown(body.name)}`,
-    `\u{1F4F1} *Контакт:* ${escapeMarkdown(body.contact)} \\(${escapeMarkdown(body.contactMethod)}\\)`,
+    `\u{1F4F1} *Контакт:* ${contactLink} \\(${escapeMarkdown(body.contactMethod)}\\)`,
     "",
     `\u{1F4AC} *Сообщение:*`,
     escapeMarkdown(body.message),
