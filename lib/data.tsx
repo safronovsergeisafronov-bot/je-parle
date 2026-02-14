@@ -83,7 +83,7 @@ export const expressionCards = [
     topic: "Les expressions avec « en »",
     topicRu: "Выражения с «en»",
     audioSrc: "/audio/expression3.mp3",
-    iconSrc: "/images/Les expressions avec « en » et « y »_3.svg"
+    iconSrc: "/images/les-expressions-en-y_3.svg"
   },
   {
     id: 4,
@@ -92,7 +92,7 @@ export const expressionCards = [
     topic: "Les expressions avec « y »",
     topicRu: "Выражения с «y»",
     audioSrc: "/audio/expression4.mp3",
-    iconSrc: "/images/Les expressions avec « en » et « y »_4.svg"
+    iconSrc: "/images/les-expressions-en-y_4.svg"
   }
 ]
 
