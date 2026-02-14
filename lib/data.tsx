@@ -65,7 +65,10 @@ export const expressionCards = [
     topic: "La 1ère rencontre",
     topicRu: "Первая встреча",
     audioSrc: "/audio/expression1.mp3",
-    iconSrc: "/images/Les relations_1.svg"
+    iconSrc: "/images/Les relations_1.svg",
+    frenchPhrase: "Ton visage me dit quelque chose.",
+    translation: "Ты мне знаком.",
+    explanation: "Очень частое выражение, но по дословному переводу легко запутаться."
   },
   {
     id: 2,
@@ -74,7 +77,10 @@ export const expressionCards = [
     topic: "Le verbe « rencontrer »",
     topicRu: "Подводные камни",
     audioSrc: "/audio/expression2.mp3",
-    iconSrc: "/images/Les relations_2.svg"
+    iconSrc: "/images/Les relations_2.svg",
+    frenchPhrase: "Je suis tombé sur Karim il y a deux jours.",
+    translation: "Я наткнулся на Карима два дня назад.",
+    explanation: "Фраза tomber sur quelqu'un означает «случайно встретить»."
   },
   {
     id: 3,
@@ -83,7 +89,10 @@ export const expressionCards = [
     topic: "Les expressions avec « en »",
     topicRu: "Выражения с «en»",
     audioSrc: "/audio/expression3.mp3",
-    iconSrc: "/images/les-expressions-en-y_3.svg"
+    iconSrc: "/images/Les expressions avec « en » et « y »_3.svg",
+    frenchPhrase: "Je ne comprends plus où j'en suis.",
+    translation: "Я уже не понимаю на каком этапе я.",
+    explanation: "Звучит нелогично, если переводить дословно («где я в этом»)."
   },
   {
     id: 4,
@@ -92,7 +101,10 @@ export const expressionCards = [
     topic: "Les expressions avec « y »",
     topicRu: "Выражения с «y»",
     audioSrc: "/audio/expression4.mp3",
-    iconSrc: "/images/les-expressions-en-y_4.svg"
+    iconSrc: "/images/Les expressions avec « en » et « y »_4.svg",
+    frenchPhrase: "Il faut que je m'y mette sérieusement.",
+    translation: "Мне нужно серьёзно за это взяться.",
+    explanation: "S'y mettre значит «начать делать, взяться за что-то», не имеет точного аналога."
   }
 ]
 

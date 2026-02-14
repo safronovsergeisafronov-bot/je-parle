@@ -36,6 +36,9 @@ export function Expressions() {
                   topicRu={card.topicRu}
                   audioSrc={card.audioSrc}
                   iconSrc={card.iconSrc}
+                  frenchPhrase={card.frenchPhrase}
+                  translation={card.translation}
+                  explanation={card.explanation}
                 />
               ))}
             </div>

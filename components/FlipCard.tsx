@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { Play, Pause, RotateCcw } from "lucide-react"
+import { Play, Pause, RotateCcw, Mic, Pencil, Search } from "lucide-react"
 
 interface FlipCardProps {
   theme: string
@@ -12,6 +12,9 @@ interface FlipCardProps {
   topicRu: string
   audioSrc?: string
   iconSrc?: string
+  frenchPhrase?: string
+  translation?: string
+  explanation?: string
   className?: string
 }
 
@@ -22,11 +25,15 @@ export function FlipCard({
   topicRu,
   audioSrc,
   iconSrc,
+  frenchPhrase,
+  translation,
+  explanation,
   className,
 }: FlipCardProps) {
   const [isFlipped, setIsFlipped] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
   const audioRef = useRef<HTMLAudioElement | null>(null)
+  const flipTimerRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     if (!audioSrc) return
@@ -40,6 +47,21 @@ export function FlipCard({
       audioRef.current = null
     }
   }, [audioSrc])
+
+  // Автоматический возврат карточки через 5 секунд
+  useEffect(() => {
+    if (isFlipped) {
+      flipTimerRef.current = setTimeout(() => {
+        setIsFlipped(false)
+      }, 5000)
+    }
+    return () => {
+      if (flipTimerRef.current) {
+        clearTimeout(flipTimerRef.current)
+        flipTimerRef.current = null
+      }
+    }
+  }, [isFlipped])
 
   const handlePlay = () => {
     if (!audioRef.current) return
@@ -141,53 +163,55 @@ export function FlipCard({
 
         {/* Back */}
         <div
-          className="flip-card-back absolute w-full h-full bg-accent rounded-2xl p-4 flex flex-col justify-between"
+          className="flip-card-back absolute w-full h-full bg-accent rounded-2xl p-4 flex flex-col gap-3"
           style={{
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
           }}
         >
-          <div className="flex items-center gap-2.5">
-            {iconSrc ? (
-              <div className="w-[45px] h-[45px] rounded-xl overflow-hidden flex-shrink-0 opacity-80">
-                <img src={iconSrc} alt="" className="w-full h-full object-cover" aria-hidden="true" />
-              </div>
-            ) : (
-              <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                <div className="w-4 h-4 rounded-full bg-white/40" />
-              </div>
-            )}
-            <div className="min-w-0">
-              <h3 className="font-semibold text-sm leading-tight text-white truncate">
-                {themeRu}
-              </h3>
-              <p className="text-white/60 text-xs">Перевод</p>
+          {/* 1. En français */}
+          <div className="flex items-start gap-3">
+            <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+              <Mic className="w-5 h-5 text-white" aria-hidden="true" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs text-white/70 mb-1">En français :</p>
+              <p className="text-sm text-white leading-snug">{frenchPhrase}</p>
             </div>
           </div>
 
-          <div className="bg-white/10 rounded-xl px-4 py-2.5">
-            <span className="text-[11px] text-white/50 block mb-0.5">
-              Тема:
-            </span>
-            <p className="text-xs text-white font-medium truncate">
-              {topicRu}
-            </p>
+          {/* 2. Перевод */}
+          <div className="flex items-start gap-3">
+            <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+              <Pencil className="w-5 h-5 text-white" aria-hidden="true" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs text-white/70 mb-1">Перевод:</p>
+              <p className="text-sm text-white leading-snug">{translation}</p>
+            </div>
           </div>
 
-          <button
-            onClick={() => setIsFlipped(false)}
-            className="flex items-center gap-2 group"
-            aria-label="Вернуться к оригиналу"
-          >
-            <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
-              <RotateCcw className="w-4 h-4 text-accent" />
+          {/* 3. Объяснение */}
+          <div className="flex items-start gap-3 flex-1">
+            <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+              <Search className="w-5 h-5 text-white" aria-hidden="true" />
             </div>
-            <span className="text-xs text-white/80 leading-tight text-left">
-              Вернуться
-              <br />
-              назад
-            </span>
-          </button>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs text-white/70 mb-1">Объяснение:</p>
+              <p className="text-sm text-white leading-snug">{explanation}</p>
+            </div>
+          </div>
+
+          {/* Кнопка возврата (справа внизу) */}
+          <div className="flex justify-end">
+            <button
+              onClick={() => setIsFlipped(false)}
+              className="w-12 h-12 rounded-full bg-white flex items-center justify-center flex-shrink-0 hover:scale-105 transition-transform"
+              aria-label="Вернуться к оригиналу"
+            >
+              <RotateCcw className="w-5 h-5 text-accent" />
+            </button>
+          </div>
         </div>
       </motion.div>
     </div>
