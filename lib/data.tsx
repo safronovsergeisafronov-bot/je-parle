@@ -89,7 +89,7 @@ export const expressionCards = [
     topic: "Les expressions avec « en »",
     topicRu: "Выражения с «en»",
     audioSrc: "/audio/expression3.mp3",
-    iconSrc: "/images/Les expressions avec « en » et « y »_3.svg",
+    iconSrc: "/images/les-expressions-en-y_3.svg",
     frenchPhrase: "Je ne comprends plus où j'en suis.",
     translation: "Я уже не понимаю на каком этапе я.",
     explanation: "Звучит нелогично, если переводить дословно («где я в этом»)."
@@ -101,7 +101,7 @@ export const expressionCards = [
     topic: "Les expressions avec « y »",
     topicRu: "Выражения с «y»",
     audioSrc: "/audio/expression4.mp3",
-    iconSrc: "/images/Les expressions avec « en » et « y »_4.svg",
+    iconSrc: "/images/les-expressions-en-y_4.svg",
     frenchPhrase: "Il faut que je m'y mette sérieusement.",
     translation: "Мне нужно серьёзно за это взяться.",
     explanation: "S'y mettre значит «начать делать, взяться за что-то», не имеет точного аналога."
