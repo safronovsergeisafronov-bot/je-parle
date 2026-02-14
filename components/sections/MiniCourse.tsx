@@ -58,7 +58,7 @@ export function MiniCourse() {
           {/* Left — title */}
           <div className="lg:flex-1">
             <h2 className="text-3xl md:text-4xl font-medium leading-[1.15] tracking-[-0.03em] text-foreground">
-              Хочешь читать без&nbsp;запинок?<Heart className="w-7 h-7 text-accent inline-block ml-2 align-middle relative -top-0.5" fill="currentColor" aria-hidden="true" />
+              Хочешь читать без&nbsp;<span className="whitespace-nowrap">запинок?<Heart className="w-7 h-7 text-accent inline-block ml-2 align-middle relative -top-0.5" fill="currentColor" aria-hidden="true" /></span>
             </h2>
           </div>
 

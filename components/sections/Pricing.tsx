@@ -56,7 +56,7 @@ export function Pricing() {
         <div className="mb-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             {/* Left: Premium Book Video */}
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#56051B] via-[#7a1a35] to-[#56051B] min-h-[300px] md:min-h-[unset]">
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#56051B] via-[#7a1a35] to-[#56051B] min-h-[260px] md:min-h-[unset]">
               <video
                 ref={videoRef}
                 className="w-full h-full object-cover"
@@ -73,24 +73,24 @@ export function Pricing() {
             </div>
 
             {/* Right: Pricing Card */}
-            <div className="relative rounded-2xl border-2 border-accent bg-background p-6 md:p-8 flex flex-col">
+            <div className="relative rounded-2xl border-2 border-accent bg-background p-5 md:p-6 flex flex-col">
               {/* Currency Tabs */}
-              <div className="flex justify-center mb-6">
+              <div className="flex justify-center mb-4">
                 <CurrencySelector selected={currency} onSelect={setCurrency} />
               </div>
 
               {/* Price */}
-              <div className="text-center mb-6">
+              <div className="text-center mb-4">
                 <p className="text-5xl md:text-6xl font-bold text-accent">
                   {currentPrice.symbol}{currentPrice.price}
                 </p>
-                <p className="text-sm text-muted-foreground mt-2">
+                <p className="text-sm text-muted-foreground mt-1">
                   Одна цена, всё просто.
                 </p>
               </div>
 
               {/* Features */}
-              <ul className="space-y-3 mb-8 flex-1">
+              <ul className="space-y-2 mb-5 flex-1">
                 {pricingFeatures.map((feature, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <div className="w-5 h-5 rounded-full bg-[#56051B]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
