@@ -63,22 +63,26 @@ export function ContactModal({ children }: ContactModalProps) {
       <SheetTrigger asChild>
         {children}
       </SheetTrigger>
-      <SheetContent className="w-full sm:max-w-md overflow-y-auto">
-        <SheetHeader>
-          <SheetTitle className="text-xl">Напиши мне вопрос прямо здесь</SheetTitle>
+      <SheetContent className="w-full sm:max-w-md overflow-y-auto flex flex-col">
+        <SheetHeader className="text-center">
+          <SheetTitle className="text-xl">
+            Напиши мне вопрос
+            <br />
+            прямо здесь
+          </SheetTitle>
           <SheetDescription>
             Не стесняйся, спрашивай
           </SheetDescription>
         </SheetHeader>
 
         {status === "success" ? (
-          <div className="flex flex-col items-center justify-center py-12 text-center">
+          <div className="flex flex-col items-center justify-center flex-1 py-12 text-center">
             <CheckCircle2 className="w-16 h-16 text-green-600 mb-4" />
             <p className="text-lg font-medium mb-2">Вопрос отправлен!</p>
             <p className="text-muted-foreground text-sm">Ответ придёт на указанный контакт</p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-6 mt-6">
+          <form onSubmit={handleSubmit} className="space-y-6 mt-6 flex-1 flex flex-col justify-center">
             <div className="space-y-2">
               <Label htmlFor="name">Ваше имя</Label>
               <Input

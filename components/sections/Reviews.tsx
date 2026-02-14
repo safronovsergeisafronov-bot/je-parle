@@ -97,7 +97,7 @@ export function Reviews() {
         {/* Mobile: Carousel */}
         <div className="md:hidden" role="region" aria-label="Отзывы" aria-roledescription="carousel" tabIndex={0} onKeyDown={handleCarouselKeyDown}>
           <Card
-            className="border-border cursor-pointer"
+            className="border-border shadow-none cursor-pointer"
             onClick={() => setOpenReview(reviews[currentIndex].id)}
           >
             <CardContent className="p-6">
@@ -125,13 +125,13 @@ export function Reviews() {
 
           {/* Navigation */}
           <div className="flex items-center justify-center gap-4 mt-4">
-            <Button variant="outline" size="icon" onClick={prevSlide} aria-label="Предыдущий отзыв">
+            <Button variant="outline" size="icon" className="shadow-none" onClick={prevSlide} aria-label="Предыдущий отзыв">
               <ChevronLeft className="w-4 h-4" />
             </Button>
             <span className="text-sm text-muted-foreground" aria-live="polite">
               {currentIndex + 1} / {reviews.length}
             </span>
-            <Button variant="outline" size="icon" onClick={nextSlide} aria-label="Следующий отзыв">
+            <Button variant="outline" size="icon" className="shadow-none" onClick={nextSlide} aria-label="Следующий отзыв">
               <ChevronRight className="w-4 h-4" />
             </Button>
           </div>

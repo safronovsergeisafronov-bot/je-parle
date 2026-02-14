@@ -30,7 +30,7 @@ export function CinematicModal({
       <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-foreground/40 backdrop-blur-[4px] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
         <DialogPrimitive.Content
-          className="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-[calc(100vw-2rem)] md:w-[calc(100vw-4rem)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 md:p-8 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
           aria-describedby={undefined}
         >
           <DialogPrimitive.Title
@@ -39,15 +39,17 @@ export function CinematicModal({
             {title}
           </DialogPrimitive.Title>
 
-          <div className={cn("relative mx-auto", className)}>
-            {/* Close button — inside the content wrapper for proper alignment */}
+          {/* Close button — always visible at top */}
+          <div className="w-full flex justify-end mb-2" style={{ maxWidth: className?.includes("max-w") ? undefined : "100%" }}>
             <DialogPrimitive.Close
-              className="absolute -top-12 right-0 md:-top-14 md:right-0 z-50 flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-secondary text-foreground shadow-lg transition-all hover:scale-110 hover:shadow-xl hover:bg-accent hover:text-white"
+              className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-secondary text-foreground shadow-lg transition-all hover:scale-110 hover:shadow-xl hover:bg-accent hover:text-white"
               aria-label="Закрыть"
             >
               <X className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.5} />
             </DialogPrimitive.Close>
+          </div>
 
+          <div className={cn("relative mx-auto w-full max-h-[calc(100dvh-6rem)] overflow-y-auto", className)}>
             {children}
           </div>
         </DialogPrimitive.Content>

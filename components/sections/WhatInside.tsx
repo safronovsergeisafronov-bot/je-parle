@@ -24,12 +24,27 @@ export function WhatInside() {
   const video = useResponsiveVideo()
   const videoRef = useRef<HTMLVideoElement>(null)
 
-  // Ensure video plays after source is set
+  // Ensure video plays when visible (iOS requires user interaction unless muted+playsInline)
   useEffect(() => {
-    if (video && videoRef.current) {
-      videoRef.current.load()
-      videoRef.current.play().catch(() => {})
-    }
+    if (!video || !videoRef.current) return
+    const el = videoRef.current
+    el.load()
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            el.play().catch(() => {})
+          } else {
+            el.pause()
+          }
+        })
+      },
+      { threshold: 0.15 }
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
   }, [video])
 
   return (
@@ -56,25 +71,24 @@ export function WhatInside() {
 
           <div className="relative z-10 grid lg:grid-cols-[2fr_1fr] min-h-[480px] lg:min-h-[580px]">
 
-            {/* Left: Badges over video */}
-            {/* TODO: Add a static fallback image for when video is not loaded or unavailable */}
-            <div className="relative min-h-[320px] lg:min-h-full">
+            {/* Left: Badges over video (desktop only) */}
+            <div className="relative hidden lg:block lg:min-h-full">
               {/* Top-left badge */}
-              <span className="absolute top-5 left-5 md:top-8 md:left-8 px-4 py-1.5 bg-white/15 backdrop-blur-sm text-white text-sm font-medium rounded-full">
+              <span className="absolute top-8 left-8 px-4 py-1.5 bg-white/15 backdrop-blur-sm text-white text-sm font-medium rounded-full">
                 Бесплатный фрагмент
               </span>
 
               {/* Bottom-left badge */}
-              <span className="absolute bottom-5 left-5 md:bottom-8 md:left-8 px-4 py-1.5 bg-white/15 backdrop-blur-sm text-white text-sm font-medium rounded-full">
+              <span className="absolute bottom-8 left-8 px-4 py-1.5 bg-white/15 backdrop-blur-sm text-white text-sm font-medium rounded-full">
                 PDF 16 страниц
               </span>
             </div>
 
-            {/* Right: Compact content aligned to top, in the gradient area */}
-            <div className="relative flex flex-col justify-start px-6 py-6 pt-5 md:px-8 md:pt-8 lg:px-10 lg:pt-8">
+            {/* Right (desktop) / Full overlay centered (mobile) */}
+            <div className="relative flex flex-col items-center justify-center text-center lg:items-start lg:text-left lg:justify-start px-6 py-8 md:px-8 md:py-10 lg:px-10 lg:pt-8 min-h-[400px] lg:min-h-0">
               {/* Top badge */}
-              <span className="inline-block self-start px-4 py-1.5 bg-white/15 backdrop-blur-sm text-white/90 text-sm font-medium rounded-full mb-4">
-                Весь продукт в 6,7 раз больше
+              <span className="inline-block px-4 py-1.5 bg-white/15 backdrop-blur-sm text-white/90 text-sm font-medium rounded-full mb-4">
+                Весь продукт в&nbsp;6,7 раз больше
               </span>
 
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium leading-[1.15] tracking-[-0.03em] text-white mb-4">
@@ -102,8 +116,10 @@ export function WhatInside() {
                 </button>
               </PdfViewerModal>
 
-              <p className="text-xs text-white/40 mt-4 max-w-xs text-center mx-auto">
-                Фрагмент откроется прямо здесь&nbsp;— не&nbsp;нужно никуда уходить.
+              <p className="text-xs text-white/40 mt-4 max-w-xs">
+                Фрагмент откроется прямо здесь&nbsp;—
+                <br />
+                не&nbsp;нужно никуда уходить.
               </p>
             </div>
 

@@ -25,8 +25,8 @@ export function Expressions() {
               </p>
             </div>
 
-            {/* Right: 2x2 grid of expression cards */}
-            <div className="lg:w-[70%] grid sm:grid-cols-2 gap-5">
+            {/* Right: cards — single column on mobile, 2-col on tablet+ */}
+            <div className="lg:w-[70%] grid grid-cols-1 md:grid-cols-2 gap-5">
               {expressionCards.map((card) => (
                 <FlipCard
                   key={card.id}

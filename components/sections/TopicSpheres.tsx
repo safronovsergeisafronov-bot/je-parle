@@ -51,7 +51,7 @@ export function TopicSpheres() {
         </div>
 
         {/* 5-column grid: 9 topic cards + 1 CTA card */}
-        <StaggerChildren className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4" staggerDelay={0.06}>
+        <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4" staggerDelay={0.06}>
           {topicSpheres.map((sphere) => {
             const dark = isDarkColor(sphere.color)
             const textColor = sphere.textColor ?? (dark ? "#ffffff" : "var(--foreground)")

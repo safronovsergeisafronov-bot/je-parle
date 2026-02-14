@@ -58,9 +58,13 @@ export function HeroSection() {
           </div>
 
           {/* Mobile Menu Dropdown */}
-          {isMenuOpen && (
-            <div className="md:hidden mt-4 pb-4 border-b border-white/[0.1]">
-              <nav className="flex flex-col gap-1">
+          <div
+            className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+              isMenuOpen ? "max-h-[500px] opacity-100 mt-4 pb-4" : "max-h-0 opacity-0"
+            }`}
+          >
+            <div className="border-b border-white/[0.05]">
+              <nav className="flex flex-col gap-1 pb-4">
                 {mobileNavLinks.map((link) => (
                   <Link
                     key={link.href}
@@ -78,7 +82,7 @@ export function HeroSection() {
                 </ContactModal>
               </nav>
             </div>
-          )}
+          </div>
 
           {/* Heading + Description — centered between header and buttons */}
           <div className="flex-1 flex flex-col items-center justify-center text-center pt-6 md:pt-8 lg:pt-0">
@@ -86,18 +90,18 @@ export function HeroSection() {
               <TextGenerateEffect
                 as="span"
                 text="Книга, собранная"
-                className="block text-3xl md:text-4xl lg:text-[2.75rem] font-light text-white leading-none tracking-[-0.02em]"
+                className="block text-[1.625rem] md:text-4xl lg:text-[2.75rem] font-light text-white leading-none tracking-[-0.02em]"
               />
               <TextGenerateEffect
                 as="span"
                 text="не за день — а за 7 лет"
-                className="block text-3xl md:text-4xl lg:text-[2.75rem] font-medium text-white leading-none tracking-[-0.02em]"
+                className="block text-[1.625rem] md:text-4xl lg:text-[2.75rem] font-medium text-white leading-none tracking-[-0.02em]"
                 delay={200}
               />
               <TextGenerateEffect
                 as="span"
-                text="преподавания французского."
-                className="block text-3xl md:text-4xl lg:text-[2.75rem] font-light text-white/50 leading-none tracking-[-0.02em]"
+                text="преподавания французского"
+                className="block text-[1.625rem] md:text-4xl lg:text-[2.75rem] font-light text-white/50 leading-none tracking-[-0.02em]"
                 delay={400}
               />
             </h1>

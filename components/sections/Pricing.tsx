@@ -55,8 +55,8 @@ export function Pricing() {
         {/* Bento Grid: Image + Pricing */}
         <div className="mb-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-            {/* Left: Premium Book Video */}
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#56051B] via-[#7a1a35] to-[#56051B] min-h-[260px] md:min-h-[unset]">
+            {/* Left: Premium Book Video (on mobile: below price card) */}
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#56051B] via-[#7a1a35] to-[#56051B] min-h-[260px] md:min-h-[unset] order-2 md:order-1">
               <video
                 ref={videoRef}
                 className="w-full h-full object-cover"
@@ -72,8 +72,8 @@ export function Pricing() {
               </video>
             </div>
 
-            {/* Right: Pricing Card */}
-            <div className="relative rounded-2xl border-2 border-accent bg-background p-5 md:p-6 flex flex-col">
+            {/* Right: Pricing Card (on mobile: first, so price+button visible immediately) */}
+            <div className="relative rounded-2xl border-2 border-accent bg-background p-5 md:p-6 flex flex-col order-1 md:order-2">
               {/* Currency Tabs */}
               <div className="flex justify-center mb-4">
                 <CurrencySelector selected={currency} onSelect={setCurrency} />
@@ -169,10 +169,12 @@ export function Pricing() {
             <div className="flex flex-col md:flex-row items-center gap-5 md:gap-8">
               {/* Text */}
               <div className="text-center md:text-left flex-1">
-                <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-foreground">
-                  Оставьте заявку,
+                <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-foreground leading-[1.2]">
+                  Оставьте заявку, если
                   <br />
-                  если у&nbsp;вас возникли проблемы с&nbsp;оплатой
+                  у&nbsp;вас возникли
+                  <br className="md:hidden" />
+                  {" "}проблемы с&nbsp;оплатой
                 </span>
               </div>
 

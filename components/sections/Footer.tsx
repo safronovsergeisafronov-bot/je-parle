@@ -16,27 +16,28 @@ function Tooltip({ children, text }: { children: React.ReactNode; text: React.Re
   const triggerRef = useRef<HTMLDivElement>(null)
   const idRef = useRef(`footer-tooltip-${++tooltipCounter}`)
 
-  const handleEnter = useCallback(() => {
+  const handleToggle = useCallback(() => {
     if (triggerRef.current) {
       const rect = triggerRef.current.getBoundingClientRect()
       setPosition(rect.top < 120 ? "bottom" : "top")
     }
-    setVisible(true)
+    setVisible((v) => !v)
   }, [])
 
   return (
     <div
       ref={triggerRef}
       className="relative cursor-pointer"
-      onMouseEnter={handleEnter}
+      onMouseEnter={() => { handleToggle(); setVisible(true) }}
       onMouseLeave={() => setVisible(false)}
+      onClick={handleToggle}
       aria-describedby={idRef.current}
     >
       {children}
       <div
         id={idRef.current}
         role="tooltip"
-        className={`pointer-events-none absolute left-1/2 -translate-x-1/2 w-64 rounded-xl bg-white p-3 text-xs text-foreground transition-opacity z-20 shadow-lg ${
+        className={`pointer-events-none absolute left-0 sm:left-1/2 sm:-translate-x-1/2 w-64 rounded-xl bg-white p-3 text-xs text-foreground transition-opacity z-20 shadow-lg ${
           position === "top" ? "bottom-full mb-2" : "top-full mt-2"
         } ${visible ? "opacity-100" : "opacity-0"}`}
       >

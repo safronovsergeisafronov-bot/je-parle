@@ -40,6 +40,86 @@ const textPlacement: Array<"above" | "below"> = [
   "above", "above", "below", "below", "below",
 ]
 
+function MobileWhyItWorks({ scrollYProgress }: { scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"] }) {
+  // Reuse the same scrollYProgress from parent section
+  // Each card fades in at 20% intervals, croissant moves vertically
+  const mobileOpacities = whyItWorksPoints.map((_, i) => {
+    const start = i * 0.18
+    const end = start + 0.12
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    return useTransform(scrollYProgress, [start, end], [0, 1])
+  })
+
+  const mobileTranslateYs = whyItWorksPoints.map((_, i) => {
+    const start = i * 0.18
+    const end = start + 0.12
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    return useTransform(scrollYProgress, [start, end], [30, 0])
+  })
+
+  // Croissant vertical position (0% to 100% of the card area)
+  const croissantY = useTransform(scrollYProgress, [0, 0.85], [0, 100])
+  const croissantTop = useMotionTemplate`${croissantY}%`
+
+  return (
+    <div className="lg:hidden">
+      <div className="sticky top-0 h-screen flex flex-col px-3 pt-4">
+        <div className="relative w-full bg-card rounded-2xl overflow-hidden flex-1 p-5 pb-6">
+          {/* Title */}
+          <div className="text-center mb-6">
+            <h2 className="text-2xl md:text-3xl font-medium leading-[1.15] tracking-[-0.03em] text-foreground mb-2">
+              Почему это работает?
+            </h2>
+            <p className="text-sm md:text-base text-muted-foreground">
+              Записал для вас озвучку&nbsp;&mdash; чтобы вы&nbsp;слышали
+              правильное произношение и&nbsp;интонации.
+            </p>
+          </div>
+
+          {/* Cards with vertical line and croissant */}
+          <div className="relative">
+            {/* Vertical line */}
+            <div className="absolute left-4 top-0 bottom-0 w-px bg-border" />
+
+            {/* Croissant moving along the line */}
+            <motion.div
+              className="absolute left-0 z-20 select-none will-change-transform -translate-y-1/2"
+              style={{ top: croissantTop }}
+            >
+              <Image
+                src="/images/croissant.png"
+                alt="Круассан"
+                width={32}
+                height={32}
+                className="w-8 h-8 object-contain"
+              />
+            </motion.div>
+
+            {/* Cards */}
+            <div className="space-y-3 pl-10">
+              {whyItWorksPoints.map((text, i) => (
+                <motion.div
+                  key={i}
+                  className="bg-background rounded-xl p-3.5"
+                  style={{
+                    opacity: mobileOpacities[i],
+                    y: mobileTranslateYs[i],
+                  }}
+                >
+                  <ProgressDots count={i + 1} />
+                  <p className="text-sm text-muted-foreground leading-snug">
+                    {text}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export function WhyItWorks() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
@@ -83,9 +163,9 @@ export function WhyItWorks() {
   const translateYs = [ty1, ty2, ty3, ty4, ty5]
 
   return (
-    <section id="why" ref={sectionRef} className="relative">
+    <section id="why" ref={sectionRef} className="relative h-[300vh]">
       {/* Desktop: scroll-driven animated path */}
-      <div className="hidden lg:block h-[300vh]">
+      <div className="hidden lg:block h-full">
         <div className="sticky top-0 h-screen flex flex-col pt-3 lg:pt-4 px-3 lg:px-4">
           <div className="relative w-full bg-card rounded-t-3xl overflow-hidden flex-1">
             {/* Title & subtitle — top right */}
@@ -188,39 +268,8 @@ export function WhyItWorks() {
         </div>
       </div>
 
-      {/* Mobile & tablet: simplified vertical layout */}
-      <div className="lg:hidden py-10 md:py-15 bg-secondary/30">
-        <div className="w-full px-3 lg:px-4">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-medium leading-[1.15] tracking-[-0.03em] text-foreground mb-3">
-              Почему это работает?
-            </h2>
-            <p className="text-base md:text-lg text-muted-foreground">
-              Записал для вас озвучку&nbsp;&mdash; чтобы вы&nbsp;слышали
-              правильное произношение и&nbsp;интонации.
-            </p>
-          </div>
-          <div className="space-y-4">
-            {whyItWorksPoints.map((text, i) => (
-              <div key={i} className="bg-card rounded-2xl p-4 text-left">
-                <ProgressDots count={i + 1} />
-                <p className="text-sm text-muted-foreground">
-                  {text}
-                </p>
-              </div>
-            ))}
-          </div>
-          <div className="flex justify-center mt-8 select-none">
-            <Image
-              src="/images/croissant.png"
-              alt="Круассан"
-              width={48}
-              height={48}
-              className="w-12 h-12 object-contain"
-            />
-          </div>
-        </div>
-      </div>
+      {/* Mobile & tablet: scroll-driven vertical animation */}
+      <MobileWhyItWorks scrollYProgress={scrollYProgress} />
     </section>
   )
 }

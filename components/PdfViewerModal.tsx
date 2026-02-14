@@ -36,13 +36,19 @@ export function PdfViewerModal({
 
   useEffect(() => {
     function updateWidth() {
-      // Leave some padding on each side
-      const maxWidth = Math.min(window.innerWidth - 48, 900)
-      setPageWidth(maxWidth)
+      // Leave padding and account for landscape mode (limit by height too)
+      const maxByWidth = window.innerWidth - 48
+      const maxByHeight = window.innerHeight - 160 // space for controls + padding
+      const maxWidth = Math.min(maxByWidth, maxByHeight * 0.75, 900) // 0.75 = approximate PDF aspect ratio
+      setPageWidth(Math.max(280, maxWidth))
     }
     updateWidth()
     window.addEventListener("resize", updateWidth)
-    return () => window.removeEventListener("resize", updateWidth)
+    window.addEventListener("orientationchange", updateWidth)
+    return () => {
+      window.removeEventListener("resize", updateWidth)
+      window.removeEventListener("orientationchange", updateWidth)
+    }
   }, [])
 
   const onDocumentLoadSuccess = useCallback(({ numPages }: { numPages: number }) => {

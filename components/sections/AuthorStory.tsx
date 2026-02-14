@@ -24,14 +24,12 @@ export function AuthorStory() {
           {/* ── Card 1: Начало пути ── */}
           <StaggerItem>
             <div className="bg-card rounded-2xl p-5 md:p-6 flex flex-col gap-3.5 h-full">
-              <h3 className="text-base md:text-lg font-semibold leading-tight text-foreground">
+              <h3 className="text-lg md:text-xl font-semibold leading-tight text-foreground">
                 Начало пути
               </h3>
 
               <p className="text-sm text-muted-foreground leading-normal">
-                В&nbsp;10&nbsp;лет переехал во&nbsp;Францию. Прошёл путь
-                от&nbsp;чемпиона мира по&nbsp;хоккею и&nbsp;учёбы
-                на&nbsp;священника до&nbsp;преподавания французского.
+                В&nbsp;10&nbsp;лет переехал во&nbsp;Францию. Прошёл путь от&nbsp;чемпиона мира по&nbsp;хоккею и&nbsp;учёбы на&nbsp;священника до&nbsp;преподавания французского.
               </p>
 
               <div className="relative rounded-xl overflow-hidden">
@@ -60,7 +58,7 @@ export function AuthorStory() {
 
           {/* ── Card 2: Мечта ── */}
           <StaggerItem>
-            <div className="rounded-2xl p-5 md:p-6 flex flex-col gap-3.5 h-full relative overflow-hidden">
+            <div className="rounded-2xl p-5 md:p-6 flex flex-col gap-3.5 h-full min-h-[280px] md:min-h-0 relative overflow-hidden">
               <Image
                 src="/images/mechta.jpg"
                 alt="Мечта — материалы Гаврилова Ильи"
@@ -68,7 +66,7 @@ export function AuthorStory() {
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 25vw"
               />
-              <h3 className="text-base md:text-lg font-semibold leading-tight text-white relative z-10">
+              <h3 className="text-lg md:text-xl font-semibold leading-tight text-white relative z-10">
                 Мечта
               </h3>
 
@@ -83,7 +81,7 @@ export function AuthorStory() {
           {/* ── Card 3: Сегодня ── */}
           <StaggerItem>
             <div className="bg-secondary rounded-2xl p-5 md:p-6 flex flex-col gap-3.5 h-full">
-              <h3 className="text-base md:text-lg font-semibold leading-tight text-foreground">
+              <h3 className="text-lg md:text-xl font-semibold leading-tight text-foreground">
                 Сегодня
               </h3>
 

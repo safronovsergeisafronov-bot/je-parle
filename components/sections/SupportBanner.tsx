@@ -21,28 +21,28 @@ function Tooltip({ children, text }: { children: React.ReactNode; text: React.Re
   const triggerRef = useRef<HTMLDivElement>(null)
   const idRef = useRef(`tooltip-${++tooltipCounter}`)
 
-  const handleEnter = useCallback(() => {
+  const handleToggle = useCallback(() => {
     if (triggerRef.current) {
       const rect = triggerRef.current.getBoundingClientRect()
-      // If less than 120px from top of viewport, show tooltip below
       setPosition(rect.top < 120 ? "bottom" : "top")
     }
-    setVisible(true)
+    setVisible((v) => !v)
   }, [])
 
   return (
     <div
       ref={triggerRef}
       className="relative cursor-pointer"
-      onMouseEnter={handleEnter}
+      onMouseEnter={() => { handleToggle(); setVisible(true) }}
       onMouseLeave={() => setVisible(false)}
+      onClick={handleToggle}
       aria-describedby={idRef.current}
     >
       {children}
       <div
         id={idRef.current}
         role="tooltip"
-        className={`pointer-events-none absolute left-1/2 -translate-x-1/2 w-64 rounded-xl bg-white p-3 text-xs text-foreground transition-opacity z-20 shadow-lg ${
+        className={`pointer-events-none absolute left-0 sm:left-1/2 sm:-translate-x-1/2 w-64 rounded-xl bg-white p-3 text-xs text-foreground transition-opacity z-20 shadow-lg ${
           position === "top" ? "bottom-full mb-2" : "top-full mt-2"
         } ${visible ? "opacity-100" : "opacity-0"}`}
       >
@@ -59,15 +59,15 @@ export function SupportBanner() {
         <div className="bg-gradient-to-r from-[#2a1f1a] via-[#1c1614] to-[#2a1f1a] rounded-3xl p-5 sm:p-6 md:p-8">
 
           {/* Top banner row */}
-          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-5 lg:gap-0 mb-6 md:mb-8">
+          <div className="flex flex-col lg:flex-row items-center lg:items-center gap-5 lg:gap-0 mb-6 md:mb-8">
 
             {/* Left: Title */}
-            <h3 className="text-xl sm:text-2xl md:text-[1.7rem] font-semibold text-white leading-tight shrink-0 lg:flex-1">
+            <h3 className="text-xl sm:text-2xl md:text-[1.7rem] font-semibold text-white leading-tight shrink-0 lg:flex-1 text-center lg:text-left">
               При поддержке<br />French Tech &amp; CopyFrog
             </h3>
 
             {/* Center: Logo icons */}
-            <div className="flex items-center gap-3 shrink-0 lg:flex-1 lg:justify-center">
+            <div className="flex items-center gap-3 shrink-0 lg:flex-1 justify-center">
               <Tooltip
                 text={
                   <><span className="font-semibold">French Tech</span> — национальная программа Франции по&nbsp;развитию стартапов и&nbsp;технологий.</>
@@ -107,7 +107,7 @@ export function SupportBanner() {
             </div>
 
             {/* Right: Info icon + description */}
-            <div className="flex items-start gap-3 lg:flex-1 lg:justify-end max-w-md lg:max-w-none">
+            <div className="flex items-start gap-3 lg:flex-1 justify-center lg:justify-end max-w-md lg:max-w-none text-center lg:text-left">
               <Tooltip
                 text={
                   <>
